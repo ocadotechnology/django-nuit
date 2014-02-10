@@ -1,0 +1,3 @@
+include .GITVERSION
+graft nuitng/templates
+graft nuitng/static
