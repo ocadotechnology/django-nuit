@@ -1,0 +1,41 @@
+{% load static %}
+<nav class='top-bar' data-topbar>
+    <ul class='title-area'>
+        <li class='name'>
+            <h1 class='hide-for-small-only'><a href='#'><img src='{% static 'images/ot-horiz-white.png' %}' /></a></h1>
+            <h1 class='show-for-small-only'><a href='#'><img src='{% static 'images/hex.png' %}' /></a></h1>
+        </li>
+        <li class='toggle-topbar menu-icon'><a href='#'></a></li>
+    </ul>
+
+    <section class='top-bar-section'>
+
+        <ul class='left'>
+            {% if NUIT_APP_TITLE %}<li class='hide-for-small-only divider'></li>
+            <li class='hide-for-small-only'><a href='{{NUIT_APP_URL|default:'/'}}'>{{NUIT_APP_TITLE}}</a></li>{% endif %}
+
+            {% with NUIT_APP_MENU as menu %}
+            {% with False as show_ul %}
+            {% with 'show-for-small-only' as extra_item_class %}
+            {% include 'nuit/includes/_menu.html' %}
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+
+        </ul>
+
+        <ul class='right'>
+            {% if NUIT_APPLICATIONS %}
+            <li class='has-dropdown'>
+                <a href='#'>Applications</a>
+                <ul class='dropdown'>
+                    {% with NUIT_APPLICATIONS as applications %}
+                    {% include 'nuit/includes/_application_menu.html' %}
+                    {% endwith %}
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+
+    </section>
+</nav>

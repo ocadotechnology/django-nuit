@@ -1,0 +1,161 @@
+@import "settings";
+@import "scss/foundation";
+
+.size-12 { font-size: 12px; }
+
+.size-14 { font-size: 14px; }
+
+.size-16 { font-size: 16px; }
+
+.size-18 { font-size: 18px; }
+
+.size-21 { font-size: 21px; }
+
+.size-24 { font-size: 24px; }
+
+.size-36 { font-size: 36px; }
+
+.size-48 { font-size: 48px; }
+
+.size-60 { font-size: 60px; }
+
+.size-72 { font-size: 72px; }
+
+.row {
+    min-width: 100% !important;
+}
+
+.sidebar {
+
+    background-color: rgb(250, 250, 250);
+    padding: 20px;
+    min-width: 150px;
+    max-width: 280px;
+    width: 30%;
+    margin-bottom: 20px;
+    
+    &.left {
+        margin-right: 20px;
+        margin-left: 10px;
+    }
+    
+    &.right {
+        margin-right: 10px;
+        margin-left: 20px;
+        max-width: 220px;
+    }
+
+    .side-nav {
+        padding-top: 0;
+    }
+    
+    h5 {
+        margin: 0;
+        padding: 2px 0;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+    }
+    
+    hr {
+        margin-top: 0;
+    }
+    
+    p, table {
+        font-size: 0.8rem;
+        margin-top: 0.8rem;
+    }
+    
+    table tr td, table tr th {
+        font-size: 0.8rem;
+    }
+    
+    .panel {
+        padding: 0.8rem;
+        margin-top: 0.8rem;
+    }
+    
+    form {
+        
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        
+        label, input, select, button {
+            font-size: 0.8rem;
+        }
+        
+        select, input[type=text] {
+            height: 2rem;
+        }
+        
+        button {
+            padding: 0.5rem 0.8rem;
+            width: 100%;
+            margin: 0 0 1rem;
+        }
+        
+    }
+    
+    li {
+        
+        margin: 0;
+        padding: 0;
+        
+        &.divider {
+            margin: 16px 0;
+        }
+        
+        &.heading {
+            padding: 2px 0;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+        }
+        
+        a {
+            padding: 0.33333rem 0;
+        }
+        
+        &.active {
+            & > a:first-child {
+                margin: 0 -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                background: rgba(0, 64, 84, 0.05);
+                font-weight: bold;
+                color: rgb(0, 143, 186);
+            }
+        }
+        
+        &:hover {
+            & > a:first-child {
+                margin: 0 -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                color: rgb(0, 104, 135);
+                background: rgba(0, 64, 84, 0.03);
+            }
+        }
+    }
+    
+}
+
+.main {
+    
+    margin: 10px;
+    
+    @media #{$medium-up} {
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .actions.button.dropdown {
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .actions:before {
+        display: none;
+    }
+    
+}

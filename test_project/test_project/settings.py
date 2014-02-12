@@ -10,6 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -45,27 +47,27 @@ USE_L10N = True
 USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
+# Example: '/home/media/media.lawrence.com/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+# Examples: 'http://media.lawrence.com/media/', 'http://example.com/media/'
 MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
+# in apps' 'static/' subdirectories and in STATICFILES_DIRS.
+# Example: '/home/media/media.lawrence.com/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
 
 # URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
+# Example: 'http://media.lawrence.com/static/'
 STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Put strings here, like '/home/html/static' or 'C:/www/django/static'.
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
@@ -75,6 +77,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -89,6 +92,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,9 +108,20 @@ ROOT_URLCONF = 'test_project.urls'
 WSGI_APPLICATION = 'test_project.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like '/home/html/django_templates' or 'C:/www/django/templates'.
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'nuit.context_processors.nuit',
 )
 
 INSTALLED_APPS = (
@@ -115,11 +130,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'nuitng',
+    'nuit',
+
+    'compressor',
+    'foundation_scss',
+    'foundation_icons',
+    'jquery',
+
     # Uncomment the next line to enable the admin:
     #'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'debug_toolbar',
     'django_jenkins',
 )
 
@@ -173,4 +195,97 @@ LOGGING = {
         },
     }
 }
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-sass', 'sass {infile} {outfile}'), #'nuit.filters.SASSFilter'),
+    ('text/x-scss', 'sass {infile} {outfile}'), #'nuit.filters.SCSSFilter'),
+)
+
+
+NUIT_APPLICATIONS = (
+    {
+        'name': 'Asset Management',
+        'link': 'https://infmis.ocado.com/',
+    },
+    {
+        'name': 'Network Access & Management',
+        'subs': (
+            {
+                'name': 'RADIUS',
+                'link': 'https://infmis.ocado.com/',
+            },
+            {
+                'name': 'Wireless Tools',
+                'link': 'https://infmis.ocado.com/wireless/guest-passphrase/',
+            },
+            {
+                'name': 'DHCP Management',
+                'link': 'https://infmis.ocado.com/',
+            },
+            {
+                'name': 'IPTool',
+                'link': 'https://iptool.tech.lastmile.com/iptool/api/v1/?format=json',
+            },
+        ),
+    },
+    {
+        'name': 'Dashboards & Insight',
+        'subs': (
+            {
+                'name': 'Forest Fire',
+                'link': 'https://forestfire.tech.lastmile.com',
+            },
+            {
+                'name': 'Flocked',
+                'link': '#',
+            },
+            {
+                'name': 'Shuttle Track',
+                'link': '#',
+            },
+        ),
+    },
+    {
+        'name': 'Self Service',
+        'subs': (
+            {
+                'name': 'User Access Requests',
+                'link': 'https://lss.ocado.com/',
+            },
+            {
+                'name': 'VM Provisioning',
+                'link': 'https://lss.ocado.com/vmpro/',
+            },
+            {
+                'name': 'Database Users',
+                'link': 'https://lss.ocado.com/dumi/',
+            },
+            {
+                'name': 'Apparition',
+                'link': 'https://lss.ocado.com/apparition/',
+            },
+        ),
+    },
+    {
+        'name': 'Warehouse Management',
+        'subs': (
+            {
+                'name': 'NFDC Pickstations',
+                'link': 'https://pickman.ocado.com/',
+            },
+        ),
+    },
+)
+
+NUIT_APP_MENU = 'nuit.views.app_menu'
+NUIT_APP_TITLE = 'User Access Requests'
 

@@ -1,0 +1,53 @@
+{% load static %}
+{% load compress %}
+<!doctype html>
+
+<html class='no-js' lang='en'>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{{page_title|default:NUIT_APP_TITLE}}</title>
+
+    {% compress css %}
+    <link rel='stylesheet' type='text/x-scss' href='{% static 'app.scss' %}' />
+    {% endcompress %}
+
+    <link rel='stylesheet' type='text/css' href='{% static 'icons/foundation-icons.css' %}' />
+
+    <script src='{% static 'js/vendor/modernizr.js' %}'></script>
+
+</head>
+<body>
+
+    {% block pre_main %}{% endblock %}
+
+    <section role='main'>
+    <div class='row clearfix'>
+        {% block pre_content %}{% endblock %}
+        <div class='main'>
+        {% block main_content %}
+            <ul class='breadcrumbs'>
+              <li><a href='#'>Home</a></li>
+              <li><a href='#'>Features</a></li>
+              <li><a href='#'>Breadcrumbs</a></li>
+              <li class='current'><a href='#'>Something else</a></li>
+            </ul>
+            <h1>Stand-in Content&hellip;</h1>
+        {% endblock %}
+        </div>
+        {% block post_content %}{% endblock %}
+    </div>
+    </section>
+
+    {% block post_main %}{% endblock %}
+    
+    <script src='{% static 'js/jquery.js' %}'></script>
+    <script src='{% static 'js/foundation.min.js' %}'></script>
+    <script>
+    $(document).foundation();
+    </script>
+    
+</body>
+
+</html>
