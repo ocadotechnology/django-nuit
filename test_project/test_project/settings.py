@@ -206,8 +206,8 @@ COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 
 COMPRESS_PRECOMPILERS = (
-    ('text/x-sass', 'sass {infile} {outfile}'), #'nuit.filters.SASSFilter'),
-    ('text/x-scss', 'sass {infile} {outfile}'), #'nuit.filters.SCSSFilter'),
+    ('text/x-sass', 'sass {infile} {outfile}'),
+    ('text/x-scss', 'sass {infile} {outfile}'),
 )
 
 
