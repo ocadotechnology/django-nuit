@@ -4,7 +4,7 @@ def home(request):
 
     template_name = request.GET.get('template', 'bothmenu-topbar')
 
-    return render(request, 'nuit/%s.html' % template_name, {'current_menu': template_name})
+    return render(request, 'nuit/mytemplate.html', {'template_name': 'nuit/%s.html' % template_name})
 
 def app_menu(request):
     return (

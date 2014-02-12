@@ -258,7 +258,7 @@ NUIT_APPLICATIONS = (
         'name': 'Self Service',
         'subs': (
             {
-                'name': 'User Access Requests',
+                'name': 'User Provisioning',
                 'link': 'https://lss.ocado.com/',
             },
             {
@@ -287,5 +287,5 @@ NUIT_APPLICATIONS = (
 )
 
 NUIT_APP_MENU = 'nuit.views.app_menu'
-NUIT_APP_TITLE = 'User Access Requests'
+NUIT_APP_TITLE = 'User Provisioning'
 
