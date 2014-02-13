@@ -2,6 +2,53 @@
 {% load nuit %}
 
 {% block main_content %}
-<h1>Hello - template is {{template_name}}</h1>
-{% set_active_menu "bothmenu-topbar" %}
+
+<h1>Current template is {{template_name}}</h1>
+{% set_active_menu template_short_name %}
+
+{% endblock %}
+
+{% block left_menu %}
+{{block.super}}
+
+{% menu_section is_list=True title="More" %}
+    <li><a href='#'>Some other link</a></li>
+    <li><a href='#'>More pie please</a></li>
+{% end_menu_section %}
+
+{% menu_section is_list=True %}
+    <li><a href='#'>Some new link</a></li>
+    <li><a href='#'>More pizza please</a></li>
+{% end_menu_section %}
+
+{% menu_section %}
+    <p class='panel callout'>The above links will be found under the 'hamburger' icon for smaller screens.</p>
+{% end_menu_section %}
+
+{% endblock %}
+
+{% block right_menu %}
+{{block.super}}
+
+{% menu_section title="Right Menu" %}
+    <p>These sections werer generated with the <code>{% templatetag openblock %} menu_section {% templatetag closeblock %}</code> template tag.</p>
+{% end_menu_section %}
+
+{% menu_section is_list=True title="Actions" %}
+    <li><a href=''>These links have the option <code>is_list=True</code></a></li>
+    <li><a href=''>It wraps your content in the correct <code>&lt;nav&gt;</code> and <code>&lt;ul&gt;</code> elements.</a></li>
+{% end_menu_section %}
+
+{% menu_section title=template_short_name %}
+    <p>The title for this is generated from the a context variable.</p>
+{% end_menu_section %}
+
+{% menu_section "Just Title" %}
+    <p>This one omits the <code>title=</code> from the template tag.</p>
+{% end_menu_section %}
+
+{% menu_section link_name="callout" %}
+    <p class='panel callout'>This one doesn't have a title, but is set as a callout!</p>
+{% end_menu_section %}
+
 {% endblock %}

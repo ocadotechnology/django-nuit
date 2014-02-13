@@ -2,5 +2,13 @@
 
 {% block pre_content %}
 {{block.super}}
-{% include 'nuit/includes/_right_menu.html' %}
+{% include 'nuit/includes/_right_menu_open.html' %}
+{% block right_menu %}
+{% endblock %}
+{% include 'nuit/includes/_right_menu_close.html' %}
+{% endblock %}
+
+{% block prefix_content %}
+{% include 'nuit/includes/_right_menu_dropdown.html' %}
+{{block.super}}
 {% endblock %}

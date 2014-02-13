@@ -113,6 +113,10 @@
         a {
             padding: 0.33333rem 0;
         }
+
+        p {
+            margin-bottom: 0;
+        }
         
         &.active {
             & > a:first-child {
@@ -134,6 +138,10 @@
                 background: rgba(0, 64, 84, 0.03);
             }
         }
+    }
+
+    section:last-child hr {
+        display: none;
     }
     
 }
