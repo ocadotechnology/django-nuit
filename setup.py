@@ -11,6 +11,6 @@ setup(
     maintainer           = 'Netnix Team',
     maintainer_email     = 'netnix@ocado.com',
     packages             = find_packages(),
-    install_requires     = ['django-foundation-statics', 'compressor', 'django-jquery', 'django-foundation-icons',],
+    install_requires     = ['django-foundation-statics', 'django-compressor', 'django-jquery', 'django-foundation-icons',],
     include_package_data = True,
 )
