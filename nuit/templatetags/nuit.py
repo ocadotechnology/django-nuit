@@ -6,10 +6,28 @@ register = template.Library()
 def is_quoted(string):
     return string[0] == string[-1] and string[0] in ('"', '"')
 
+@register.inclusion_tag('nuit/includes/_pagination_menu.html')
+def pagination_menu(page_obj):
+    total_pages = range(1, page_obj.paginator.num_pages + 1)
+
+    actual_numbers = [page for page in total_pages if page >= total_pages[-1] - 1 or page <= 2 or (page >= page_obj.number - 2 and page <= page_obj.number + 2)]
+    page_list = []
+    for i, number in enumerate(actual_numbers[:-1]):
+        page_list.append(number)
+        if actual_numbers[i + 1] != number + 1:
+            page_list.append(None)
+    page_list.append(actual_numbers[-1])
+
+    print page_list
+
+    return {
+        'page_obj': page_obj,
+        'page_list': page_list,
+    }
+
 @register.simple_tag
 def set_active_menu(active_menu):
     return "<span style='display: none' class='nuit-active-menu'>%s</span>" % active_menu
-
 
 #@register.tag
 def autoescape(parser, token):

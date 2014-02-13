@@ -1,4 +1,25 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+
+class PaginatedListView(ListView):
+    object_link = True
+
+    def get_context_data(self, **kwargs):
+        context = super(PaginatedListView, self).get_context_data(**kwargs)
+        context['object_link'] = self.object_link
+        return context
+
+
+
+
+
+
+
+
+
+
+
+#===================================================
 
 def home(request):
 

@@ -28,13 +28,6 @@
         <div class='main'>
         {% block prefix_content %}{% endblock %}
         {% block main_content %}
-            <ul class='breadcrumbs'>
-              <li><a href='#'>Home</a></li>
-              <li><a href='#'>Features</a></li>
-              <li><a href='#'>Breadcrumbs</a></li>
-              <li class='current'><a href='#'>Something else</a></li>
-            </ul>
-            <h1>Stand-in Content&hellip;</h1>
         {% endblock %}
         </div>
         {% block post_content %}{% endblock %}
@@ -47,6 +40,16 @@
     <script src='{% static 'js/foundation.min.js' %}'></script>
     <script>
 
+    $(window).resize(function() {
+        var width = $('.sidebar.left').outerWidth();
+        var padding = 0;
+        if (width > 40) {
+            padding = width + 10;
+        }
+        $('.main').css({
+            'paddingLeft': padding
+        });
+    });
 
     $('.nuit-active-menu').each(function() {
         $('.menu-' + $(this).html()).addClass('active');

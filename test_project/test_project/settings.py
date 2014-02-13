@@ -10,7 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = ('127.0.0.1', '10.252.24.0/24',)
 
 DATABASES = {
     'default': {
@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nuit',
+    'demo',
 
     'compressor',
     'foundation_scss',
