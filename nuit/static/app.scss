@@ -79,12 +79,13 @@
         margin-top: 0.8rem;
         margin-bottom: 0.8rem;
         
-        label, input, select, button {
+        label, input, select, button, .postfix.button {
             font-size: 0.8rem;
         }
         
-        select, input[type=text] {
+        select, input[type=text], .postfix.button {
             height: 2rem;
+            line-height: 2rem;
         }
         
         button {

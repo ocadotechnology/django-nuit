@@ -1,12 +1,12 @@
-{% extends 'nuit/leftmenu-topbar.html' %}
 {% load nuit %}
+{% extend 'nuit/base.html' %}
 
-{% block main_content %}
+{% block content %}
 
 <h1>{% block title %}List of Objects{% endblock %}</h1>
 
-{% if search %}
-<div class='show-for-small-only'>
+{% if search and not nuit_rightmenu %}
+<div class='{% if nuit_leftmenu %}show-for-small-only{% endif %}'>
 {% include 'nuit/includes/_search_form.html' %}
 </div>
 {% endif %}
@@ -25,13 +25,20 @@
 
 {% endblock %}
 
-{% block left_menu %}
+{% block right_menu %}
 {{block.super}}
-
-{% if search %}
+{% if nuit_rightmenu and search %}
 {% menu_section "Search" %}
 {% include 'nuit/includes/_search_form.html' %}
 {% end_menu_section %}
 {% endif %}
+{% endblock %}
 
+{% block left_menu %}
+{{block.super}}
+{% if nuit_leftmenu and search and not nuit_rightmenu %}
+{% menu_section "Search" %}
+{% include 'nuit/includes/_search_form.html' %}
+{% end_menu_section %}
+{% endif %}
 {% endblock %}
