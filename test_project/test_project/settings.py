@@ -283,7 +283,3 @@ NUIT_APPLICATIONS = (
         ),
     },
 )
-
-NUIT_APP_MENU = 'nuit.views.app_menu'
-NUIT_APP_TITLE = 'User Provisioning'
-
