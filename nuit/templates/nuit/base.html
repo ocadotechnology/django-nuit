@@ -27,16 +27,32 @@
     <section role='main'>
     <div class='row clearfix'>
         {% if nuit_leftmenu %}
-        {% include 'nuit/includes/_left_menu_open.html' %}
-        {% block left_menu %}{% endblock %}
-        {% include 'nuit/includes/_left_menu_close.html' %}
+        <div class='sidebar hide-for-small-only left'>
+            {% if NUIT_APP_TITLE %}<h5>{{NUIT_APP_TITLE}}</h5>{% endif %}
+            <section>
+                <nav>
+                    {% with NUIT_APP_MENU as menu %}
+                    {% with 'side-nav' as menu_class %}
+                    {% include 'nuit/includes/_menu.html' %}
+                    {% endwith %}
+                    {% endwith %}
+                </nav>
+                <hr />
+            </section>
+            {% block left_menu %}{% endblock %}
+        </div>
         {% endif %}
         {% if nuit_rightmenu %}
-        {% include 'nuit/includes/_right_menu_open.html' %}
+        <div class='sidebar show-for-large-up right'>
         {% block right_menu %}{% endblock %}
-        {% include 'nuit/includes/_right_menu_close.html' %}
+        </div>
         {% endif %}
         <div class='main'>
+            {% if nuit_rightmenu %}
+            <a href='#' data-dropdown='right-menu-drop' class='hide-for-large-up actions small secondary radius button dropdown right'><i class='fi-widget size-24'></i></a>
+            <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
+            </ul>
+            {% endif %}
         </div>
     </div>
     </section>
