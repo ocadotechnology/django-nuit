@@ -6,18 +6,18 @@
 <h1>{% block title %}List of Objects{% endblock %}</h1>
 
 {% if search and not nuit_rightmenu %}
-<div class='{% if nuit_leftmenu %}show-for-small-only{% endif %}'>
 {% include 'nuit/includes/_search_form.html' %}
-</div>
 {% endif %}
 
 {% block search_query %}{% if search_query %}<p>{{page_obj.paginator.count|default:object_list.count}} result{{page_obj.paginator.count|default:object_list.count|pluralize}} for <cite>{{search_query}}</cite>:</p>{% endif %}{% endblock %}
 
+{% block object_list %}
 <ul>
 {% for object in object_list %}
     <li>{% if object_link %}<a href='{{object.get_absolute_url}}'>{% endif %}{{object}}{% if object_link %}</a>{% endif %}</li>
 {% endfor %}
 </ul>
+{% endblock %}
 
 {% if is_paginated %}
 {% pagination_menu page_obj %}
@@ -28,15 +28,6 @@
 {% block right_menu %}
 {{block.super}}
 {% if nuit_rightmenu and search %}
-{% menu_section "Search" %}
-{% include 'nuit/includes/_search_form.html' %}
-{% end_menu_section %}
-{% endif %}
-{% endblock %}
-
-{% block left_menu %}
-{{block.super}}
-{% if nuit_leftmenu and search and not nuit_rightmenu %}
 {% menu_section "Search" %}
 {% include 'nuit/includes/_search_form.html' %}
 {% end_menu_section %}
