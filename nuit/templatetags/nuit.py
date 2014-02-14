@@ -1,4 +1,6 @@
 from django import template
+from django.template.base import token_kwargs
+from django.template.loader_tags import do_extends
 import re
 
 register = template.Library()
@@ -15,18 +17,14 @@ def set_active_menu(active_menu):
     return "<span style='display: none' class='nuit-active-menu'>%s</span>" % active_menu
 
 
-from django.template.loader_tags import do_extends
-import tokenize
-import StringIO
-
-class ExtendsNode(template.Node):
+class ExtendNode(template.Node):
     def __init__(self, node, kwargs):
         self.node = node
-        self.kwargs = kwargs
+        self.kwargs = dict(("nuit_%s" % key, value) for key, value in kwargs.iteritems())
 
     def render(self, context):
-        # TODO: add the values to the bottom of the context stack instead?
-        context.update(self.kwargs)
+        kwargs = dict((key, value.resolve(context)) for key, value in self.kwargs.iteritems())
+        context.update(kwargs)
         try:
            return self.node.render(context)
         finally:
@@ -34,28 +32,12 @@ class ExtendsNode(template.Node):
 
 @register.tag
 def extend(parser, token):
-    bits = token.contents.split()
-    kwargs = {}
-    if 'with' in bits:
-        pos = bits.index('with')
-        argslist = bits[pos+1:]
-        bits = bits[:pos]
-        for i in argslist:
-            try:
-                a, b = i.split('=', 1); a = a.strip(); b = b.strip()
-                keys = list(tokenize.generate_tokens(StringIO.StringIO(a).readline))
-                if keys[0][0] == tokenize.NAME:
-                    kwargs['nuit_%s' % str(a)] = parser.compile_filter(b)
-                else: raise ValueError
-            except ValueError:
-                raise template.TemplateSyntaxError, "Argument syntax wrong: should be key=value"
-        # before we are done, remove the argument part from the token contents,
-        # or django's extends tag won't be able to handle it.
-        # TODO: find a better solution that preserves the orginal token including whitespace etc.
-        token.contents = " ".join(bits)
+    bits = token.split_contents()
+    kwargs = token_kwargs(bits[2:], parser)
+    token.contents = " ".join(bits[:2])
 
     # let the orginal do_extends parse the tag, and wrap the ExtendsNode
-    return ExtendsNode(do_extends(parser, token), kwargs)
+    return ExtendNode(do_extends(parser, token), kwargs)
 
 
 
@@ -79,7 +61,7 @@ class MenuSectionNode(template.Node):
             return template.Variable(self._link_name).resolve(context)
         except template.VariableDoesNotExist:
             return ''
-        
+
     def get_title(self, context):
         if not self._title:
             return ''
