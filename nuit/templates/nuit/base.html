@@ -20,21 +20,26 @@
 </head>
 <body>
 
-    {% block pre_main %}{% endblock %}
+    {% if nuit_topbar %}
+    {% include 'nuit/includes/_top_bar.html' %}
+    {% endif %}
 
     <section role='main'>
     <div class='row clearfix'>
-        {% block pre_content %}{% endblock %}
+        {% if nuit_leftmenu %}
+        {% include 'nuit/includes/_left_menu_open.html' %}
+        {% block left_menu %}{% endblock %}
+        {% include 'nuit/includes/_left_menu_close.html' %}
+        {% endif %}
+        {% if nuit_rightmenu %}
+        {% include 'nuit/includes/_right_menu_open.html' %}
+        {% block right_menu %}{% endblock %}
+        {% include 'nuit/includes/_right_menu_close.html' %}
+        {% endif %}
         <div class='main'>
-        {% block prefix_content %}{% endblock %}
-        {% block main_content %}
-        {% endblock %}
         </div>
-        {% block post_content %}{% endblock %}
     </div>
     </section>
-
-    {% block post_main %}{% endblock %}
 
     <script src='{% static 'js/jquery.js' %}'></script>
     <script src='{% static 'js/foundation.min.js' %}'></script>

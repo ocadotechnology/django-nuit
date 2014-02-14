@@ -143,6 +143,12 @@
     section:last-child hr {
         display: none;
     }
+
+    @media #{$large-up} {
+        &.right + .main {
+            padding-right: 220px;
+        }
+    }
     
 }
 
@@ -166,4 +172,9 @@
         display: none;
     }
     
+}
+
+.pagination-totals {
+    font-size: 0.8rem;
+    color: $pagination-link-font-color;
 }
