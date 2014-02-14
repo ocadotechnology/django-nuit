@@ -11,17 +11,9 @@
     <section class='top-bar-section'>
 
         <ul id='left-menu-drop' class='left'>
-            {% if NUIT_APP_TITLE %}<li class='hide-for-small-only divider'></li>
-            <li class='hide-for-small-only'><a href='{{NUIT_APP_URL|default:'/'}}'>{{NUIT_APP_TITLE}}</a></li>{% endif %}
+            {% if nuit_app_title %}<li class='hide-for-small-only divider'></li>
+            <li class='hide-for-small-only'><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>{% endif %}
 
-            <li class='show-for-small-only divider'></li>
-            {% with NUIT_APP_MENU as menu %}
-            {% with False as show_ul %}
-            {% with 'show-for-small-only' as extra_item_class %}
-            {% include 'nuit/includes/_menu.html' %}
-            {% endwith %}
-            {% endwith %}
-            {% endwith %}
             <li class='show-for-small-only divider'></li>
 
         </ul>

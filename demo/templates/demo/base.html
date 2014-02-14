@@ -1,0 +1,13 @@
+{% load nuit %}
+{% extend 'nuit/base.html' app_title='User Provisioning' %}
+
+{% block left_menu %}
+
+{% app_menu "User Provisioning" %}
+    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis" %}
+    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis1" %}
+    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis2" %}
+    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis3" %}
+{% end_app_menu %}
+
+{% endblock %}

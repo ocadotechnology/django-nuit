@@ -1,5 +1,6 @@
 {% load static %}
 {% load compress %}
+{% load nuit %}
 <!doctype html>
 
 <html class='no-js' lang='en'>
@@ -7,7 +8,7 @@
 <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>{% block title %}Home{% endblock %} - {{page_title|default:NUIT_APP_TITLE}}</title>
+    <title>{% block title %}Home{% endblock %} - {{page_title|default:nuit_app_title}}</title>
 
     {% compress css %}
     <link rel='stylesheet' type='text/x-scss' href='{% static 'app.scss' %}' />
@@ -28,17 +29,6 @@
     <div class='clearfix container'>
         {% if nuit_leftmenu %}
         <div class='sidebar on-left hide-for-small-only'>
-            {% if NUIT_APP_TITLE %}<h5>{{NUIT_APP_TITLE}}</h5>{% endif %}
-            <section>
-                <nav>
-                    {% with NUIT_APP_MENU as menu %}
-                    {% with 'side-nav' as menu_class %}
-                    {% include 'nuit/includes/_menu.html' %}
-                    {% endwith %}
-                    {% endwith %}
-                </nav>
-                <hr />
-            </section>
             {% block left_menu %}{% endblock %}
         </div>
         {% endif %}
@@ -81,7 +71,7 @@
         $('.menu-' + $(this).html()).addClass('active');
     });
 
-    $('.sidebar.right > section').each(function() {
+    $('.sidebar.on-right > section').each(function() {
         $this = $(this);
         if ($this.data('link')) {
             $('body').append("<div id='" + $this.data('id') + "' class='reveal-modal' data-reveal><a class='close-reveal-modal'><i class='fi-x size-16'></i></a>" + $this.find('div').html() + '</div>');
@@ -97,13 +87,13 @@
         }
     });
 
-    $('.sidebar.left > section').each(function() {
+    $('.sidebar.on-left > section').each(function() {
         $this = $(this);
         $nav = $this.find('nav');
         if ($nav.length) {
             $title = $this.find('h5');
             $append_to = $('#left-menu-drop');
-            if ($title.length) {
+            if ($title.length && !$this.hasClass('main-nav')) {
                 $new_li = $('<li></li>').addClass('show-for-small-only').addClass('has-dropdown')
                 $new_li.append("<a href='#'>" + $title.html() + "</a>");
                 $append_to.append($new_li);

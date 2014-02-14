@@ -40,8 +40,6 @@ def extend(parser, token):
     return ExtendNode(do_extends(parser, token), kwargs)
 
 
-
-
 class MenuSectionNode(template.Node):
 
     def __init__(self, nodelist, title=None, is_list=False, link_name=None):
@@ -96,6 +94,7 @@ class MenuSectionNode(template.Node):
             list_end = '</ul></nav>' if self.is_list else '',
         )
 
+
 @register.tag
 def menu_section(parser, token):
     '''
@@ -114,23 +113,30 @@ def menu_section(parser, token):
     return MenuSectionNode(nodelist, **kwargs)
 
 
+class AppMenuNode(template.Node):
+    def __init__(self, nodelist, title=None):
+        self.nodelist = nodelist
+        self.title = title
+    def render(self, context):
+        content = self.nodelist.render(context)
+        title = '<h5>%s</h5>' % self.title.resolve(context) if self.title else ''
+        return "<section class='main-nav'>{title}<nav><ul class='side-nav'>{content}</ul></nav><hr /></section>".format(title=title, content=content)
 
+@register.tag
+def app_menu(parser, token):
+    bits = token.split_contents()
+    if len(bits) > 2:
+        raise template.TemplateSyntaxError('Wrong number of arguments for app_menu - expected 2 maximum')
+    title = None
+    if len(bits) == 2:
+        title = parser.compile_filter(bits[1])
+    nodelist = parser.parse(('end_app_menu',))
+    parser.delete_first_token()
+    return AppMenuNode(nodelist, title=title)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@register.simple_tag
+def menu_item(link, name, id):
+    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=link, id=id)
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)
@@ -143,9 +149,6 @@ def pagination_menu(context, page_obj, show_totals=True):
         if actual_numbers[i + 1] != number + 1:
             page_list.append(None)
     page_list.append(actual_numbers[-1])
-
-    print page_list
-
     return {
         'context': context,
         'page_obj': page_obj,
