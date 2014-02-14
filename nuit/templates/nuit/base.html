@@ -25,9 +25,9 @@
     {% endif %}
 
     <section role='main'>
-    <div class='row clearfix'>
+    <div class='clearfix container'>
         {% if nuit_leftmenu %}
-        <div class='sidebar hide-for-small-only left'>
+        <div class='sidebar on-left hide-for-small-only'>
             {% if NUIT_APP_TITLE %}<h5>{{NUIT_APP_TITLE}}</h5>{% endif %}
             <section>
                 <nav>
@@ -43,7 +43,7 @@
         </div>
         {% endif %}
         {% if nuit_rightmenu %}
-        <div class='sidebar show-for-large-up right'>
+        <div class='sidebar on-right show-for-large-up'>
         {% block right_menu %}{% endblock %}
         </div>
         {% endif %}
@@ -64,7 +64,7 @@
     <script>
 
     function pad_main() {
-        var left_width = $('.sidebar.left').outerWidth();
+        var left_width = $('.sidebar.on-left').outerWidth();
         var left_padding = 0;
         if (left_width > 40) {
             left_padding = left_width + 10;

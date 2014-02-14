@@ -1,29 +1,80 @@
-{% extends template_name %}
 {% load nuit %}
+{% extend 'nuit/base.html' leftmenu=True rightmenu=True topbar=True %}
 
-{% block main_content %}
+{% block content %}
 
-<h1>Current template is {{template_name}}</h1>
-{% set_active_menu template_short_name %}
+{% set_active_menu 'bothmenu-topbar' %}
+
+<h1>Publishers</h1>
+
+<form method='get' action=''>
+    <div class='row collapse'>
+        <div class='small-10 columns'>
+            <input type='text' name='q' id='query' value='' />
+        </div>
+        <div class='small-2 columns'>
+            <button class="button postfix">Filter</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<ul>
+
+    <li><a href=''>Publisher A</a></li>
+
+    <li><a href=''>Publisher B</a></li>
+
+    <li><a href=''>Publisher C</a></li>
+
+    <li><a href=''>Publisher D</a></li>
+
+    <li><a href=''>Publisher E</a></li>
+
+    <li><a href=''>Publisher F</a></li>
+
+    <li><a href=''>Publisher G</a></li>
+
+    <li><a href=''>Publisher H</a></li>
+
+    <li><a href=''>Publisher I</a></li>
+
+    <li><a href=''>Publisher J</a></li>
+
+    <li><a href=''>Publisher K</a></li>
+
+    <li><a href=''>Publisher L</a></li>
+
+    <li><a href=''>Publisher M</a></li>
+
+    <li><a href=''>Publisher N</a></li>
+
+    <li><a href=''>Publisher O</a></li>
+
+</ul>
+
+
+<div class='pagination-centered'>
+<ul class='pagination'>
+  <li class='arrow unavailable'><a href=''>&laquo;</a></li>
+  
+    <li class='current unavailable'><a href='?page=1'>1</a></li>
+  
+    <li class=''><a href='?page=2'>2</a></li>
+  
+  <li class='arrow'><a href='?page=2'>&raquo;</a></li>
+  <li class='unavailable'><a href=''>1 to 15 of 26</a></li>
+</ul>
+</div>
+
 
 {% endblock %}
 
 {% block left_menu %}
 {{block.super}}
-
-{% menu_section is_list=True title="More" %}
-    <li><a href='#'>Some other link</a></li>
-    <li><a href='#'>More pie please</a></li>
-{% end_menu_section %}
-
-{% menu_section is_list=True %}
-    <li><a href='#'>Some new link</a></li>
-    <li><a href='#'>More pizza please</a></li>
-{% end_menu_section %}
-
-{% menu_section %}
-    <p class='panel callout'>The above links will be found under the 'hamburger' icon for smaller screens.</p>
-{% end_menu_section %}
 
 {% endblock %}
 

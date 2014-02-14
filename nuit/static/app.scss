@@ -21,8 +21,12 @@
 
 .size-72 { font-size: 72px; }
 
-.row {
-    min-width: 100% !important;
+/*.row:before, .row:after {
+    display: none;
+}*/
+
+.container {
+    position: relative;
 }
 
 .sidebar {
@@ -34,15 +38,17 @@
     width: 30%;
     margin-bottom: 20px;
     
-    &.left {
-        margin-right: 20px;
-        margin-left: 10px;
+    &.on-left {
+        top: 0;
+        left: 10px;
+        position: absolute;
     }
     
-    &.right {
-        margin-right: 10px;
-        margin-left: 20px;
+    &.on-right {
         max-width: 220px;
+        top: 0;
+        right: 10px;
+        position: absolute;
     }
 
     .side-nav {
@@ -146,7 +152,7 @@
     }
 
     @media #{$large-up} {
-        &.right + .main {
+        &.on-right + .main {
             padding-right: 220px;
         }
     }
