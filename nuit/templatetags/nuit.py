@@ -1,6 +1,7 @@
 from django import template
 from django.template.base import token_kwargs
 from django.template.loader_tags import do_extends
+from django.core.urlresolvers import reverse, NoReverseMatch
 import re
 
 register = template.Library()
@@ -136,7 +137,12 @@ def app_menu(parser, token):
 
 @register.simple_tag
 def menu_item(link, name, id):
-    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=link, id=id)
+    # try reversing the link to see if it is a view
+    try:
+        url = reverse(link)
+    except NoReverseMatch:
+        url = link
+    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=url, id=id)
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)
