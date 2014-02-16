@@ -182,12 +182,12 @@
     color: $pagination-link-font-color;
 }
 
-.loader {
+.nuit-loader {
   
   display: inline-block;
   position: relative;
   
-  .loader-text {
+  .nuit-loader-text {
     display: inline-block;
     //font-size: 0.8em;
     margin-top: 0.5em;
@@ -256,7 +256,7 @@
   100%{ opacity: .9; }
 }
 
-@mixin loader-size($size) {
+@mixin nuit-loader-size($size) {
   .container {
     width: $size;
     height: $size;
@@ -264,26 +264,47 @@
   .dot {
     font-size: $size * 0.4;
   }
-  .loader-text {
+  .nuit-loader-text {
     //font-size: $size * 0.4;
   }
 }
 
-.size16 {
-  @include loader-size(16px);
+.nuit-loader-size16 {
+  @include nuit-loader-size(16px);
 }
-.size32 {
-  @include loader-size(32px);
+.nuit-loader-size32 {
+  @include nuit-loader-size(32px);
 }
-.size48 {
-  @include loader-size(48px);
+.nuit-loader-size48 {
+  @include nuit-loader-size(48px);
 }
-.size64 {
-  @include loader-size(64px);
+.nuit-loader-size64 {
+  @include nuit-loader-size(64px);
 }
-.size80 {
-  @include loader-size(80px);
+.nuit-loader-size80 {
+  @include nuit-loader-size(80px);
 }
-.size96 {
-  @include loader-size(96px);
+.nuit-loader-size96 {
+  @include nuit-loader-size(96px);
+}
+
+.login {
+    @media #{$medium-up} {
+        .surround {
+            border: 1px solid #ccc;
+        }
+    }
+    .title {
+        background-color: $topbar-bg;
+        padding: 1em;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+    .submit {
+        text-align: center;
+    }
+    .nuit-loader {
+        margin-bottom: 1em;
+        display: none;
+    }
 }
