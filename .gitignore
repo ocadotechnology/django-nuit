@@ -7,3 +7,4 @@ dist*
 docs/_build
 ._*
 .sass-cache
+test_project/test_project/static
