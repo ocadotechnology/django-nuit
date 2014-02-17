@@ -1,10 +1,14 @@
 from django import template
-from django.template.base import token_kwargs
+from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends
+from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse, NoReverseMatch
 import re
 
 register = template.Library()
+
+NoneFilterExpression = FilterExpression("None", None)
+FalseFilterExpression = FilterExpression("False", None)
 
 def is_quoted(string):
     return string[0] == string[-1] and string[0] in ('"', '"')
@@ -43,41 +47,20 @@ def extend(parser, token):
 
 class MenuSectionNode(template.Node):
 
-    def __init__(self, nodelist, title=None, is_list=False, link_name=None):
+    def __init__(self, nodelist, title=None, is_list=None, link_name=None, id=None):
         self.nodelist = nodelist
-        self._title = title
-        self.is_list = is_list
-        self._link_name = link_name
-
-    def get_link_name(self, context):
-        if self.is_list:
-            return ''
-        if not self._link_name:
-            return self.get_title(context)
-        if is_quoted(self._link_name):
-            return self._link_name[1:-1]
-        try:
-            return template.Variable(self._link_name).resolve(context)
-        except template.VariableDoesNotExist:
-            return ''
-
-    def get_title(self, context):
-        if not self._title:
-            return ''
-        if is_quoted(self._title):
-            return self._title[1:-1]
-        try:
-            return template.Variable(self._title).resolve(context)
-        except template.VariableDoesNotExist:
-            return ''
+        self.title = title or NoneFilterExpression
+        self.is_list = is_list or FalseFilterExpression
+        self.link_name = link_name or NoneFilterExpression
+        self.id = id or NoneFilterExpression
 
     def render(self, context):
         content = self.nodelist.render(context)
-        bare_title = self.get_title(context)
+        bare_title = self.title.resolve(context)
         title = '<h5>%s</h5>' % bare_title if bare_title else ''
-        link_name = self.get_link_name(context)
+        link_name = self.link_name.resolve(context) or bare_title
         return '''
-            <section data-link='{link_name}' data-id='{id}'>
+            <section class='right-menu-reveal' data-reveal data-link='{link_name}' id='{id}'>
                 <div>
                 {title}
                 {list_begin}
@@ -90,9 +73,9 @@ class MenuSectionNode(template.Node):
             title = title,
             content = content,
             link_name = link_name,
-            id = re.sub(r'[^A-Za-z0-9]+', '', link_name),
-            list_begin = "<nav><ul class='side-nav'>" if self.is_list else '',
-            list_end = '</ul></nav>' if self.is_list else '',
+            id = slugify(link_name) if not self.id.resolve(context) else self.id.resolve(context),
+            list_begin = "<nav><ul class='side-nav'>" if self.is_list.resolve(context) else '',
+            list_end = '</ul></nav>' if self.is_list.resolve(context) else '',
         )
 
 
@@ -111,6 +94,7 @@ def menu_section(parser, token):
         kwargs[before] = after
     nodelist = parser.parse(('end_menu_section',))
     parser.delete_first_token()
+    kwargs = dict((key, parser.compile_filter(value)) for key, value in kwargs.iteritems())
     return MenuSectionNode(nodelist, **kwargs)
 
 

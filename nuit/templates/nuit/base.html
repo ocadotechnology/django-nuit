@@ -76,11 +76,15 @@
         $('.menu-' + $(this).html()).addClass('active');
     });
 
+    $(document).on('closed', '[data-reveal]', function () {
+        var modal = $(this);
+        modal.attr('style', '');
+    });
+
     $('.sidebar.on-right > section').each(function() {
         $this = $(this);
         if ($this.data('link')) {
-            $('body').append("<div id='" + $this.data('id') + "' class='reveal-modal' data-reveal><a class='close-reveal-modal'><i class='fi-x size-16'></i></a>" + $this.find('div').html() + '</div>');
-            $('#right-menu-drop').append("<li><a href='#' data-reveal-id='" + $this.data('id') + "'>" + $this.data('link') + "</a></li>");
+            $('#right-menu-drop').append("<li><a href='#' data-reveal-id='" + $this.attr('id') + "'>" + $this.data('link') + "</a></li>");
         } else {
             $nav = $this.find('nav');
             if ($nav.length) {
