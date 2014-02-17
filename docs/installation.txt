@@ -1,0 +1,20 @@
+Installation
+============
+
+Requirements
+------------
+
+``django-nuit`` is built using SASS_, and requires that you install the SASS binary in order to compile and compress the CSS.
+
+* Install ``django-nuit`` with ``pip``::
+
+    pip install django-nuit
+
+* Add ``nuit`` to your ``INSTALLED_APPS`` in ``settings.py``::
+
+    INSTALLED_APPS = (
+        'nuit',
+        # other apps
+    )
+
+.. _SASS: http://sass-lang.com
