@@ -122,15 +122,10 @@ def app_menu(parser, token):
     return AppMenuNode(nodelist, title=title)
 
 @register.simple_tag
-def menu_item(link, name, id=None):
-    # try reversing the link to see if it is a view
-    try:
-        url = reverse(link)
-    except NoReverseMatch:
-        url = link
+def menu_item(link, name, id=None, *args, **kwargs):
     if not id:
         id = slugify(name)
-    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=url, id=id)
+    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=link, id=id)
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)
