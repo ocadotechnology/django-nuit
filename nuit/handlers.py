@@ -4,7 +4,7 @@ from django.conf import settings
 from django.shortcuts import render
 
 def generic_handler(request, template, status, context={}):
-    return render(request, template, context, status)
+    return render(request, template, context, status=status)
 
 def handler500(request, template='nuit/generic/500.html'):
     return generic_handler(request, template, 500)

@@ -264,9 +264,6 @@
   .dot {
     font-size: $size * 0.4;
   }
-  .nuit-loader-text {
-    //font-size: $size * 0.4;
-  }
 }
 
 .nuit-loader-size16 {
@@ -288,7 +285,10 @@
   @include nuit-loader-size(96px);
 }
 
-.login {
+.modal {
+
+    margin-top: 3em;
+
     @media #{$medium-up} {
         .surround {
             border: 1px solid #ccc;
@@ -300,11 +300,18 @@
         text-align: center;
         margin-bottom: 1em;
     }
-    .submit {
-        text-align: center;
+    .login {
+        .submit {
+            text-align: center;
+        }
+        .nuit-loader {
+            margin-bottom: 1em;
+            display: none;
+        }
     }
-    .nuit-loader {
-        margin-bottom: 1em;
-        display: none;
+    &.error {
+        .bullet-item {
+            line-height: 1.6em;
+        }
     }
 }

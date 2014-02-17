@@ -4,35 +4,42 @@
 
 {% block content %}
 
-<form class='login'>
-  <div class='row'>
-    <div class='small-12 medium-6 medium-push-3 large-4 large-push-4 surround'>
-        <div class='row collapse'>
-            <div class='small-12 column'>
-                <div class='title'>
-                    <img src='{% static 'images/ot-horiz-white.png' %}' />
+<section class='modal'>
+    <form class='login'>
+      <div class='row'>
+        <div class='small-12 medium-6 medium-push-3 large-4 large-push-4 surround'>
+            <div class='row collapse'>
+                <div class='small-12 column'>
+                    <div class='title'>
+                        <img src='{% static 'images/ot-horiz-white.png' %}' />
+                    </div>
+                </div>
+            </div>
+    
+            <div data-alert class='alert-box alert'>
+                Your login details were not recognised. Please try again.
+                <a href='#' class='close'>&times;</a>
+            </div>
+    
+            <div class='row'>
+                <div class='small-12 medium-11 small-centered column'>
+                    <input type='text' id='username' placeholder='Username'>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='small-12 medium-11 small-centered column'>
+                    <input type='password' id='password' placeholder='Password'>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='small-12 medium-11 small-centered column submit'>
+                    {% include 'nuit/includes/loader.html' with size=48 %}
+                    <button class='button expand'>Login</button>
                 </div>
             </div>
         </div>
-        <div class='row'>
-            <div class='small-12 medium-11 small-centered column'>
-                <input type='text' id='username' class='error' placeholder='Username'>
-                <small class="error">These login details were not recognised. Please try again.</small>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='small-12 medium-11 small-centered column'>
-                <input type='password' id='password' placeholder='Password'>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='small-12 medium-11 small-centered column submit'>
-                {% include 'nuit/includes/loader.html' with size=48 %}
-                <button class='button expand'>Login</button>
-            </div>
-        </div>
-    </div>
-  </div>
-</form>
+      </div>
+    </form>
+</section>
 
 {% endblock %}

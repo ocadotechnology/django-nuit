@@ -1,0 +1,22 @@
+{% load static %}
+{% load nuit %}
+{% extend nuit_base|default:'nuit/base.html' %}
+
+{% block title %}{{nuit_error_code}}: {{nuit_error_title}}{% endblock %}
+
+{% block content %}
+<section class='modal error'>
+    <div class='row'>
+        <div class='small-12 medium-6 medium-push-3 large-4 large-push-4'>
+            <ul class='pricing-table'>
+                <li class='title'><img src='{% static 'images/ot-horiz-white.png' %}' /></li>
+                <li class='price'>{{nuit_error_code}}: {{nuit_error_title}}</li>
+                <li class='bullet-item'>
+                    {{nuit_error_message}}
+                </li>
+                {% if nuit_show_return %}<li class='bullet-item'>Perhaps you'd like to <a href='javascript:history.go(-1)'>go back and try again</a>?</a></li>{% endif %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
