@@ -122,12 +122,14 @@ def app_menu(parser, token):
     return AppMenuNode(nodelist, title=title)
 
 @register.simple_tag
-def menu_item(link, name, id):
+def menu_item(link, name, id=None):
     # try reversing the link to see if it is a view
     try:
         url = reverse(link)
     except NoReverseMatch:
         url = link
+    if not id:
+        id = slugify(name)
     return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=url, id=id)
 
 
