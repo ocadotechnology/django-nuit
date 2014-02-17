@@ -60,7 +60,7 @@ class MenuSectionNode(template.Node):
         title = '<h5>%s</h5>' % bare_title if bare_title else ''
         link_name = self.link_name.resolve(context) or bare_title
         return '''
-            <section class='right-menu-reveal' data-reveal data-link='{link_name}' id='{id}'>
+            <section class='right-menu-reveal' {reveal} data-link='{link_name}' id='{id}'>
                 <div>
                 {title}
                 {list_begin}
@@ -76,7 +76,9 @@ class MenuSectionNode(template.Node):
             id = slugify(link_name) if not self.id.resolve(context) else self.id.resolve(context),
             list_begin = "<nav><ul class='side-nav'>" if self.is_list.resolve(context) else '',
             list_end = '</ul></nav>' if self.is_list.resolve(context) else '',
+            reveal = 'data-reveal' if not self.is_list.resolve(context) else '',
         )
+
 
 
 @register.tag

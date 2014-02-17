@@ -83,7 +83,7 @@
 
     $('.sidebar.on-right > section').each(function() {
         $this = $(this);
-        if ($this.data('link')) {
+        if ($this.data('reveal')) {
             $('#right-menu-drop').append("<li><a href='#' data-reveal-id='" + $this.attr('id') + "'>" + $this.data('link') + "</a></li>");
         } else {
             $nav = $this.find('nav');
