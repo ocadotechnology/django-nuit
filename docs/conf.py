@@ -94,11 +94,11 @@ pygments_style = 'sphinx'
 
 # -- Options for HTML output ---------------------------------------------------
 
-import sphinx_rtd_theme
+#import sphinx_rtd_theme
 
-html_theme = "sphinx_rtd_theme"
+#html_theme = "sphinx_rtd_theme"
 
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+#html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.

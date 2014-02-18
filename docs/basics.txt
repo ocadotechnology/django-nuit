@@ -8,4 +8,19 @@ Framework Templates
 
 There are three basic framework elements provided by Nuit that can be enabled on a per-app or per-template basis. These are the top bar, left menu and right menu.
 
+.. _top-bar:
+
+Top Bar
+~~~~~~~
+
+.. _left-menu:
+
+Left Menu
+~~~~~~~~~
+
+.. _right-menu:
+
+Right Menu
+~~~~~~~~~~
+
 .. _`Zurb Foundation`: http://foundation.zurb.com
