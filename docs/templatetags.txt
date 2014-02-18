@@ -90,6 +90,26 @@ To use the tags, you need to load the ``nuit`` tag library::
 
             A unique ID for the link, intended for use by the :ref:`set_active_menu <set-active-menu>` tag. Is applied as a class to the ``<li>`` prepended with ``menu-``.
 
+.. attribute:: app_menu
+
+    Renders the main application menu. Intended for use in the :attr:`right_menu` block, and should be filled with :ref:`menu_item <menu-item>` links. One optional argument:
+
+    .. attribute:: title
+
+            The title of the application - displayed above the menu items.
+
+    Example usage::
+
+        {% block left_menu %}
+            {% app_menu 'My Application' %}
+                {% menu_link name='Page One' link='/page-one/' %}
+                {% menu_link name='Page Two' link='/page-two/' %}
+                {% menu_link name='Page Three' link='/page-three/' %}
+                {% menu_link name='Page Four' link='/page-four/' %}
+                {% menu_link name='Page Five' link='/page-five/' %}
+            {% end_app_menu %}
+        {% endblock %}
+
 .. _set-active-menu:
 
 .. attribute:: set_active_menu
@@ -109,6 +129,9 @@ To use the tags, you need to load the ``nuit`` tag library::
         .. attribute:: page_obj
 
             The Django Page_ object for the current view of data. This is provided by Django's ListView_ and Nuit's SearchableListView.
+
+            .. _Page: https://docs.djangoproject.com/en/dev/topics/pagination/#page-objects
+            .. _ListView: https://docs.djangoproject.com/en/dev/ref/class-based-views/generic-display/#listview
 
         .. attribute:: show_totals
 

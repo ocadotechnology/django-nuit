@@ -12,6 +12,10 @@ Contents
 
  installation
  basics
+ sass
+ settings
  templates
+ templatetags
+ includes
 
 .. _`Zurb Foundation`: http://foundation.zurb.com

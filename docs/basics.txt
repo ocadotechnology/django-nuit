@@ -1,7 +1,9 @@
-Nuit Basics
-===========
+Basics
+======
 
-Nuit provides a collection of templates, template tags, views and other Django utilities, using `Zurb Foundation`_ as a framework for a consistent front-end experience for your apps.
+Nuit provides a collection of templates, template tags, views and other Django utilities, using `Zurb Foundation`_ as a framework for a consistent responsive front-end experience for your apps.
+
+.. _`Zurb Foundation`: http://foundation.zurb.com
 
 Framework Templates
 -------------------
@@ -13,14 +15,50 @@ There are three basic framework elements provided by Nuit that can be enabled on
 Top Bar
 ~~~~~~~
 
+The top bar is Nuit's implementation of Foundation's `Top Bar`_ component. It provides a global application menu on the right hand side (defined in ``settings.py`` with the :attr:`NUIT_APPLICATIONS` variable), a logo and an optional number of links.
+
+TODO: Option to override the logo.
+
+.. _`Top Bar`: http://foundation.zurb.com/docs/components/topbar.html
+
 .. _left-menu:
 
 Left Menu
 ~~~~~~~~~
+
+The left menu is intended for use as the main menu of an application. It is situated on the left of the screen until the screen size drops to 'small' (mobile screens etc.), where the menu items are then accessible under the hamburger icon in the top bar.
 
 .. _right-menu:
 
 Right Menu
 ~~~~~~~~~~
 
-.. _`Zurb Foundation`: http://foundation.zurb.com
+The right menu is intended for use as a page-specific menu. It floats on the right of the screen until the screen size drops to 'medium' (tablets, narrow windows etc.), where the items are then available under a gear icon in the top right. Links appear directly beneath the gear, whereas more detailed data structures appear in a modal dialog box with an activation link beneath the gear.
+
+Suggested Deployment Scenario
+-----------------------------
+
+The way Nuit is intended to be used is as follows. Note: this is a quick overview, and for a more in-depth explaination of each stage you should read the revelant documentation.
+
+* Install Nuit following the :doc:`installation` guidelines.
+* In your app, define a base template that extends from :ref:`nuit-base`, that includes the relevant framework elements::
+
+    {% load nuit %}
+    {% extend 'nuit/base.html' app_name='My application' topbar=True leftmenu=True %}
+
+* Use this template to define everything you want on all pages in your application, such as the application-level menu::
+
+    {% block left_menu %}
+        {% app_menu 'My Application' %}
+            {% menu_link name='Page One' link='/page-one/' %}
+            {% menu_link name='Page Two' link='/page-two/' %}
+            {% menu_link name='Page Three' link='/page-three/' %}
+            {% menu_link name='Page Four' link='/page-four/' %}
+            {% menu_link name='Page Five' link='/page-five/' %}
+        {% end_app_menu %}
+    {% endblock %}
+
+* Inherit all other templates from this one::
+
+    {% load nuit %}
+    {% extend 'my-base.html' %}

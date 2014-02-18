@@ -1,0 +1,30 @@
+Settings
+========
+
+There are a handful of settings available to customise Nuit from ``settings.py``.
+
+.. _settings-nuit-applications:
+
+.. attribute:: NUIT_APPLICATIONS
+
+    Defines the global Nuit applications menu. This is intended to be the same across all of your sites using Nuit, and therefore ought to be added to ``settings.py`` via something like Puppet or Chef. These items are available in a drop-down menu on the right of the :ref:`top-bar`. Multi-levels are acceptible. The structure should be a list of dictionaries with particular keys::
+
+        NUIT_APPLICATIONS = (
+            {
+                'name': 'One Link',
+                'link': 'https://www.google.com/',
+            },
+            {  
+                'name': 'More under here',
+                'subs': (
+                    {
+                        'name': 'Another Link',
+                        'link': 'https://pypi.python.org/',
+                    },
+                    {
+                        'name': 'Another Link 2',
+                        'link': 'https://www.ocado.com',
+                    },
+                ),
+            },
+        )

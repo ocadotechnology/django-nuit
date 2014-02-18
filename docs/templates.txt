@@ -18,6 +18,8 @@ For more information about Nuit's ``extend`` tag, see the :doc:`documentation <t
 Base Template
 -------------
 
+.. _nuit-base:
+
 ``nuit/base.html``
 ~~~~~~~~~~~~~~~~~~
 
@@ -73,7 +75,7 @@ The following blocks can be overridden in subsequent templates to customise the 
 
 .. attribute:: title
 
-    :default: "Home"
+    :default: 'Home'
 
     Defines the title of the page, used in the ``<title>`` element.
 
@@ -125,5 +127,60 @@ The following blocks can be overridden in subsequent templates to customise the 
 
     ``{{block.super}}`` is not required for this block when extending ``nuit/base.html`` directly.
 
+Generic Templates
+-----------------
 
+Nuit's generic templates provide the front-end detail for common operations, such as listing objects. These tend to go hand-in-hand with Django's `Generic Views`_.
 
+.. _`Generic Views`: https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-display/
+
+.. _list-template:
+
+``nuit/generic/list.html``
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Displays a list of objects, linking to their `detail URL`_, with options for pagination and filtering. This is designed to be used with Nuit's :ref:`SearchableListView`.
+
+.. _`detail URL`: https://docs.djangoproject.com/en/dev/ref/models/instances/#get-absolute-url
+
+Arguments
+^^^^^^^^^
+
+The following arguments can be passed to the ``extend`` tag to change the behaviour of the list template:
+
+.. attribute:: base
+
+    :default: 'nuit/base.html'
+
+    Defines the template which `nuit/generic/list.html` will extend. This defaults to Nuit's base, but in most cases you will have made customisations (such as menu items etc.) to your own base template, and need this template to extend your own.
+
+.. attribute:: search_verb
+
+    :default: 'Search'
+
+    Defines the verb to be displayed on the submit button of the search form, if applicable.
+
+Blocks
+^^^^^^
+
+The following blocks can be overridden in subsequent templates to customise the behaviour of the template. All blocks that are included in the template hierarchy are also available - by default, this means all blocks available in :ref:`nuit-base`.
+
+.. note::
+    
+    As always, the best way to override these blocks is to look at the source code for ``nuit/generic/list.html``. This will give you a good idea about how Nuit implements parts of the template, and therefore a good indication of what is required if you wish to override the blocks.
+
+.. attribute:: title
+
+    :default: 'List of Objects'
+
+    Defines the title of the page, used in an ``<h1>`` element and in the ``<title>``.
+
+.. attribute:: search_query
+
+    :default: '*x* results for *search_term*'
+
+    Displays above the list of objects.
+
+.. attribute:: object_list
+
+    :default: an unordered list containing a list of the elements for that page.
