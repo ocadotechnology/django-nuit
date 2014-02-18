@@ -1,8 +1,8 @@
-===========
-django-nuit
-===========
+====
+Nuit
+====
 
-A front-end framework based upon Zurb Foundation for Django.
+A front-end framework based upon `Zurb Foundation`_ for Django.
 
 Contents
 ========
@@ -11,3 +11,7 @@ Contents
  :maxdepth: 2
 
  installation
+ basics
+ templates
+
+.. _`Zurb Foundation`: http://foundation.zurb.com

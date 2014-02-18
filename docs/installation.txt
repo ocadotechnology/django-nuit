@@ -4,17 +4,81 @@ Installation
 Requirements
 ------------
 
-``django-nuit`` is built using SASS_, and requires that you install the SASS binary in order to compile and compress the CSS.
+Nuit is built using SASS_, and requires that you install the SASS binary in order to compile and compress the CSS. This won't be installed using ``pip``, and will need to be installed manually.
 
-* Install ``django-nuit`` with ``pip``::
+Installation
+------------
+
+* Install Nuit with ``pip``::
 
     pip install django-nuit
 
-* Add ``nuit`` to your ``INSTALLED_APPS`` in ``settings.py``::
+* Add the following to your ``INSTALLED_APPS`` in ``settings.py``::
 
-    INSTALLED_APPS = (
+    INSTALLED_APPS += (
         'nuit',
-        # other apps
+        'compressor',
+        'foundation_scss',
+        'foundation_icons',
+        'jquery',
     )
 
+* Add the context processor to your settings::
+
+    TEMPLATE_CONTEXT_PROCESSORS += (
+        'nuit.context_processors.nuit',
+    )
+
+* Add the following settings for django-compressor_ (see their documentation for more detail)::
+
+    COMPRESS_ENABLED = True
+    COMPRESS_OFFLINE = True
+
+    COMPRESS_PRECOMPILERS = (
+        ('text/x-sass', 'sass {infile} {outfile}'),
+        ('text/x-scss', 'sass {infile} {outfile}'),
+    )
+
+* Run ``collectstatic`` and ``compress``::
+
+    manage.py collectstatic
+    manage.py compress
+
+* You're now ready to start using Nuit in your templates and apps.
+
+Dependencies
+------------
+
+In case you're installing Nuit differently (e.g. from the git repo), make sure to install the following dependencies.
+
+- django_
+
+  Fairly obvious - this is a Django library, afterall::
+
+      pip install django
+
+- django-compressor_
+
+  In order to compile the CSS used by Nuit::
+
+      pip install django-compressor
+
+- django-foundation-statics_
+
+  Nuit provides a suite to tools to help you easily build a consistent front-end interface for your Django application using Zurb's Foundation_ framework. This package contains the static files (CSS, Javscript) that makes up that framework::
+
+      pip install django-foundation-statics
+
+- django-foundation-icons_
+
+  This package contains Zurb's `Foundation Icons`_ static files::
+
+      pip install django-foundation-icons
+
 .. _SASS: http://sass-lang.com
+.. _`django-compressor`: http://django-compressor.readthedocs.org/en/latest/
+.. _`django`: https://www.djangoproject.com/
+.. _`django-foundation-statics`: https://pypi.python.org/pypi/django-foundation-statics/
+.. _`Foundation`: http://foundation.zurb.com
+.. _`django-foundation-icons`: https://pypi.python.org/pypi/django-foundation-icons/
+.. _`Foundation Icons`: http://zurb.com/playground/foundation-icon-fonts-3

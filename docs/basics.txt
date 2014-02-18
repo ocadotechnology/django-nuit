@@ -1,0 +1,11 @@
+Nuit Basics
+===========
+
+Nuit provides a collection of templates, template tags, views and other Django utilities, using `Zurb Foundation`_ as a framework for a consistent front-end experience for your apps.
+
+Framework Templates
+-------------------
+
+There are three basic framework elements provided by Nuit that can be enabled on a per-app or per-template basis. These are the top bar, left menu and right menu.
+
+.. _`Zurb Foundation`: http://foundation.zurb.com

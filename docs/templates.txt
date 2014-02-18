@@ -1,0 +1,23 @@
+Templates
+=========
+
+There are a number of templates provided with Nuit, intended to be extended by your own templates to provide the framework around your own content.
+
+Extending the Nuit templates
+----------------------------
+
+In order to get the most functionality out of Nuit's templates, you need to extend them using Nuit's own ``extend`` template tag, not Django's built in ``extends``. This is because all the templates take arguments that customise how they display and function, and this isn't possible with Django's standard template tag.
+
+To use Nuit's extend tag, you must first load the ``nuit`` template tag library::
+
+    {% load nuit %}
+    {% extend 'nuit/base.html' %}
+
+Base Template
+-------------
+
+``nuit/base.html``
+^^^^^^^^^^^^^^^^^^
+
+The base template contains the necessary markup to provide the basic framework elements and styling, and include the CSS and Javascript required for the Nuit interface to function. Most of the time, unless you're using one of the generic templates listed below, you'll be extending from ``nuit/base.html`` and overwriting the various blocks you require.
+
