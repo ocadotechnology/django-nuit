@@ -1,4 +1,4 @@
-@import "custom";
+@import "_custom";
 
 $row-width: 100%;
 
@@ -238,23 +238,23 @@ $row-width: 100%;
   
   .dotwrap:nth-child(5n+1) {
     -webkit-transform: rotate(0deg);
-    .dot { color: rgb(132, 189, 0); }
+    .dot { color: rgba(0, 0, 0, 1); }
   }
   .dotwrap:nth-child(5n+2) {
     -webkit-transform: rotate(72deg);
-    .dot { color: rgb(234, 170, 0); }
+    .dot { color: rgba(0, 0, 0, 0.8); }
   }
   .dotwrap:nth-child(5n+3) {
     -webkit-transform: rotate(144deg);
-    .dot { color: rgb(179, 105, 36); }
+    .dot { color: rgba(0, 0, 0, 0.6); }
   }
   .dotwrap:nth-child(5n+4) {
     -webkit-transform: rotate(216deg);
-    .dot { color: rgb(209, 26, 80); }
+    .dot { color: rgba(0, 0, 0, 0.4); }
   }
   .dotwrap:nth-child(5n+5) {
     -webkit-transform: rotate(288deg);
-    .dot { color: rgb(81, 8, 100); }
+    .dot { color: rgba(0, 0, 0, 0.2); }
   }
   
 }
