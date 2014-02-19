@@ -86,6 +86,15 @@
                         <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
                         </ul>
                     {% endif %}
+
+                    {% if nuit_breadcrumbs %}
+                        <ul class='breadcrumbs nuit-breadcrumbs'>
+                            {% if nuit_app_title %}<li><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>{% endif %}
+                            {% block breadcrumbs %}
+                            {% endblock %}
+                        </ul>
+                    {% endif %}
+
                     {% block content %}
 
                     {% endblock %}
@@ -121,6 +130,8 @@
         var modal = $(this);
         modal.attr('style', '');
     });
+
+    $('.nuit-breadcrumbs li:last-child').addClass('current');
 
     $('.sidebar.on-right > section').each(function() {
         $this = $(this);

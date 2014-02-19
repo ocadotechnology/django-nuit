@@ -123,10 +123,15 @@ def app_menu(parser, token):
     return AppMenuNode(nodelist, title=title)
 
 @register.simple_tag
-def menu_item(link, name, id=None, *args, **kwargs):
+def menu_item(link, name, id=None, current=False, unavailable=False):
     if not id:
         id = slugify(name)
-    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=link, id=id)
+    classes = []
+    if current:
+        classes.append('current')
+    if unavailable:
+        classes.append('unavailable')
+    return "<li class='menu-{id} {classes}'><a href='{link}'>{name}</a></li>".format(name=name, link=link, id=id, classes=' '.join(classes))
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)

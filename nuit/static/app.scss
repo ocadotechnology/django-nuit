@@ -2,6 +2,20 @@
 
 $row-width: 100%;
 
+$crumb-bg: rgba(0,0,0,0) !default;
+
+// We use these to set the padding around the breadcrumbs.
+$crumb-padding: 0 !default;
+//$crumb-side-padding: 0 !default;
+
+// We use these to control border styles.
+$crumb-border-size: 0 !default;
+$crumb-radius: 0 !default;
+
+// We use these to control the slash between breadcrumbs
+$crumb-slash-color: #aaa;
+$crumb-slash: "/";
+
 @import "scss/foundation";
 @import "nuit/_mixins";
 
@@ -157,7 +171,7 @@ $row-width: 100%;
 
     @media #{$large-up} {
         &.on-right + .main {
-            padding-right: 220px;
+            padding-right: 230px;
         }
     }
     
@@ -319,4 +333,8 @@ $row-width: 100%;
             line-height: 1.6em;
         }
     }
+}
+
+.nuit-breadcrumbs {
+    margin-bottom: 0.5em;
 }
