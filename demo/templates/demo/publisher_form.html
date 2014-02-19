@@ -1,0 +1,27 @@
+{% load nuit %}
+{% extend 'demo/base.html' leftmenu=False %}
+
+{% block content %}
+
+    <h1>Publisher Form</h1>
+    
+    <form method='post' action=''>
+    
+        {% csrf_token %}
+
+        {% foundation_form form %}
+            title {'small': 4, 'medium': 2}; first_name {'small': 8, 'medium': 0}; last_name
+            address
+            city; state_province; country {'postfix': 'Europe'}
+            website {'prefix': 'http://'}
+        {% end_foundation_form %}
+
+        <div class='row'>
+            <div class='small-12 columns'>
+                <button class='button'>Submit</button>
+            </div>
+        </div>
+    
+    </form>
+
+{% endblock %}

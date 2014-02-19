@@ -1,3 +1,4 @@
+from __future__ import division
 from django import template
 from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends
@@ -144,3 +145,125 @@ def pagination_menu(context, page_obj, show_totals=True):
         'page_list': page_list,
         'show_totals': show_totals,
     }
+
+
+from django.template import Context
+from django.template.loader import get_template
+from ast import literal_eval
+
+def d(num, parts):
+       first = num // parts
+       last  = num - (parts - 1) * first
+       return (parts - 1) * [first] + [last]
+
+def split_strip(iter, delimiter=','):
+    return [x.strip() for x in iter.split(delimiter) if x.strip()]
+
+class FoundationFormField(object):
+    def __init__(self, field, small=12, medium=None, large=None, prefix=None, postfix=None):
+        self.field = field
+        self.small_width = small
+        self.medium_width = medium or self.small_width
+        self.large_width = large or self.medium_width
+        self.prefix = prefix
+        self.postfix = postfix
+    def __repr__(self):
+        return '<Field: %s (%d, %d, %d)>' % (self.field, self.small_width, self.medium_width, self.large_width)
+
+class FoundationFormNode(template.Node):
+    def __init__(self, form, nodelist):
+        self.form = form
+        self.nodelist = nodelist
+    def render(self, context):
+        form = self.form.resolve(context)
+        form_template = get_template('nuit/includes/_form.html')
+
+        layout_instructions = []
+        for line in self.nodelist.render(context).splitlines():
+            if not line.strip(): 
+                continue
+            row_data = []
+            for field_data in line.split(';'):
+                field_data = field_data.strip()
+                if not field_data:
+                    continue
+                try:
+                    field_name, data = [x.strip() for x in field_data.split(' ', 1)]
+                except ValueError:
+                    row_data.append((field_data, {}))
+                else:
+                    try:
+                        row_data.append((field_name, literal_eval(data)))
+                    except SyntaxError:
+                        raise template.TemplateSyntaxError('Invalid parameters for field %s' % field_name)
+
+            sizes = ('small', 'medium', 'large',)
+
+            for x, y in row_data:
+                current_size = None
+                for size in sizes:
+                    if size in y:
+                        current_size = y[size]
+                    elif current_size:
+                        y[size] = current_size
+
+            for size in sizes:
+                total = sum(y[size] for x, y in row_data if size in y)
+                unspecified = len([x for x, y in row_data if size not in y or not y[size]])
+                if unspecified == len(row_data) and size == 'small':
+                    unspecified_widths = [12] * unspecified
+                else:
+                    unspecified_widths = d(12 - total, unspecified)
+                for field, data in row_data:
+                    if size in data and data[size]:
+                        continue
+                    data[size] = unspecified_widths.pop(0)
+
+            print row_data
+
+            layout_instructions.append(row_data)
+
+        #layout_instructions = [split_strip(x, ',') for x in self.nodelist.render(context).splitlines() if x.strip()]
+
+        all_fields = [field.name for field in form.visible_fields()]
+
+        field_layout = []
+        for field_line in layout_instructions:
+            fields = []
+            for field, data in field_line:
+                print field, data
+                try:
+                    fields.append(FoundationFormField(form[field], **data))
+                    all_fields.remove(field)
+                except KeyError:
+                    raise template.TemplateSyntaxError('Field %s not found in form' % field)
+            field_layout.append(fields)
+
+        if all_fields:
+            remaining_fields = []
+            for field in all_fields:
+                remaining_fields.append(FoundationFormField(form[field]))
+            field_layout.append(remaining_fields)
+
+        content = form_template.render(Context({'form': form, 'fields': field_layout}))
+        return content
+
+@register.tag
+def foundation_form(parser, token):
+    bits = token.split_contents()
+    if len(bits) < 2:
+        raise template.TemplateSyntaxError('Incorrect number of arguements for %s, Form object required' % bits[0])
+    form = parser.compile_filter(bits[1])
+    nodelist = parser.parse(('end_foundation_form',))
+    parser.delete_first_token()
+    return FoundationFormNode(form, nodelist)
+
+
+
+
+
+
+
+
+
+

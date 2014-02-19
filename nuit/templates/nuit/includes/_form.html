@@ -1,0 +1,51 @@
+{% if form.non_field_errors %}
+<div class='row'>
+    <div class='small-12 columns'>
+        <div data-alert class='alert-box alert'>
+            {% for non_field_error in form.non_field_errors %}
+                {{non_field_error}}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% for field in form.hidden_fields %}
+    {{form.field}}
+{% endfor %}
+
+{% for foundation_fields in fields %}
+
+    <div class='row'>
+
+    {% for foundation_field in foundation_fields %}
+        {% with foundation_field.field as field %}
+            <div class='small-{{foundation_field.small_width}} medium-{{foundation_field.medium_width}} large-{{foundation_field.large_width}} columns {% if field.errors %}error{% endif %}'>
+                {% if foundation_field.prefix or foundation_field.postfix %}<div class='row collapse'>{% endif %}
+                <label{% if field.errors %} class='error'{% endif %} for='{{field.auto_id}}'>
+                    {{field.label}}
+                </label>
+                {% if foundation_field.prefix %}
+                    <div class='small-3 columns'><span class='prefix'>{{foundation_field.prefix}}</span></div>
+                {% endif %}
+                {% if foundation_field.prefix or foundation_field.postfix %}
+                    <div class='small-9 columns'>
+                {% endif %}
+                {{field}}
+                {% if foundation_field.prefix or foundation_field.postfix %}
+                    </div>
+                {% endif %}
+                {% if foundation_field.postfix %}
+                    <div class='small-3 columns'><span class='postfix'>{{foundation_field.postfix}}</span></div>
+                {% endif %}
+                {% if foundation_field.prefix or foundation_field.postfix %}</div>{% endif %}
+                {% for error in field.errors %}
+                    <small class='error'>{{error|escape}}</small>
+                {% endfor %}
+            </div>
+        {% endwith %}
+    {% endfor %}
+
+    </div>
+
+{% endfor %}
