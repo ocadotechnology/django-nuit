@@ -219,8 +219,6 @@ class FoundationFormNode(template.Node):
                         continue
                     data[size] = unspecified_widths.pop(0)
 
-            print row_data
-
             layout_instructions.append(row_data)
 
         #layout_instructions = [split_strip(x, ',') for x in self.nodelist.render(context).splitlines() if x.strip()]
@@ -231,7 +229,6 @@ class FoundationFormNode(template.Node):
         for field_line in layout_instructions:
             fields = []
             for field, data in field_line:
-                print field, data
                 try:
                     fields.append(FoundationFormField(form[field], **data))
                     all_fields.remove(field)
