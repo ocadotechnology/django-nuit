@@ -79,13 +79,18 @@
         </div>
         {% endif %}
         <div class='main'>
-            {% if nuit_rightmenu %}
-            <a href='#' data-dropdown='right-menu-drop' class='hide-for-large-up actions small secondary radius button dropdown right'><i class='fi-widget size-24'></i></a>
-            <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
-            </ul>
-            {% endif %}
-            {% block content %}
-            {% endblock %}
+            <div class='row'>
+                <div class='small-12 columns'>
+                    {% if nuit_rightmenu %}
+                        <a href='#' data-dropdown='right-menu-drop' class='hide-for-large-up actions small secondary radius button dropdown right'><i class='fi-widget size-24'></i></a>
+                        <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
+                        </ul>
+                    {% endif %}
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
         </div>
     </div>
     </section>

@@ -176,11 +176,7 @@ $row-width: 100%;
 
 .main {
     
-    margin: 10px;
-    
-    @media #{$medium-up} {
-        margin: 20px;
-    }
+    margin-top: 10px;
 
     h1 {
         font-size: 1.8rem;
