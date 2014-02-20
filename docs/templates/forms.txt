@@ -1,0 +1,77 @@
+Forms
+=====
+
+Foundation's `form component`_ is complex and provides many options. The :ref:`template-tag-foundation-form` template tag enables you to render your Form_ objects with complete control over their layout.
+
+.. _`form component`: http://foundation.zurb.com/docs/components/forms.html
+.. _Form: https://docs.djangoproject.com/en/dev/topics/forms/#form-objects
+
+.. _forms-basic-usage:
+
+Basic Usage
+-----------
+
+To use the template tag at it's most basic, don't provide any options between the open and closing tags, and pass your ``Form`` object::
+
+    {% foundation_form my_form_object %}
+    {% end_foundation_form %}
+
+This will render all your specified form fields at full width. (In Foundation's grid_ terms, this means they are defined as ``small-12``, ``medium-12`` and ``large-12``.)
+
+.. note::
+    Just like Django's own form rendering, the template tag will not render the opening and closing ``<form>`` elements, or the submit button. That's up to you.
+
+.. _grid: http://foundation.zurb.com/docs/components/grid.html
+
+.. _forms-layout-customisation:
+
+Layout Customisation
+--------------------
+
+To customise which fields appear next to each other in the form, specify each row as a semi-colon-separated list between the form tags. For example, for a imaginary 'Customer' form::
+
+    {% foundation_form customer_form %}
+        title; first_name; last_name
+        email_address;
+        password; confirm_password;
+    {% end_foundation_form %}
+
+This will render the ``title``, ``first_name`` and ``last_name`` fields at equal widths on one row, the ``email_address`` field on it's own row, and then the two ``password`` fields equal width on the final row. Again, in Foundation's grid terms, this means that the three first-row fields will have ``small-12``, ``medium-4`` and ``large-4``, the ``email_address`` is ``small-12`` etc., and the ``password`` fields are ``small-12``, ``medium-6`` and ``large-6`` etc.
+
+Any fields you do not specify will be appended to the end of the form at full width.
+
+.. note::
+    No matter which fields you specify on each line, Nuit will default all fields to their own line for small screens (``small-12``). This can be overriden - see the :ref:`forms-custom-widths` section.
+
+.. _forms-custom-widths:
+
+Custom Widths
+~~~~~~~~~~~~~
+
+If you don't want to rely on Nuit's automatic spacing of fields (for example, you know that the ``title`` field really out to be smaller than the ``field_name`` and ``last_name`` fields), you can provide a :py:class:`dict` of options after each field containing values for either ``small``, ``medium`` or ``large`` depending on what you want to override. For example, to make the ``title`` field take up 2 columns at medium-up, use the following markup::
+
+    
+    {% foundation_form customer_form %}
+        title {'medium': 2}; first_name; last_name
+        email_address;
+        password; confirm_password;
+    {% end_foundation_form %}
+
+Nuit will automatically space out unspecified width fields as best it can to fill the remaining space.
+
+.. note::
+    Just like Foundation, widths defined for smaller sizes will be inherited by larger sizes. In the example above, even though we only specify the ``medium`` value, the ``title`` field also take a width of ``2`` at ``large`` sizes. If you don't want this behaviour, then either set the larger sizes manually, or set the next size up to ``0`` to let Nuit calculate the spacings.
+
+.. _forms-pre-post-fix-elements
+
+Pre- and Post-fix elements
+--------------------------
+
+Foundation allows you to define `pre- and post-fix elements`_ that attach to form inputs. One example of such usage is prepending a ``http://`` before an input asking for a URL (note that this data is **not** included in the submitted data). Nuit lets you define this in the field's data :py:class:`dict`::
+
+    
+    {% foundation_form customer_form %}
+        title; first_name; last_name
+        email_address {'postfix': '@gmail.com'};
+        password {'prefix': '6 chars or less'}; confirm_password;
+    {% end_foundation_form %}

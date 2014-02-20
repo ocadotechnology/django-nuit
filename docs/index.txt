@@ -13,9 +13,6 @@ Contents
  installation
  basics
  sass
- settings
- templates
- templatetags
- includes
+ templates/index
 
 .. _`Zurb Foundation`: http://foundation.zurb.com

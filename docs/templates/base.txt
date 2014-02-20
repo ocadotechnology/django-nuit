@@ -1,0 +1,115 @@
+Base Template
+=============
+
+.. _template-nuit-base:
+
+``nuit/base.html``
+------------------
+
+The base template contains the necessary markup to provide the basic framework elements and styling, and include the CSS and Javascript required for the Nuit interface to function. Most of the time, unless you're using one of the generic templates listed below, you'll be extending from ``nuit/base.html`` and overwriting the various blocks you require.
+
+Arguments
+^^^^^^^^^
+
+The following arguments can be passed to the :ref:`template-tag-extend` tag to change the behaviour of the base template:
+
+.. attribute:: topbar
+
+    :default: ``False``
+
+    Boolean that decides whether to display the :ref:`component-top-bar` or not.
+
+.. attribute:: leftmenu
+
+    :default: ``False``
+
+    Boolean that decides whether to display the :ref:`component-left-menu` or not.
+
+.. attribute:: rightmenu
+
+    :default: ``False``
+
+    Boolean that decides whether to display the :ref:`component-right-menu` or not.
+
+.. attribute:: app_title
+
+    :default: ``None``
+
+    The name of the application. This is displayed in various places, such as the ``<title>`` element, and as a button on the top bar to take you back to the :attr:`app_url` defined.
+
+.. attribute:: app_url
+
+    :default: ``None``
+
+    The base URL of the application.
+
+.. attribute:: breadcrumbs
+
+    :default: ``False``
+
+    Whether to display the breadcrumbs or not. See the :ref:`component-breadcrumbs` documentation for more detail.
+
+Blocks
+^^^^^^
+
+The following blocks can be overridden in subsequent templates to customise the content of the template - override these using the standard Django template model::
+
+    {% block block_name %}
+    This is my new content
+    {% endblock %}
+
+.. _`template-nuit-base-block-title`:
+
+title
+~~~~~
+
+Defines the title of the page, used in the ``<title>`` element.
+
+.. _`template-nuit-base-block-content`:
+
+content
+~~~~~~~
+
+The main content of the page. The space that this content fills will be determined by the :attr:`topbar`, :attr:`leftmenu` and :attr:`rightmenu` attributes.
+
+.. _`template-nuit-base-block-css`:
+
+css
+~~~
+
+Allows you to enter CSS ``<link>`` or ``<style>`` elements that will be compiled and compressed by Django Compressor.
+
+.. _`template-nuit-base-block-scripts`:
+
+scripts
+~~~~~~~
+
+Allows you to enter Javascript ``<script>`` tags that will be included just before the closing ``</body>`` element.
+
+.. _`template-nuit-base-block-top-bar-menu`:
+
+top_bar_menu
+~~~~~~~~~~~~
+
+Allows you to add links to the :ref:`component-top-bar`. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
+
+.. _`template-nuit-base-block-left-menu`:
+
+left_menu
+~~~~~~~~~
+
+Allows you to add content to the :ref:`component-left-menu`. This is only visible when :attr:`leftmenu` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
+
+.. _`template-nuit-base-block-right-menu`:
+
+right_menu
+~~~~~~~~~~
+
+Allows you to add links to the :ref:`component-right-menu`. This is only visible when :attr:`rightmenu` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
+
+.. _`template-nuit-base-block-breadcrumbs`:
+
+breadcrumbs
+~~~~~~~~~~~
+
+Allows you to define breadcrumb links. See the :ref:`component-breadcrumbs` documentation for more detail.

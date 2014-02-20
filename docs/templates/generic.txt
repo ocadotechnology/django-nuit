@@ -1,0 +1,83 @@
+Generic Templates
+=================
+
+Nuit's generic templates provide the front-end detail for common operations, such as listing objects. These tend to go hand-in-hand with Django's `Generic Views`_.
+
+.. _`Generic Views`: https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-display/
+
+.. _template-generic-list:
+
+``nuit/generic/list.html``
+--------------------------
+
+Displays a list of objects, linking to their `detail URL`_, with options for pagination and filtering. This is designed to be used with Nuit's :ref:`SearchableListView`.
+
+.. _`detail URL`: https://docs.djangoproject.com/en/dev/ref/models/instances/#get-absolute-url
+
+Arguments
+^^^^^^^^^
+
+The following arguments can be passed to the ``extend`` tag to change the behaviour of the list template:
+
+.. attribute:: base
+
+    :default: 'nuit/base.html'
+
+    Defines the template which :ref:`template-generic-list` will extend. This defaults to :ref:`template-nuit-base`, but in most cases you will have made customisations (such as menu items etc.) to your own base template, and need this template to extend your own.
+
+.. attribute:: search_verb
+
+    :default: 'Search'
+
+    Defines the verb to be displayed on the submit button of the search form, if applicable.
+
+Blocks
+^^^^^^
+
+The following blocks can be overridden in subsequent templates to customise the behaviour of the template. All blocks that are included in the template hierarchy are also available - by default, this means all blocks available in :ref:`template-nuit-base`.
+
+.. note::
+    
+    As always, the best way to override these blocks is to look at the source code for :ref:`template-generic-list`. This will give you a good idea about how Nuit implements parts of the template, and therefore a good indication of what is required if you wish to override the blocks.
+
+.. template-generic-list-block-title:
+
+title
+~~~~~
+
+Defines the title of the page, used in an ``<h1>`` element and in the ``<title>``.
+
+.. template-generic-list-block-search-query:
+
+search_query
+~~~~~~~~~~~~
+
+Displays above the list of objects when a search has been performed. Defaults to displaying the number of results and the term that was searched for.
+
+.. template-generic-list-block-object-list:
+
+object_list
+~~~~~~~~~~~
+
+Used to override the list of objects. By default, contains an unordered list of the object's ``str`` representations that links to their ``get_absolute_url``.
+
+.. template-generic-403:
+
+``nuit/generic/403.html``
+-------------------------
+
+A generic view designed for display when an HTTP status code of ``403`` is returned. Used by the :ref:`handler-403` handler.
+
+.. template-generic-404:
+
+``nuit/generic/404.html``
+-------------------------
+
+A generic view designed for display when an HTTP status code of ``404`` is returned. Used by the :ref:`handler-404` handler.
+
+.. template-generic-500:
+
+``nuit/generic/500.html``
+-------------------------
+
+A generic view designed for display when an HTTP status code of ``500`` is returned. Used by the :ref:`handler-500` handler.
