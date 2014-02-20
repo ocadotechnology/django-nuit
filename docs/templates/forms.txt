@@ -59,19 +59,37 @@ If you don't want to rely on Nuit's automatic spacing of fields (for example, yo
 
 Nuit will automatically space out unspecified width fields as best it can to fill the remaining space.
 
+.. _forms-custom-widths-inheritance:
+
 .. note::
     Just like Foundation, widths defined for smaller sizes will be inherited by larger sizes. In the example above, even though we only specify the ``medium`` value, the ``title`` field also take a width of ``2`` at ``large`` sizes. If you don't want this behaviour, then either set the larger sizes manually, or set the next size up to ``0`` to let Nuit calculate the spacings.
 
-.. _forms-pre-post-fix-elements
+.. _forms-pre-post-fix-labels
 
-Pre- and Post-fix elements
---------------------------
+Pre- and Post-fix Labels
+------------------------
 
-Foundation allows you to define `pre- and post-fix elements`_ that attach to form inputs. One example of such usage is prepending a ``http://`` before an input asking for a URL (note that this data is **not** included in the submitted data). Nuit lets you define this in the field's data :py:class:`dict`::
-
+Foundation allows you to define `pre- and post-fix labels`_ that attach to form inputs. One example of such usage is prepending a ``http://`` before an input asking for a URL (note that this data is **not** included in the submitted data). Nuit lets you define this in the field's data :py:class:`dict`::
     
     {% foundation_form customer_form %}
         title; first_name; last_name
         email_address {'postfix': '@gmail.com'};
         password {'prefix': '6 chars or less'}; confirm_password;
     {% end_foundation_form %}
+
+.. _`pre- and post-fix labels`: http://foundation.zurb.com/docs/components/forms.html#pre-postfix-labels-amp-actions
+
+.. _forms-pre-post-custom-widths:
+
+Custom Widths
+~~~~~~~~~~~~~
+
+By default, each pre- or post-fix label will take up 3 of the 12 available grid widths at all sizes, and the field will take up 9. This can be customised in exactly the same way as for fields, detailed above in :ref:`forms-custom-widths`. Add options to the :py:class:`dict` of ``prefix_small``, ``prefix_medium``, ``prefix_large``, ``postfix_small``, ``postfix_medium`` and ``postfix_large``::
+
+    {% foundation_form customer_form %}
+        title; first_name; last_name
+        email_address {'postfix': '@gmail.com', 'postfix_medium': 4};
+        password {'prefix': '6 chars or less'}; confirm_password;
+    {% end_foundation_form %}
+
+The same rules for inheritance apply as in the :ref:`note <forms-custom-widths-inheritance>` above.
