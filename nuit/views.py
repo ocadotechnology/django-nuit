@@ -3,6 +3,20 @@ from django.views.generic import ListView
 from django.db.models import Q
 
 class SearchableListView(ListView):
+    '''
+    Render a list of objects that's searchable.
+
+    For documentation on ListView, from which this class inherits, see the `Django documentation`_.
+
+    .. _`Django documentation`: https://docs.djangoproject.com/en/dev/ref/class-based-views/generic-display/#listview
+
+    .. attribute:: search_fields
+
+        :default: ``()``
+
+        The fields the search will be performed on, using ``queryset.filter``.
+
+    '''
     search_fields = ()
 
     def get_context_data(self, **kwargs):

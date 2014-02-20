@@ -64,7 +64,7 @@ Nuit will automatically space out unspecified width fields as best it can to fil
 .. note::
     Just like Foundation, widths defined for smaller sizes will be inherited by larger sizes. In the example above, even though we only specify the ``medium`` value, the ``title`` field also take a width of ``2`` at ``large`` sizes. If you don't want this behaviour, then either set the larger sizes manually, or set the next size up to ``0`` to let Nuit calculate the spacings.
 
-.. _forms-pre-post-fix-labels
+.. _forms-pre-post-fix-labels:
 
 Pre- and Post-fix Labels
 ------------------------

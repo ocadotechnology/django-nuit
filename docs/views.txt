@@ -1,0 +1,7 @@
+Views
+=====
+
+Nuit provides a number of generic views for you to subclass.
+
+.. automodule:: nuit.views
+    :members: 

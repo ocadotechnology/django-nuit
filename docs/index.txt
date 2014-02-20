@@ -14,5 +14,6 @@ Contents
  basics
  sass
  templates/index
+ views
 
 .. _`Zurb Foundation`: http://foundation.zurb.com

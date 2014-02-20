@@ -10,7 +10,7 @@ Nuit's generic templates provide the front-end detail for common operations, suc
 ``nuit/generic/list.html``
 --------------------------
 
-Displays a list of objects, linking to their `detail URL`_, with options for pagination and filtering. This is designed to be used with Nuit's :ref:`SearchableListView`.
+Displays a list of objects, linking to their `detail URL`_, with options for pagination and filtering. This is designed to be used with Nuit's :class:`nuit.views.SearchableListView`.
 
 .. _`detail URL`: https://docs.djangoproject.com/en/dev/ref/models/instances/#get-absolute-url
 
