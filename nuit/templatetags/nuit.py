@@ -4,6 +4,9 @@ from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.template import Context
+from django.template.loader import get_template
+from ast import literal_eval
 import re
 
 register = template.Library()
@@ -152,11 +155,7 @@ def pagination_menu(context, page_obj, show_totals=True):
     }
 
 
-from django.template import Context
-from django.template.loader import get_template
-from ast import literal_eval
-
-def d(num, parts):
+def calculate_widths(parts, num=12):
        first = num // parts
        last  = num - (parts - 1) * first
        return (parts - 1) * [first] + [last]
@@ -218,7 +217,7 @@ class FoundationFormNode(template.Node):
                 if unspecified == len(row_data) and size == 'small':
                     unspecified_widths = [12] * unspecified
                 else:
-                    unspecified_widths = d(12 - total, unspecified)
+                    unspecified_widths = calculate_widths(unspecified, 12 - total)
                 for field, data in row_data:
                     if size in data and data[size]:
                         continue
