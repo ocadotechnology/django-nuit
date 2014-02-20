@@ -26,17 +26,17 @@
                     {{field.label}}
                 </label>
                 {% if foundation_field.prefix %}
-                    <div class='small-3 columns'><span class='prefix'>{{foundation_field.prefix}}</span></div>
+                    <div class='small-{{foundation_field.prefix_small_width}} medium-{{foundation_field.prefix_medium_width}} large-{{foundation_field.prefix_large_width}} columns'><span class='prefix'>{{foundation_field.prefix}}</span></div>
                 {% endif %}
                 {% if foundation_field.prefix or foundation_field.postfix %}
-                    <div class='small-9 columns'>
+                    <div class='small-{{foundation_field.fix_field_small_width}} medium-{{foundation_field.fix_field_medium_width}} large-{{foundation_field.fix_field_large_width}} columns'>
                 {% endif %}
                 {{field}}
                 {% if foundation_field.prefix or foundation_field.postfix %}
                     </div>
                 {% endif %}
                 {% if foundation_field.postfix %}
-                    <div class='small-3 columns'><span class='postfix'>{{foundation_field.postfix}}</span></div>
+                    <div class='small-{{foundation_field.postfix_small_width}} medium-{{foundation_field.postfix_medium_width}} large-{{foundation_field.postfix_large_width}} columns'><span class='postfix'>{{foundation_field.postfix}}</span></div>
                 {% endif %}
                 {% if foundation_field.prefix or foundation_field.postfix %}</div>{% endif %}
                 {% for error in field.errors %}
