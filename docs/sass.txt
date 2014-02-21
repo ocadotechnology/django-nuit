@@ -10,7 +10,65 @@ Available Variables
 
 For a list of most variables, please refer to the Foundation_ docs. The following variables are used by Nuit when compiling the SASS:
 
-None at the moment!
+.. attribute:: $sidebar-bg
+
+    :default: ``rgb(250, 250, 250)``
+
+    The color of the left and right menus.
+
+.. attribute:: $sidebar-left-min-width
+
+    :default: ``150px``
+
+    The minimum with of the left menu.
+
+.. attribute:: $sidebar-left-max-width
+
+    :default: ``280px``
+
+    The maximum width of the left menu.
+
+.. attribute:: $sidebar-left-width
+
+    :default: ``30%``
+
+    The width of the left menu, if between :attr:`$sidebar-left-min-width` and :attr:`$sidebar-left-max-width`.
+
+.. attribute:: $sidebar-right-max-width
+
+    :default: ``220px``
+
+    The maximum width of the right menu.
+
+.. attribute:: $sidebar-gutter-spacing
+
+    :default: ``10px``
+
+    The spacing between the menus and the content and window frame.
+
+.. attribute:: $sidebar-link-active-color
+
+    :default: ``$anchor-font-color``
+
+    The color of active links in the menus.
+
+.. attribute:: $sidebar-link-hover-color
+
+    :default: ``$anchor-font-color-hover``
+
+    The hover color of links in the menus.
+
+.. attribute:: $sidebar-link-active-bg
+
+    :default: ``rgba(0, 64, 84, 0.05)``
+
+    The background colour of active links in the menus.
+
+.. attribute:: $sidebar-link-hover-bg
+
+    :default: ``rgba(0, 64, 84, 0.03)``
+
+    The background colour of hovered links in the menus.
 
 
 .. _Foundation: http://foundation.zurb.com

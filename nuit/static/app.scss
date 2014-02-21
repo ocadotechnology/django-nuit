@@ -1,23 +1,28 @@
 @import "_custom";
 
+// Foundation overrides
 $row-width: 100%;
-
 $crumb-bg: rgba(0,0,0,0) !default;
-
-// We use these to set the padding around the breadcrumbs.
 $crumb-padding: 0 !default;
-//$crumb-side-padding: 0 !default;
-
-// We use these to control border styles.
 $crumb-border-size: 0 !default;
 $crumb-radius: 0 !default;
 
-// We use these to control the slash between breadcrumbs
-$crumb-slash-color: #aaa;
-$crumb-slash: "/";
-
 @import "scss/foundation";
 @import "nuit/_mixins";
+
+// Nuit variables
+
+$sidebar-bg: rgb(250, 250, 250) !default;
+$sidebar-left-min-width: 150px !default;
+$sidebar-left-max-width: 280px !default;
+$sidebar-left-width: 30% !default;
+$sidebar-right-max-width: 220px !default;
+$sidebar-gutter-spacing: 10px !default;
+
+$sidebar-link-active-color: $anchor-font-color !default;
+$sidebar-link-hover-color: $anchor-font-color-hover !default;
+$sidebar-link-active-bg: rgba(0, 64, 84, 0.05) !default;
+$sidebar-link-hover-bg: rgba(0, 64, 84, 0.03) !default;
 
 .size-12 { font-size: 12px; }
 
@@ -45,23 +50,23 @@ $crumb-slash: "/";
 
 .sidebar {
 
-    background-color: rgb(250, 250, 250);
+    background-color: $sidebar-bg;
     padding: 20px;
-    min-width: 150px;
-    max-width: 280px;
-    width: 30%;
-    margin-bottom: 20px;
+    min-width: $sidebar-left-min-width;
+    max-width: $sidebar-left-max-width;
+    width: $sidebar-left-width;
+    margin-bottom: $sidebar-gutter-spacing;
     
     &.on-left {
         top: 0;
-        left: 10px;
+        left: $sidebar-gutter-spacing;
         position: absolute;
     }
     
     &.on-right {
-        max-width: 220px;
+        max-width: $sidebar-right-max-width;
         top: 0;
-        right: 10px;
+        right: $sidebar-gutter-spacing;
         position: absolute;
     }
 
@@ -148,9 +153,9 @@ $crumb-slash: "/";
                 margin: 0 -20px;
                 padding-left: 20px;
                 padding-right: 20px;
-                background: rgba(0, 64, 84, 0.05);
+                background: $sidebar-link-active-bg;
                 font-weight: bold;
-                color: rgb(0, 143, 186);
+                color: $sidebar-link-active-color;
             }
         }
         
@@ -159,8 +164,8 @@ $crumb-slash: "/";
                 margin: 0 -20px;
                 padding-left: 20px;
                 padding-right: 20px;
-                color: rgb(0, 104, 135);
-                background: rgba(0, 64, 84, 0.03);
+                color: $sidebar-link-hover-color;
+                background: $sidebar-link-hover-bg;
             }
         }
     }
@@ -171,7 +176,7 @@ $crumb-slash: "/";
 
     @media #{$large-up} {
         &.on-right + .main {
-            padding-right: 230px;
+            padding-right: $sidebar-right-max-width + $sidebar-gutter-spacing;
         }
     }
     
@@ -218,7 +223,6 @@ $crumb-slash: "/";
   
   .nuit-loader-text {
     display: inline-block;
-    //font-size: 0.8em;
     margin-top: 0.5em;
   }
   
