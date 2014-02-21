@@ -30,8 +30,14 @@
     <nav class='top-bar' data-topbar>
         <ul class='title-area'>
             <li class='name'>
-                <h1 class='hide-for-small-only'><a href='#'><img src='{% static 'images/ot-horiz-white.png' %}' /></a></h1>
-                <h1 class='show-for-small-only'><a href='#'><img src='{% static 'images/hex.png' %}' /></a></h1>
+                {% if 'images/logo.png'|static_file_exists %}
+                    <h1 class='{% if 'images/logo-small.png'|static_file_exists %}hide-for-small-only{% endif %}'><a href='#'><img src='{% static 'images/logo.png' %}' /></a></h1>
+                    {% if 'images/logo-small.png'|static_file_exists %}
+                        <h1 class='show-for-small-only'><a href='#'><img src='{% static 'images/logo-small.png' %}' /></a></h1>
+                    {% endif %}
+                {% else %}
+                    <h1><a href='#'>{{NUIT_GLOBAL_TITLE|default:'Nuit'}}</a></h1>
+                {% endif %}
             </li>
             <li class='toggle-topbar menu-icon'><a href='#'></a></li>
         </ul>
@@ -179,3 +185,4 @@
 </body>
 
 </html>
+    

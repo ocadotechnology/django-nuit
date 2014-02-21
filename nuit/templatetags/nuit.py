@@ -4,6 +4,7 @@ from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.contrib.staticfiles import finders
 from django.template import Context
 from django.template.loader import get_template
 from ast import literal_eval
@@ -16,6 +17,12 @@ FalseFilterExpression = FilterExpression("False", None)
 
 def is_quoted(string):
     return string[0] == string[-1] and string[0] in ('"', '"')
+
+@register.filter
+def static_file_exists(filename):
+    if not finders.find(filename):
+        return False
+    return True
 
 @register.simple_tag
 def set_active_menu(active_menu):

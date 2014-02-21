@@ -208,7 +208,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'sass {infile} {outfile}'),
 )
 
-
+NUIT_GLOBAL_TITLE = 'Test Project'
 NUIT_APPLICATIONS = (
     {
         'name': 'Asset Management',

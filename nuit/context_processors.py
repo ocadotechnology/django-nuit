@@ -5,7 +5,9 @@ from compressor.utils import get_mod_func
 
 def nuit(request):
 
-    context = {}
-    context['NUIT_APPLICATIONS'] = getattr(settings, 'NUIT_APPLICATIONS', None)
+    context = {
+        'NUIT_APPLICATIONS': getattr(settings, 'NUIT_APPLICATIONS', None),
+        'NUIT_GLOBAL_TITLE': getattr(settings, 'NUIT_GLOBAL_TITLE', None),
+    }
     
     return context
