@@ -1,0 +1,8 @@
+URL Handlers
+============
+
+Nuit proides the following URL handlers for consistent error pages across the site. See Django's :py:mod:`django.conf.urls` documentation for more details.
+
+.. automodule:: nuit.handlers
+    :show-inheritance:
+    :members: 

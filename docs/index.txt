@@ -16,5 +16,6 @@ Contents
  settings
  templates/index
  views
+ handlers
 
 .. _`Zurb Foundation`: http://foundation.zurb.com
