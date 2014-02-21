@@ -1,9 +1,10 @@
 from django.db import models
 
 class Publisher(models.Model):
-    title = models.CharField(max_length=30, choices=(('Mr', 'Mr'), ('Mrs', 'Mrs'), ('Miss', 'Miss'), ('Dr', 'Dr')), default='Mr')
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    #title = models.CharField(max_length=30, choices=(('Mr', 'Mr'), ('Mrs', 'Mrs'), ('Miss', 'Miss'), ('Dr', 'Dr')), default='Mr')
+    #first_name = models.CharField(max_length=30)
+    #last_name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=60)
     state_province = models.CharField(max_length=30)

@@ -1,27 +1,34 @@
 {% load nuit %}
-{% extend 'demo/base.html' leftmenu=False %}
+{% extend 'demo/publisher_list.html' %}
+
+{% block title %}Publisher Form{% endblock %}
+
+{% block breadcrumbs %}
+{{block.super}}
+{% url 'publisher_form' as publisher_url %}
+{% menu_item name='New' link=publisher_url %}
+{% endblock %}
 
 {% block content %}
 
     <h1>Publisher Form</h1>
     
-            <form method='post' action=''>
-            
-                {% csrf_token %}
+    <form method='post' action=''>
+        {% csrf_token %}
+        {% foundation_form form %}
+            name {'medium': 4}; address {'prefix': 'Bob', 'prefix_medium': 6, 'prefix_large': 0}
+            city; state_province; country {'postfix': 'Europe', 'postfix_small': 6, 'postfix_medium': 0}
+            website {'prefix': 'http://'}
+        {% end_foundation_form %}
+        <button class='button'>Submit</button>
+    </form>
 
-                {% foundation_form form %}
-                    title {'small': 4, 'medium': 2}; first_name {'small': 8, 'medium': 0}; last_name
-                    address
-                    city; state_province; country {'postfix': 'Europe'}
-                    website {'prefix': 'http://'}
-                {% end_foundation_form %}
+{% endblock %}
 
-                <div class='row'>
-                    <div class='small-12 columns'>
-                        <button class='button'>Submit</button>
-                    </div>
-                </div>
-            
-            </form>
+{% block right_menu %}
+
+{% menu_section "Bob" %}
+<p>Just to bulk out this menu.</p>
+{% end_menu_section %}
 
 {% endblock %}

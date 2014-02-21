@@ -14,7 +14,7 @@ from django.forms import ModelForm, ValidationError
 class PublisherForm(ModelForm):
     class Meta:
         model = Publisher
-        fields = ('title', 'first_name', 'last_name', 'address', 'city', 'state_province', 'country', 'website',)
+        fields = ('name', 'address', 'city', 'state_province', 'country', 'website',)
     def clean(self):
         raise ValidationError('Something went wrong')
 

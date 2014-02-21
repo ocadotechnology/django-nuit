@@ -1,22 +1,25 @@
 {% load nuit %}
-{% extend 'nuit/generic/list.html' base='demo/base.html' rightmenu=False topbar=True leftmenu=True search_verb='Filter' %}
+{% extend 'nuit/generic/list.html' base='demo/base.html' rightmenu=False topbar=True leftmenu=True search_verb='Filter' breadcrumbs=True %}
 
 {% block title %}Publishers{% endblock %}
 
-{% block left_menu %}
+{% block breadcrumbs %}
 {{block.super}}
-{% include 'nuit/includes/loader.html' with size=16 %}
-{% include 'nuit/includes/loader.html' with size=32 %}
-{% include 'nuit/includes/loader.html' with size=48 %}
-{% include 'nuit/includes/loader.html' with size=64 %}
-{% include 'nuit/includes/loader.html' with size=80 %}
-{% include 'nuit/includes/loader.html' with size=96 %}
+{% menu_item name='Publishers' link='/publishers/' %}
 {% endblock %}
 
 {% block content %}
-
-{% include 'nuit/includes/loader.html' with size=32 %}
 {{block.super}}
 {% set_active_menu "infmis2" %}
+{% endblock %}
+
+{% block right_menu %}
+
+{% menu_section is_list=True %}
+{% url 'publishers_add' as publisher_form %}
+{% menu_item name='Add New Publisher' link=publisher_form %}
+{% end_menu_section %}
+
+{{block.super}}
 
 {% endblock %}
