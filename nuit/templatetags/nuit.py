@@ -14,6 +14,7 @@ register = template.Library()
 
 NoneFilterExpression = FilterExpression("None", None)
 FalseFilterExpression = FilterExpression("False", None)
+TrueFilterExpression = FilterExpression("True", None)
 
 def is_quoted(string):
     return string[0] == string[-1] and string[0] in ('"', '"')
@@ -66,12 +67,12 @@ class MenuSectionNode(template.Node):
     Template node that renders a menu section.
     '''
 
-    def __init__(self, nodelist, title=None, is_list=None, link_name=None, id=None):
+    def __init__(self, nodelist, title=NoneFilterExpression, is_list=FalseFilterExpression, link_name=NoneFilterExpression, id=NoneFilterExpression):
         self.nodelist = nodelist
-        self.title = title or NoneFilterExpression
-        self.is_list = is_list or FalseFilterExpression
-        self.link_name = link_name or NoneFilterExpression
-        self.id = id or NoneFilterExpression
+        self.title = title
+        self.is_list = is_list
+        self.link_name = link_name
+        self.id = id
 
     def render(self, context):
         content = self.nodelist.render(context)
@@ -231,9 +232,10 @@ class FoundationFormNode(template.Node):
     A template node for a form field capabale of rendering Foundation-specific markup.
     '''
     
-    def __init__(self, form, nodelist):
+    def __init__(self, form, nodelist, csrf_enabled=TrueFilterExpression):
         self.form = form
         self.nodelist = nodelist
+        self.csrf_enabled = csrf_enabled
 
     def render(self, context):
         form = self.form.resolve(context)
@@ -317,11 +319,20 @@ class FoundationFormNode(template.Node):
                 remaining_fields.append(FoundationFormField(form[field]))
             field_layout.append(remaining_fields)
 
+        context.update({
+            'form': form,
+            'fields': field_layout,
+            'csrf_enabled': self.csrf_enabled.resolve(context),
+        })
+
         # Render the form. Template expects the form object, and a fields object
         # which is a list of list, each list representing a row of the form.
         # Each element in a row list is a FoundationFormField object.
-        content = form_template.render(Context({'form': form, 'fields': field_layout}))
-        return content
+
+        try:
+           return form_template.render(context)
+        finally:
+           context.pop()
 
 @register.tag
 def foundation_form(parser, token):
@@ -332,16 +343,8 @@ def foundation_form(parser, token):
     if len(bits) < 2:
         raise template.TemplateSyntaxError('Incorrect number of arguements for %s, Form object required' % bits[0])
     form = parser.compile_filter(bits[1])
+    kwargs = token_kwargs(bits[2:], parser)
     nodelist = parser.parse(('end_foundation_form',))
     parser.delete_first_token()
-    return FoundationFormNode(form, nodelist)
-
-
-
-
-
-
-
-
-
+    return FoundationFormNode(form, nodelist, **kwargs)
 

@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../test_project/'))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test_project.settings")
 
 intersphinx_mapping = {
-    'django': ('http://django.readthedocs.org/en/latest/', None),
+    'django': ('http://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/'),
 }
 
 # If extensions (or modules to document with autodoc) are in another directory,

@@ -61,23 +61,30 @@ object_list
 
 Used to override the list of objects. By default, contains an unordered list of the object's ``str`` representations that links to their ``get_absolute_url``.
 
+.. template-generic-400:
+
+``nuit/generic/400.html``
+-------------------------
+
+A generic view designed for display when an HTTP status code of ``400`` is returned. Used by the :func:`nuit.handlers.handler400` handler.
+
 .. template-generic-403:
 
 ``nuit/generic/403.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``403`` is returned. Used by the :ref:`handler-403` handler.
+A generic view designed for display when an HTTP status code of ``403`` is returned. Used by the :func:`nuit.handlers.handler403` handler.
 
 .. template-generic-404:
 
 ``nuit/generic/404.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``404`` is returned. Used by the :ref:`handler-404` handler.
+A generic view designed for display when an HTTP status code of ``404`` is returned. Used by the :func:`nuit.handlers.handler404` handler.
 
 .. template-generic-500:
 
 ``nuit/generic/500.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``500`` is returned. Used by the :ref:`handler-500` handler.
+A generic view designed for display when an HTTP status code of ``500`` is returned. Used by the :func:`nuit.handlers.handler500` handler.

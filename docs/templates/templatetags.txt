@@ -156,11 +156,17 @@ Used internally by Nuit in the :ref:`template-generic-list` template to generate
 ``foundation_form``
 -------------------
 
-Renders a form using Foundation's form styles in the given layout. Takes one arguent:
+Renders a form using Foundation's form styles in the given layout. Takes one required arguement, and one optional:
 
 .. attribute:: form
 
     The Django Form object. Works with all standard Django Form classes.
+
+.. attribute:: csrf_enabled
+
+    :default: ``True``
+
+    Whether to include the CSRF token or not.
 
 Further options are specified between the :ref:`template-tag-foundation-form` and ``end_foundation_form`` tags. For more details, see the :doc:`forms` documentation. Example usage::
 

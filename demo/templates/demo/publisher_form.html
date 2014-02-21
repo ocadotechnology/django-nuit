@@ -14,7 +14,6 @@
     <h1>Publisher Form</h1>
     
     <form method='post' action=''>
-        {% csrf_token %}
         {% foundation_form form %}
             name {'medium': 4}; address {'prefix': 'Bob', 'prefix_medium': 6, 'prefix_large': 0}
             city; state_province; country {'postfix': 'Europe', 'postfix_small': 6, 'postfix_medium': 0}
