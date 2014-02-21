@@ -30,7 +30,7 @@ This will render all your specified form fields at full width. (In Foundation's 
 CSRF
 ----
 
-By default, the :ref:`template-tag-foundation-form` template tag will insert the :ref:`csrf_token <django:using-csrf>` required by :py:class:`django.middleware.csrf.CsrfViewMiddleware`. If you're not using this middleware, or don't want the token itself, you can set :attr:`csrf_enabled` to ``False`` in the tag:
+By default, the :ref:`template-tag-foundation-form` template tag will insert the :ref:`csrf_token <django:using-csrf>` required by :py:class:`django.middleware.csrf.CsrfViewMiddleware`. If you're not using this middleware, or don't want the token itself, you can set :attr:`csrf_enabled` to ``False`` in the tag::
 
     {% foundation_form my_form_object csrf_enabled=False %}
     {% end_foundation_form %}
