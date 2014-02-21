@@ -13,8 +13,10 @@ Basic Usage
 
 To use the template tag at it's most basic, don't provide any options between the open and closing tags, and pass your ``Form`` object::
 
+    <form>
     {% foundation_form my_form_object %}
     {% end_foundation_form %}
+    </form>
 
 This will render all your specified form fields at full width. (In Foundation's grid_ terms, this means they are defined as ``small-12``, ``medium-12`` and ``large-12``.)
 
