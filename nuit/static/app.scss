@@ -7,6 +7,7 @@ $crumb-padding: 0 !default;
 $crumb-border-size: 0 !default;
 $crumb-radius: 0 !default;
 $alert-padding-top: 0.5rem !default;
+$alert-bottom-margin: 1em !default;
 
 @import "scss/foundation";
 @import "nuit/_mixins";
@@ -344,9 +345,19 @@ $sidebar-link-hover-bg: rgba(0, 64, 84, 0.03) !default;
     margin-bottom: 0.5em;
 }
 
+.alert-box.debug {
+  @include alert(
+    $bg: #cccccc
+  );
+}
+
 .alert-box {
-    margin-bottom: 1em;
     .fi {
         padding-right: 0.5em;
+    }
+    &.debug {
+        @include alert(
+            $bg: #cccccc
+        );
     }
 }

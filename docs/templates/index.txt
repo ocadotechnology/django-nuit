@@ -4,7 +4,7 @@ Templates
 Nuit is primarily a front-end framework, and as such comes with a number of templates and template-related tools to provide you with a consistent user experience and lean templates.
 
 .. toctree::
- :maxdepth: 2
+ :maxdepth: 3
 
  base
  components

@@ -18,6 +18,7 @@ FalseFilterExpression = FilterExpression("False", None)
 TrueFilterExpression = FilterExpression("True", None)
 
 MESSAGE_LEVELS = {
+    constants.DEBUG: {'icon': 'widget'},
     constants.INFO: {'icon': 'star'},
     constants.SUCCESS: {'icon': 'check'},
     constants.WARNING: {'icon': 'alert'},
