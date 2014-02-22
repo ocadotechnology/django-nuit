@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.contrib.staticfiles import finders
 from django.template import Context
 from django.template.loader import get_template
+from django.contrib.messages import constants
 from ast import literal_eval
 import re
 
@@ -16,11 +17,38 @@ NoneFilterExpression = FilterExpression("None", None)
 FalseFilterExpression = FilterExpression("False", None)
 TrueFilterExpression = FilterExpression("True", None)
 
-def is_quoted(string):
-    return string[0] == string[-1] and string[0] in ('"', '"')
+MESSAGE_LEVELS = {
+    constants.INFO: {'icon': 'star'},
+    constants.SUCCESS: {'icon': 'check'},
+    constants.WARNING: {'icon': 'alert'},
+    constants.ERROR: {'icon': 'prohibited', 'class': 'alert'},
+}
+
+@register.filter
+def message_class(msg):
+    '''
+    Return the foundation alert class for a message level.
+    '''
+    try:
+        return MESSAGE_LEVELS[msg.level]['class']
+    except KeyError:
+        return constants.DEFAULT_TAGS[msg.level]
+
+@register.filter
+def message_icon(msg):
+    '''
+    Return the foundation icon class for a message level.
+    '''
+    try:
+        return MESSAGE_LEVELS[msg.level]['icon']
+    except KeyError:
+        return constants.DEFAULT_TAGS[msg.level]
 
 @register.filter
 def static_file_exists(filename):
+    '''
+    Return whether a static file exists or not.
+    '''
     if not finders.find(filename):
         return False
     return True

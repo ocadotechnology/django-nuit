@@ -93,6 +93,15 @@
                         </ul>
                     {% endif %}
 
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div data-alert class='alert-box {{message.tags}} {{message|message_class}}'>
+                            <i class='fi fi-{{message|message_icon}}'></i>{{message}}
+                            <a href='#' class='close'>&times;</a>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
                     {% if nuit_breadcrumbs %}
                         <ul class='breadcrumbs nuit-breadcrumbs'>
                             {% if nuit_app_title %}<li><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>{% endif %}
