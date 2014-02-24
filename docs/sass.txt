@@ -74,12 +74,12 @@ For a list of most variables, please refer to the Foundation_ docs. The followin
 
     :default: ``rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)``
 
-    The colours of the parts of the loader.
+    The colours of the parts of the :ref:`component-loading-animation`.
 
 .. attribute:: $loader-subicon
 
     :default: ``"\0025CF"``
 
-    The icon of each part of the loader.
+    The icon of each part of the :ref:`component-loading-animation`.
 
 .. _Foundation: http://foundation.zurb.com

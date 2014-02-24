@@ -121,3 +121,8 @@ Forms
 -----
 
 Nuit provides a :ref:`template-tag-foundation-form` template tag to enable complex rendering of HTML forms, for use with Django's Form classes. See the :doc:`forms` documentation for more detail.
+
+Messages
+--------
+
+Nuit's :doc:`base` templates will display any messages logged with Django's messaging framework at the top of the content area.

@@ -4,13 +4,21 @@ Settings
 There are a handful of settings available to customise Nuit from ``settings.py``.
 
 .. _settings-nuit-global-title:
-
 .. attribute:: NUIT_GLOBAL_TITLE
 
-    Defines the global title to be displayed in the :ref:`component-top-bar`. Note that this is only visible if you do not define a ``images/logo.png`` (and an optional ``images/logo-small.png``. Defaults to 'Nuit'.
+    Defines the global title to be displayed in the :ref:`component-top-bar`. Note that this is only visible if you do not define :attr:`NUIT_LARGE_LOGO` (and optionally :attr:`NUIT_SMALL_LOGO`). Defaults to 'Nuit'.
+
+.. _settings-nuit-large-logo:
+.. attribute:: NUIT_LARGE_LOGO
+
+    Defines the path (to be passed to the ``static`` template tag) to the logo to be used in the title. Defaults to ``None``, and no logo will be displayed.
+
+.. _settings-nuit-small-logo:
+.. attribute:: NUIT_SMALL_LOGO
+
+    Defines the path (to be passed to the ``static`` template tag) to the logo to be used at small sizes. :attr:`NUIT_SMALL_LOGO` must also be defined - if set, this logo will replace the large logo at small screen sizes. Defaults to ``None``.
 
 .. _settings-nuit-applications:
-
 .. attribute:: NUIT_APPLICATIONS
 
     Defines the global Nuit applications menu. This is intended to be the same across all of your sites using Nuit, and therefore ought to be added to ``settings.py`` via something like Puppet or Chef. These items are available in a drop-down menu on the right of the :ref:`component-top-bar`. Multiple levels are acceptable. The structure should be a list of dictionaries with particular keys::

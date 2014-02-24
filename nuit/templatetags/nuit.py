@@ -4,7 +4,6 @@ from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse, NoReverseMatch
-from django.contrib.staticfiles import finders
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib.messages import constants
@@ -44,15 +43,6 @@ def message_icon(msg):
         return MESSAGE_LEVELS[msg.level]['icon']
     except KeyError:
         return constants.DEFAULT_TAGS[msg.level]
-
-@register.filter
-def static_file_exists(filename):
-    '''
-    Return whether a static file exists or not.
-    '''
-    if not finders.find(filename):
-        return False
-    return True
 
 @register.simple_tag
 def set_active_menu(active_menu):
