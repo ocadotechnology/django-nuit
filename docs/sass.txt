@@ -70,5 +70,16 @@ For a list of most variables, please refer to the Foundation_ docs. The followin
 
     The background colour of hovered links in the menus.
 
+.. attribute:: $loader-colors
+
+    :default: ``rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)``
+
+    The colours of the parts of the loader.
+
+.. attribute:: $loader-subicon
+
+    :default: ``"\0025CF"``
+
+    The icon of each part of the loader.
 
 .. _Foundation: http://foundation.zurb.com

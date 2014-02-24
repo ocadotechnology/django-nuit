@@ -26,6 +26,9 @@ $sidebar-link-hover-color: $anchor-font-color-hover !default;
 $sidebar-link-active-bg: rgba(0, 64, 84, 0.05) !default;
 $sidebar-link-hover-bg: rgba(0, 64, 84, 0.03) !default;
 
+$loader-colors: rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) !default;
+$loader-subicon: "\0025CF";
+
 .size-12 { font-size: 12px; }
 
 .size-14 { font-size: 14px; }
@@ -247,6 +250,7 @@ $sidebar-link-hover-bg: rgba(0, 64, 84, 0.03) !default;
   }
   
   .dot {
+    display: none;
     width: 100%;
     height: 100%;
     -webkit-transition: all 1s ease;
@@ -254,29 +258,22 @@ $sidebar-link-hover-bg: rgba(0, 64, 84, 0.03) !default;
     font-size: 1.2em;
     line-height: 1;
     -webkit-animation: dots 2.4s linear infinite;
+
+    &:after {
+      content: $loader-subicon;
+    }
   }
-  
-  .dotwrap:nth-child(5n+1) {
-    -webkit-transform: rotate(0deg);
-    .dot { color: rgba(0, 0, 0, 1); }
+
+  @for $i from 1 through length($loader-colors) {
+    .dotwrap:nth-child(#{length($loader-colors)}n+#{$i}) {
+      -webkit-transform: rotate(#{360/length($loader-colors)*$i}deg);
+      .dot {
+        display: block;
+        color: nth($loader-colors, $i);
+      }
+    }
   }
-  .dotwrap:nth-child(5n+2) {
-    -webkit-transform: rotate(72deg);
-    .dot { color: rgba(0, 0, 0, 0.8); }
-  }
-  .dotwrap:nth-child(5n+3) {
-    -webkit-transform: rotate(144deg);
-    .dot { color: rgba(0, 0, 0, 0.6); }
-  }
-  .dotwrap:nth-child(5n+4) {
-    -webkit-transform: rotate(216deg);
-    .dot { color: rgba(0, 0, 0, 0.4); }
-  }
-  .dotwrap:nth-child(5n+5) {
-    -webkit-transform: rotate(288deg);
-    .dot { color: rgba(0, 0, 0, 0.2); }
-  }
-  
+
 }
 
 @-webkit-keyframes rotate {
