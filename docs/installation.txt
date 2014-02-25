@@ -31,6 +31,9 @@ Installation
 
 * Add the following settings for django-compressor_ (see their documentation for more detail)::
 
+    
+    # Add 'compressor.finders.CompressorFinder' to STATICFILES_FINDERS
+
     COMPRESS_ENABLED = True
     COMPRESS_OFFLINE = True
 
