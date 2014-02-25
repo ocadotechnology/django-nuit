@@ -25,7 +25,7 @@ This will render all your specified form fields at full width. (In Foundation's 
 
 .. _grid: http://foundation.zurb.com/docs/components/grid.html
 
-.. _forms-layout-customisation:
+.. _forms-csrf:
 
 CSRF
 ----
@@ -34,6 +34,18 @@ By default, the :ref:`template-tag-foundation-form` template tag will insert the
 
     {% foundation_form my_form_object csrf_enabled=False %}
     {% end_foundation_form %}
+
+.. _forms-use-in-sidebars:
+
+Collapsing the containing row
+-----------------------------
+
+If you wish to use the form in the :ref:`component-right-menu`, or somewhere else where you do not wish the extra side padding for the form elements, set :attr:`collapse_container` to ``True``::
+
+    {% foundation_form my_form_object collapse_container=True %}
+    {% end_foundation_form %}
+
+.. _forms-layout-customisation:
 
 Layout Customisation
 --------------------

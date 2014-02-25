@@ -171,6 +171,12 @@ Renders a form using Foundation's form styles in the given layout. Takes one req
 
     Whether to include the CSRF token or not.
 
+.. attribute:: collapse_container
+
+    :default: ``False``
+
+    Whether to collapse the side padding of the form elements.
+
 Further options are specified between the :ref:`template-tag-foundation-form` and ``end_foundation_form`` tags. For more details, see the :doc:`forms` documentation. Example usage::
 
     {% foundation_form my_form_object %}

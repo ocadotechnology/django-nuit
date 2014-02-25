@@ -251,10 +251,11 @@ class FoundationFormNode(template.Node):
     A template node for a form field capabale of rendering Foundation-specific markup.
     '''
     
-    def __init__(self, form, nodelist, csrf_enabled=TrueFilterExpression):
+    def __init__(self, form, nodelist, csrf_enabled=TrueFilterExpression, collapse_container=FalseFilterExpression):
         self.form = form
         self.nodelist = nodelist
         self.csrf_enabled = csrf_enabled
+        self.collapse_container = collapse_container
 
     def render(self, context):
         form = self.form.resolve(context)
@@ -342,6 +343,7 @@ class FoundationFormNode(template.Node):
             'form': form,
             'fields': field_layout,
             'csrf_enabled': self.csrf_enabled.resolve(context),
+            'collapse_container': self.collapse_container.resolve(context),
         })
 
         # Render the form. Template expects the form object, and a fields object

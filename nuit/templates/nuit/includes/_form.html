@@ -18,7 +18,7 @@
 
 {% for foundation_fields in fields %}
 
-    <div class='row'>
+    <div class='row{% if collapse_container %} collapse{% endif %}'>
 
     {% for foundation_field in foundation_fields %}
         {% with foundation_field.field as field %}
