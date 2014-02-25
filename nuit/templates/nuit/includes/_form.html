@@ -24,9 +24,9 @@
         {% with foundation_field.field as field %}
             <div class='small-{{foundation_field.small_width}} medium-{{foundation_field.medium_width}} large-{{foundation_field.large_width}} columns {% if field.errors %}error{% endif %}'>
                 {% if foundation_field.prefix or foundation_field.postfix %}<div class='row collapse'>{% endif %}
-                <label{% if field.errors %} class='error'{% endif %} for='{{field.auto_id}}'>
+                {% if foundation_field.show_label %}<label{% if field.errors %} class='error'{% endif %} for='{{field.auto_id}}'>
                     {{field.label}}
-                </label>
+                </label>{% endif %}
                 {% if foundation_field.prefix %}
                     <div class='small-{{foundation_field.prefix_small_width}} medium-{{foundation_field.prefix_medium_width}} large-{{foundation_field.prefix_large_width}} columns'><span class='prefix'>{{foundation_field.prefix}}</span></div>
                 {% endif %}

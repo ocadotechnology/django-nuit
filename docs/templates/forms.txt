@@ -115,3 +115,16 @@ By default, each pre- or post-fix label will take up 3 of the 12 available grid 
     {% end_foundation_form %}
 
 The same rules for inheritance apply as in the :ref:`note <forms-custom-widths-inheritance>` above.
+
+.. _forms-additional-field-options:
+
+Additional Field Options
+------------------------
+
+The following options are also available in the field option ``dict``:
+
+.. attribute:: show_label
+
+    :default: ``True``
+
+    Whether to display the field's label or not.

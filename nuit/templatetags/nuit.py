@@ -224,7 +224,7 @@ class FoundationFormField(object):
     A form field, containing Foundation-markup specific parameters.
     '''
 
-    def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None):
+    def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None, show_label=True):
         self.field = field
         self.small_width = small
         self.medium_width = medium or self.small_width
@@ -237,6 +237,7 @@ class FoundationFormField(object):
         self.postfix_small_width = postfix_small
         self.postfix_medium_width = postfix_medium or self.postfix_small_width
         self.postfix_large_width = postfix_large or self.postfix_medium_width
+        self.show_label = show_label
 
         if self.prefix or self.postfix:
             self.fix_field_small_width = 12 - (self.prefix_small_width if self.prefix else 0) - (self.postfix_small_width if self.postfix else 0)
