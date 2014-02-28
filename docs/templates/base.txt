@@ -72,12 +72,19 @@ content
 
 The main content of the page. The space that this content fills will be determined by the :attr:`topbar`, :attr:`leftmenu` and :attr:`rightmenu` attributes.
 
+.. _`template-nuit-base-block-head`:
+
+head
+~~~~
+
+Allows you to insert content into the ``<head>`` of the page.
+
 .. _`template-nuit-base-block-css`:
 
 css
 ~~~
 
-Allows you to enter CSS ``<link>`` or ``<style>`` elements that will be compiled and compressed by Django Compressor.
+Allows you to enter CSS ``<link>`` or ``<style>`` elements that will be inserted into the ``<head>`` element.
 
 .. _`template-nuit-base-block-scripts`:
 
