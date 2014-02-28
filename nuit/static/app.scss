@@ -1,4 +1,5 @@
 @import "_custom";
+@import "bourbon/bourbon";
 
 // Foundation overrides
 $row-width: 100%;
@@ -235,7 +236,7 @@ $loader-subicon: "\0025CF" !default;
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    -webkit-animation: rotate 2.4s linear infinite;
+    @include animation(rotate 2.4s linear infinite);
   }
   
   .dotwrap {
@@ -246,19 +247,19 @@ $loader-subicon: "\0025CF" !default;
     margin-left: -20%;
     top: 50%; 
     margin-top: -47%;
-    -webkit-animation: smallbig 2.4s linear infinite;
+    @include animation(smallbig 2.4s linear infinite);
   }
   
   .dot {
     display: none;
     width: 100%;
     height: 100%;
-    -webkit-transition: all 1s ease;
+    @include transition(all 1s ease);
     position: relative;
     font-size: 1.2em;
     line-height: 1;
-    -webkit-animation: dots 2.4s linear infinite;
-
+    @include animation(dots 2.4s linear infinite);
+    
     &:after {
       content: $loader-subicon;
     }
@@ -266,7 +267,7 @@ $loader-subicon: "\0025CF" !default;
 
   @for $i from 1 through length($loader-colors) {
     .dotwrap:nth-child(#{length($loader-colors)}n+#{$i}) {
-      -webkit-transform: rotate(#{360/length($loader-colors)*$i}deg);
+      @include transform(rotate(#{360/length($loader-colors)*$i}deg));
       .dot {
         display: block;
         color: nth($loader-colors, $i);
@@ -276,14 +277,14 @@ $loader-subicon: "\0025CF" !default;
 
 }
 
-@-webkit-keyframes rotate {
-  0% { -webkit-transform: rotate( 0 ); }
-  100%{ -webkit-transform: rotate(360deg); }
+@include keyframes(rotate) {
+  0% { @include transform(rotate(0)); }
+  100%{ @include transform(rotate(360deg)); }
 }
-@-webkit-keyframes smallbig {
+@include keyframes(smallbig) {
   50% {  height: 40%;  margin-top: -20%; }
 }
-@-webkit-keyframes dots {
+@include keyframes(dots) {
   50% { opacity: .1; }
   100%{ opacity: .9; }
 }

@@ -18,5 +18,6 @@ SETTINGS = {
         'foundation_scss',
         'foundation_icons',
         'jquery',
+        'bourbon',
     ],
 }

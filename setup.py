@@ -17,7 +17,8 @@ setup(
         'django-jquery',
         'django-foundation-icons',
         'django',
-        'django-autoconfig'
+        'django-autoconfig',
+        'django-bourbon',
     ],
     include_package_data = True,
 )
