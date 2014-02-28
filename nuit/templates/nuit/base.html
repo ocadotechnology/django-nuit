@@ -16,10 +16,11 @@
 
     <link rel='stylesheet' type='text/css' href='{% static 'icons/foundation-icons.css' %}' />
 
-    {% compress css %}
-        {% block css %}
-        {% endblock css %}
-    {% endcompress %}
+    {% block head %}
+    {% endblock %}
+
+    {% block css %}
+    {% endblock css %}
 
     <script src='{% static 'js/vendor/modernizr.js' %}'></script>
 
@@ -188,6 +189,7 @@
     $(document).foundation();
 
     </script>
+
     {% block scripts %}
     {% endblock scripts %}
     
