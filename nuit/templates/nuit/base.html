@@ -120,9 +120,25 @@
     </div>
     </section>
 
-    <script src='{% static 'js/jquery.js' %}'></script>
+    <script src='{% static 'js/vendor/jquery.js' %}'></script>
+    <script src='{% static 'js/vendor/jquery.cookie.js' %}'></script>
     <script src='{% static 'js/foundation.min.js' %}'></script>
     <script>
+
+    var csrftoken = $.cookie('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.setRequestHeader('Accept', 'application/json');
+            }
+        }
+    });
 
     function pad_main() {
         var left_width = $('.sidebar.on-left').outerWidth();
