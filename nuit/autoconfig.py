@@ -14,6 +14,7 @@ SETTINGS = {
         'nuit.context_processors.nuit',
     ],
     'INSTALLED_APPS': [
+        'django.contrib.staticfiles',
         'compressor',
         'foundation_scss',
         'foundation_icons',
