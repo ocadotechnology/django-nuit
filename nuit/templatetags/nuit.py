@@ -226,10 +226,10 @@ class FoundationFormField(object):
     A form field, containing Foundation-markup specific parameters.
     '''
     # pylint: disable=R0902
+    # pylint: disable=C0301
 
     def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None, show_label=True):
         # pylint: disable=R0913
-        # pylint: disable=C0301
         self.field = field
         self.small_width = small
         self.medium_width = medium or self.small_width
