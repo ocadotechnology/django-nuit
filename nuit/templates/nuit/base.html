@@ -31,10 +31,10 @@
     <nav class='top-bar' data-topbar>
         <ul class='title-area'>
             <li class='name'>
-                {% if NUIT_LARGE_ICON %}
-                    <h1 class='{% if NUIT_SMALL_ICON %}hide-for-small-only{% endif %}'><a href='#'><img src='{% static NUIT_LARGE_ICON %}' /></a></h1>
-                    {% if NUIT_SMALL_ICON %}
-                        <h1 class='show-for-small-only'><a href='#'><img src='{% static NUIT_SMALL_ICON %}' /></a></h1>
+                {% if NUIT_LARGE_LOGO %}
+                    <h1 class='{% if NUIT_SMALL_LOGO %}hide-for-small-only{% endif %}'><a href='#'><img src='{% static NUIT_LARGE_LOGO %}' /></a></h1>
+                    {% if NUIT_SMALL_LOGO %}
+                        <h1 class='show-for-small-only'><a href='#'><img src='{% static NUIT_SMALL_LOGO %}' /></a></h1>
                     {% endif %}
                 {% else %}
                     <h1><a href='#'>{{NUIT_GLOBAL_TITLE|default:'Nuit'}}</a></h1>
@@ -97,7 +97,7 @@
                     {% if messages %}
                         {% for message in messages %}
                         <div data-alert class='alert-box {{message.tags}} {{message|message_class}}'>
-                            <i class='fi fi-{{message|message_icon}}'></i>{{message}}
+                            <i class='fi fi-{{message|message_LOGO}}'></i>{{message}}
                             <a href='#' class='close'>&times;</a>
                         </div>
                         {% endfor %}
