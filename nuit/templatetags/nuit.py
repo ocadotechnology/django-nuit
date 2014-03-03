@@ -251,6 +251,46 @@ class FoundationFormField(object):
     def __repr__(self):
         return '<Field: %s (%d, %d, %d)>' % (self.field, self.small_width, self.medium_width, self.large_width)
 
+def normalise_row(row_data):
+    sizes = {
+        'field': ('small', 'medium', 'large',)
+    }
+    sizes['prefixes'] = tuple('prefix_%s' % s for s in sizes['field'])
+    sizes['postfixes'] = tuple('postfix_%s' % s for s in sizes['field'])
+
+    # For each field in the row, for each type of size, propagate any given sizes upwards.
+    for _field, field_data in row_data:
+        for size_type in sizes.keys():
+            current_size = None
+            for size in sizes[size_type]:
+                if size in field_data:
+                    current_size = field_data[size]
+                elif current_size:
+                    field_data[size] = current_size
+
+    # For each size option, set the width properties of each field as defined.
+    # Default to all 12 for small sizes, and calculate any unspecified widths.
+    for size in sizes['field']:
+        total = sum(y[size] for x, y in row_data if size in y)
+        unspecified = len([x for x, y in row_data if size not in y or not y[size]])
+        if unspecified == len(row_data) and size == 'small':
+            unspecified_widths = [12] * unspecified
+        else:
+            unspecified_widths = calculate_widths(unspecified, 12 - total)
+        for field, data in row_data:
+            if size in data and data[size]:
+                continue
+            data[size] = unspecified_widths.pop(0)
+
+    # For each field, set the prefix/postfix widths if not defined.
+    for _field, field_data in row_data:
+        for size_type in sizes.keys():
+            if size_type == 'field':
+                continue
+            for size in sizes[size_type]:
+                if size not in field_data or not field_data[size]:
+                    field_data[size] = 3
+
 class FoundationFormNode(template.Node):
     '''
     A template node for a form field capabale of rendering Foundation-specific markup.
@@ -263,10 +303,6 @@ class FoundationFormNode(template.Node):
         self.collapse_container = collapse_container
 
     def render(self, context):
-        # pylint: disable=R0912
-        # pylint: disable=R0914
-        # pylint: disable=R0915
-
         form = self.form.resolve(context)
         form_template = get_template('nuit/includes/_form.html')
 
@@ -289,44 +325,7 @@ class FoundationFormNode(template.Node):
                     except SyntaxError:
                         raise template.TemplateSyntaxError('Invalid parameters for field %s' % field_name)
 
-            sizes = {
-                'field': ('small', 'medium', 'large',)
-            }
-            sizes['prefixes'] = tuple('prefix_%s' % s for s in sizes['field'])
-            sizes['postfixes'] = tuple('postfix_%s' % s for s in sizes['field'])
-
-            # For each field in the row, for each type of size, propagate any given sizes upwards.
-            for _field, field_data in row_data:
-                for size_type in sizes.keys():
-                    current_size = None
-                    for size in sizes[size_type]:
-                        if size in field_data:
-                            current_size = field_data[size]
-                        elif current_size:
-                            field_data[size] = current_size
-
-            # For each size option, set the width properties of each field as defined.
-            # Default to all 12 for small sizes, and calculate any unspecified widths.
-            for size in sizes['field']:
-                total = sum(y[size] for x, y in row_data if size in y)
-                unspecified = len([x for x, y in row_data if size not in y or not y[size]])
-                if unspecified == len(row_data) and size == 'small':
-                    unspecified_widths = [12] * unspecified
-                else:
-                    unspecified_widths = calculate_widths(unspecified, 12 - total)
-                for field, data in row_data:
-                    if size in data and data[size]:
-                        continue
-                    data[size] = unspecified_widths.pop(0)
-
-            # For each field, set the prefix/postfix widths if not defined.
-            for _field, field_data in row_data:
-                for size_type in sizes.keys():
-                    if size_type == 'field': continue
-                    for size in sizes[size_type]:
-                        if size not in field_data or not field_data[size]:
-                            field_data[size] = 3
-
+            normalise_row(row_data)
             layout_instructions.append(row_data)
 
         all_fields = [field.name for field in form.visible_fields()]
