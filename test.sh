@@ -1,6 +1,6 @@
 #!/bin/bash
-cd test_project
+cd example_project
 ./manage.py jenkins nuit
 cd ..
 rm -r reports
-mv test_project/reports .
+mv example_project/reports .

@@ -21,4 +21,6 @@ setup(
         'django-bourbon',
     ],
     include_package_data = True,
+    test_suite           = 'setuptest.setuptest.SetupTestSuite',
+    tests_require        = ['django-setuptest'],
 )

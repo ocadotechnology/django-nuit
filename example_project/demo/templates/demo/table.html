@@ -1,0 +1,46 @@
+{% load nuit %}
+{% extend 'demo/base.html'  %}
+
+{% block content %}
+
+<table class='responsive grouped headers-30 medium-down'>
+
+    <thead>
+        <tr>
+            <th>Site</th>
+            <th>Host</th>
+            <th>Device</th>
+            <th>Interface</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    
+        <tr>
+            <td data-title='Site'>ts (Test spoke)</td>
+            <td><a href="/assetchicken/asset/4720/">ittsrt01</a></td>
+            <td>Cisco 1801W-AG-E/K9</td>
+            <td>ATM0 (ADSLoPOTS)</td>
+            <td>
+                <button data-reveal-id="confirm" class="button tiny bounce" data-port="38347" data-disable-url="/rackchicken/api/v1/port/38347/disable/" data-enable-url="/rackchicken/api/v1/port/38347/enable/" style='margin: 0;'>
+                    Bounce
+                </button>
+            </td>
+        </tr>
+    
+        <tr>
+            <td>ts (Test spoke)</td>
+            <td><a href="/assetchicken/asset/1700/">ittsrt02</a></td>
+            <td>Cisco 1801W-AG-E/K9 ag sdkgs dgskdj ngjksd njksdn gkjn gkjsdbng jksd kj gasklj fhsdkjbsg </td>
+            <td>ATM0 (ADSLoPOTS)</td>
+            <td>
+                <button data-reveal-id="confirm" class="button tiny bounce success" data-port="114742" data-disable-url="/rackchicken/api/v1/port/114742/disable/" data-enable-url="/rackchicken/api/v1/port/114742/enable/" style="display: inline-block;margin: 0">Success</button>
+            </td>
+        </tr>
+    
+    </tbody>
+
+</table>
+
+{% endblock %}

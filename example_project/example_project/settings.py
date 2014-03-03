@@ -1,4 +1,4 @@
-# Django settings for test_project project.
+# Django settings for example_project project.
 import os
 
 DEBUG = True
@@ -72,10 +72,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'test_project.urls'
+ROOT_URLCONF = 'example_project.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'test_project.wsgi.application'
+WSGI_APPLICATION = 'example_project.wsgi.application'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -97,9 +97,10 @@ except ImportError:
 from django_autoconfig.autoconfig import configure_settings
 configure_settings(globals())
 
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 NUIT_GLOBAL_TITLE = 'Test Project'
+NUIT_GLOBAL_LINK = 'http://www.google.com'
 NUIT_APPLICATIONS = (
     {
         'name': 'Asset Management',

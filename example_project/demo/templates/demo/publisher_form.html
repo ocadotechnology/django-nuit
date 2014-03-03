@@ -15,7 +15,7 @@
     
     <form method='post' action=''>
         {% foundation_form form %}
-            name {'medium': 4}; address {'prefix': 'Bob', 'prefix_medium': 6, 'prefix_large': 0}
+            name {'medium': 4,}; address {'prefix': 'Bob', 'prefix_medium': 6, 'prefix_large': 0}
             city; state_province; country {'postfix': 'Europe', 'postfix_small': 6, 'postfix_medium': 0}
             website {'prefix': 'http://'}
         {% end_foundation_form %}
@@ -27,7 +27,14 @@
 {% block right_menu %}
 
 {% menu_section "Bob" %}
-<p>Just to bulk out this menu.</p>
+
+    <form method='post' action=''>
+        {% foundation_form form collapse_container=True %}
+            name {'show_label': False}
+        {% end_foundation_form %}
+        <button class='button'>Submit</button>
+    </form>
+
 {% end_menu_section %}
 
 {% endblock %}
