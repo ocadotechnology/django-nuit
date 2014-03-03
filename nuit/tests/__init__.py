@@ -1,6 +1,7 @@
 '''Tests for nuit'''
 # pylint: disable=R0904
 from django.test import TestCase
+from django.test.utils import override_settings
 from ..context_processors import nuit as nuit_context_processor
 
 class NuitContextProcessors(TestCase):
@@ -22,18 +23,22 @@ class NuitHandlers(TestCase):
     '''Tests Nuit's handlers'''
     urls = 'nuit.tests.urls'
 
+    @override_settings(COMPRESS_OFFLINE=False)
     def test_error_400(self):
         response = self.client.get('/error400/')
         self.assertEqual(response.status_code, 400)
 
+    @override_settings(COMPRESS_OFFLINE=False)
     def test_error_403(self):
         response = self.client.get('/error403/')
         self.assertEqual(response.status_code, 403)
 
+    @override_settings(COMPRESS_OFFLINE=False)
     def test_error_404(self):
         response = self.client.get('/error404/')
         self.assertEqual(response.status_code, 404)
 
+    @override_settings(COMPRESS_OFFLINE=False)
     def test_error_500(self):
         response = self.client.get('/error500/')
         self.assertEqual(response.status_code, 500)
