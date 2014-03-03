@@ -10,6 +10,7 @@ class NuitContextProcessors(TestCase):
     sample_settings = {
         'NUIT_APPLICATIONS': [{'name': 'Link', 'link': 'http://www.google.com'}],
         'NUIT_GLOBAL_TITLE': 'Title',
+        'NUIT_GLOBAL_LINK': 'http://www.google.com',
         'NUIT_LARGE_LOGO': 'logo.png',
         'NUIT_SMALL_LOGO': 'small_logo.png',
     }

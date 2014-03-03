@@ -8,6 +8,11 @@ There are a handful of settings available to customise Nuit from ``settings.py``
 
     Defines the global title to be displayed in the :ref:`component-top-bar`. Note that this is only visible if you do not define :attr:`NUIT_LARGE_LOGO` (and optionally :attr:`NUIT_SMALL_LOGO`). Defaults to 'Nuit'.
 
+.. _settings-nuit-global-link:
+.. attribute:: NUIT_GLOBAL_LINK
+
+    Defines the URL that the link in the top left of the :ref:`component-top-bar` links to.
+
 .. _settings-nuit-large-logo:
 .. attribute:: NUIT_LARGE_LOGO
 

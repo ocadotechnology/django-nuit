@@ -32,12 +32,12 @@
         <ul class='title-area'>
             <li class='name'>
                 {% if NUIT_LARGE_LOGO %}
-                    <h1 class='{% if NUIT_SMALL_LOGO %}hide-for-small-only{% endif %}'><a href='#'><img src='{% static NUIT_LARGE_LOGO %}' /></a></h1>
+                    <h1 class='{% if NUIT_SMALL_LOGO %}hide-for-small-only{% endif %}'><a href='{{NUIT_GLOBAL_LINK|default:'#'}}'><img src='{% static NUIT_LARGE_LOGO %}' /></a></h1>
                     {% if NUIT_SMALL_LOGO %}
-                        <h1 class='show-for-small-only'><a href='#'><img src='{% static NUIT_SMALL_LOGO %}' /></a></h1>
+                        <h1 class='show-for-small-only'><a href='{{NUIT_GLOBAL_LINK|default:'#'}}'><img src='{% static NUIT_SMALL_LOGO %}' /></a></h1>
                     {% endif %}
                 {% else %}
-                    <h1><a href='#'>{{NUIT_GLOBAL_TITLE|default:'Nuit'}}</a></h1>
+                    <h1><a href='{{NUIT_GLOBAL_LINK|default:'#'}}'>{{NUIT_GLOBAL_TITLE|default:'Nuit'}}</a></h1>
                 {% endif %}
             </li>
             <li class='toggle-topbar menu-icon'><a href='#'></a></li>
