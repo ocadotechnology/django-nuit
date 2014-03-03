@@ -229,6 +229,7 @@ class FoundationFormField(object):
 
     def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None, show_label=True):
         # pylint: disable=R0913
+        # pylint: disable=C0301
         self.field = field
         self.small_width = small
         self.medium_width = medium or self.small_width
@@ -252,6 +253,7 @@ class FoundationFormField(object):
         return '<Field: %s (%d, %d, %d)>' % (self.field, self.small_width, self.medium_width, self.large_width)
 
 def normalise_row(row_data):
+    # pylint: disable=R0912
     sizes = {
         'field': ('small', 'medium', 'large',)
     }
@@ -277,7 +279,7 @@ def normalise_row(row_data):
             unspecified_widths = [12] * unspecified
         else:
             unspecified_widths = calculate_widths(unspecified, 12 - total)
-        for field, data in row_data:
+        for _field, data in row_data:
             if size in data and data[size]:
                 continue
             data[size] = unspecified_widths.pop(0)
@@ -303,6 +305,8 @@ class FoundationFormNode(template.Node):
         self.collapse_container = collapse_container
 
     def render(self, context):
+        # pylint: disable=R0912
+        # pylint: disable=R0914
         form = self.form.resolve(context)
         form_template = get_template('nuit/includes/_form.html')
 
