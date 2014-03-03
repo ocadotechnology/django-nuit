@@ -1,12 +1,11 @@
 '''Nuit Status Code Handlers'''
-from django.http import HttpResponseRedirect
-from django.conf import settings
 from django.shortcuts import render
 
-def generic_handler(request, template, status, context={}):
+def generic_handler(request, template, status, context=None):
     '''
     Return a response with a particular status code, rendering a template with a specified context.
     '''
+    context = context or {}
     return render(request, template, context, status=status)
 
 def handler500(request, template='nuit/generic/500.html'):

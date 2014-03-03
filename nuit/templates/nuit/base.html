@@ -97,7 +97,7 @@
                     {% if messages %}
                         {% for message in messages %}
                         <div data-alert class='alert-box {{message.tags}} {{message|message_class}}'>
-                            <i class='fi fi-{{message|message_LOGO}}'></i>{{message}}
+                            <i class='fi fi-{{message|message_icon}}'></i>{{message}}
                             <a href='#' class='close'>&times;</a>
                         </div>
                         {% endfor %}

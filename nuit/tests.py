@@ -4,7 +4,7 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
-
+# pylint: disable=R0904
 from django.test import TestCase
 
 

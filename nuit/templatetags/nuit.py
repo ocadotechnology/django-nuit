@@ -3,12 +3,11 @@ from django import template
 from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends
 from django.template.defaultfilters import slugify
-from django.core.urlresolvers import reverse, NoReverseMatch
-from django.template import Context
 from django.template.loader import get_template
 from django.contrib.messages import constants
 from ast import literal_eval
-import re
+
+# pylint: disable=C0103
 
 register = template.Library()
 
@@ -66,9 +65,9 @@ class ExtendNode(template.Node):
         kwargs = dict((key, value.resolve(context)) for key, value in self.kwargs.iteritems())
         context.update(kwargs)
         try:
-           return self.node.render(context)
+            return self.node.render(context)
         finally:
-           context.pop()
+            context.pop()
 
 @register.tag
 def extend(parser, token):
@@ -85,19 +84,21 @@ class MenuSectionNode(template.Node):
     '''
     Template node that renders a menu section.
     '''
+    # pylint: disable=W0622
 
     def __init__(self, nodelist, title=NoneFilterExpression, is_list=FalseFilterExpression, link_name=NoneFilterExpression, id=NoneFilterExpression):
         self.nodelist = nodelist
         self.title = title
         self.is_list = is_list
         self.link_name = link_name
-        self.id = id
+        self.link_id = id
 
     def render(self, context):
         content = self.nodelist.render(context)
         bare_title = self.title.resolve(context)
         title = '<h5>%s</h5>' % bare_title if bare_title else ''
         link_name = self.link_name.resolve(context) or bare_title
+        resolved_link_id = self.link_id.resolve(context)
         return '''
             <section class='right-menu-reveal' {reveal} data-link='{link_name}' id='{id}'>
                 <div>
@@ -112,7 +113,7 @@ class MenuSectionNode(template.Node):
             title = title,
             content = content,
             link_name = link_name,
-            id = slugify(link_name) if not self.id.resolve(context) else self.id.resolve(context),
+            id = resolved_link_id or slugify(link_name),
             list_begin = "<nav><ul class='side-nav'>" if self.is_list.resolve(context) else '',
             list_end = '</ul></nav>' if self.is_list.resolve(context) else '',
             reveal = 'data-reveal' if not self.is_list.resolve(context) else '',
@@ -173,6 +174,7 @@ def menu_item(link, name, id=None, current=False, unavailable=False):
     '''
     Renders an HTML anchor element in a list element.
     '''
+    # pylint: disable=W0622
     if not id:
         id = slugify(name)
     classes = []
@@ -212,19 +214,21 @@ def calculate_widths(parts, num=12):
     last  = num - (parts - 1) * first
     return (parts - 1) * [first] + [last]
 
-def split_strip(iter, delimiter=','):
+def split_strip(iterable, delimiter=','):
     '''
-    Splits an interator and returns each element stripped.
+    Splits an iterable and returns each element stripped.
     '''
-    return [x.strip() for x in iter.split(delimiter) if x.strip()]
+    return [x.strip() for x in iterable.split(delimiter) if x.strip()]
 
 
 class FoundationFormField(object):
     '''
     A form field, containing Foundation-markup specific parameters.
     '''
+    # pylint: disable=R0902
 
     def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None, show_label=True):
+        # pylint: disable=R0913
         self.field = field
         self.small_width = small
         self.medium_width = medium or self.small_width
@@ -251,7 +255,7 @@ class FoundationFormNode(template.Node):
     '''
     A template node for a form field capabale of rendering Foundation-specific markup.
     '''
-    
+
     def __init__(self, form, nodelist, csrf_enabled=TrueFilterExpression, collapse_container=FalseFilterExpression):
         self.form = form
         self.nodelist = nodelist
@@ -259,12 +263,16 @@ class FoundationFormNode(template.Node):
         self.collapse_container = collapse_container
 
     def render(self, context):
+        # pylint: disable=R0912
+        # pylint: disable=R0914
+        # pylint: disable=R0915
+
         form = self.form.resolve(context)
         form_template = get_template('nuit/includes/_form.html')
 
         layout_instructions = []
         for line in self.nodelist.render(context).splitlines():
-            if not line.strip(): 
+            if not line.strip():
                 continue
             row_data = []
             for field_data in line.split(';'):
@@ -288,14 +296,14 @@ class FoundationFormNode(template.Node):
             sizes['postfixes'] = tuple('postfix_%s' % s for s in sizes['field'])
 
             # For each field in the row, for each type of size, propagate any given sizes upwards.
-            for x, y in row_data:
+            for _field, field_data in row_data:
                 for size_type in sizes.keys():
                     current_size = None
                     for size in sizes[size_type]:
-                        if size in y:
-                            current_size = y[size]
+                        if size in field_data:
+                            current_size = field_data[size]
                         elif current_size:
-                            y[size] = current_size
+                            field_data[size] = current_size
 
             # For each size option, set the width properties of each field as defined.
             # Default to all 12 for small sizes, and calculate any unspecified widths.
@@ -312,12 +320,12 @@ class FoundationFormNode(template.Node):
                     data[size] = unspecified_widths.pop(0)
 
             # For each field, set the prefix/postfix widths if not defined.
-            for x, y in row_data:
+            for _field, field_data in row_data:
                 for size_type in sizes.keys():
                     if size_type == 'field': continue
                     for size in sizes[size_type]:
-                        if size not in y or not y[size]:
-                            y[size] = 3
+                        if size not in field_data or not field_data[size]:
+                            field_data[size] = 3
 
             layout_instructions.append(row_data)
 
@@ -352,9 +360,9 @@ class FoundationFormNode(template.Node):
         # Each element in a row list is a FoundationFormField object.
 
         try:
-           return form_template.render(context)
+            return form_template.render(context)
         finally:
-           context.pop()
+            context.pop()
 
 @register.tag
 def foundation_form(parser, token):

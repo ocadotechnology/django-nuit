@@ -1,7 +1,5 @@
 '''Context Processors for Nuit'''
 from django.conf import settings
-from django.utils.importlib import import_module
-from compressor.utils import get_mod_func
 
 def nuit(request):
 
@@ -11,5 +9,5 @@ def nuit(request):
         'NUIT_LARGE_LOGO': getattr(settings, 'NUIT_LARGE_LOGO', None),
         'NUIT_SMALL_LOGO': getattr(settings, 'NUIT_SMALL_LOGO', None),
     }
-    
+
     return context

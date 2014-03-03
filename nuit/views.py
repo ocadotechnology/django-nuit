@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView
 from django.db.models import Q
 
@@ -6,6 +5,8 @@ class SearchableListView(ListView):
     '''
     Render a list of objects that's searchable.
     '''
+    # pylint: disable=R0901
+    # pylint: disable=E1101
     #: The fields the search will be performed on, using ``queryset.filter``.
     search_fields = ()
 
@@ -13,18 +14,18 @@ class SearchableListView(ListView):
         context = super(SearchableListView, self).get_context_data(**kwargs)
         if self.search_fields:
             context['search'] = True
-            q = self.request.GET.get('q')
-            if q:
-                context['search_query'] = q
+            query = self.request.GET.get('q')
+            if query:
+                context['search_query'] = query
         return context
 
     def get_queryset(self):
         queryset = super(SearchableListView, self).get_queryset()
         if self.search_fields:
-            q = self.request.GET.get('q')
-            if q is None:
+            query = self.request.GET.get('q')
+            if query is None:
                 return queryset
-            queryset = self.search_queryset(queryset, q)
+            queryset = self.search_queryset(queryset, query)
         return queryset
 
     def search_queryset(self, queryset, search_term):
