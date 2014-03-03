@@ -202,6 +202,11 @@
         }
     });
 
+    $('table.responsive').find('td').each(function() {
+        $td = $(this);
+        $td.attr('data-title', $td.closest('table').find('th').eq($td.index()).html());
+    });
+
     $(document).foundation();
 
     </script>
