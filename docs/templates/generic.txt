@@ -66,25 +66,37 @@ Used to override the list of objects. By default, contains an unordered list of 
 ``nuit/generic/400.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``400`` is returned. Used by the :func:`nuit.handlers.handler400` handler.
+A generic template designed for display when an HTTP status code of ``400`` is returned. Used by the :func:`nuit.handlers.handler400` handler.
 
 .. template-generic-403:
 
 ``nuit/generic/403.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``403`` is returned. Used by the :func:`nuit.handlers.handler403` handler.
+A generic template designed for display when an HTTP status code of ``403`` is returned. Used by the :func:`nuit.handlers.handler403` handler.
 
 .. template-generic-404:
 
 ``nuit/generic/404.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``404`` is returned. Used by the :func:`nuit.handlers.handler404` handler.
+A generic template designed for display when an HTTP status code of ``404`` is returned. Used by the :func:`nuit.handlers.handler404` handler.
 
 .. template-generic-500:
 
 ``nuit/generic/500.html``
 -------------------------
 
-A generic view designed for display when an HTTP status code of ``500`` is returned. Used by the :func:`nuit.handlers.handler500` handler.
+A generic template designed for display when an HTTP status code of ``500`` is returned. Used by the :func:`nuit.handlers.handler500` handler.
+
+``nuit/generic/login.html``
+---------------------------
+
+A template designed for use with Django's ``django.contrib.auth.login`` view. Use in your ``urls.py`` as such::
+
+    from django.conf.urls import patterns, include, url
+
+    urlpatterns = patterns('',
+        url(r'^', include('myapp.urls')),
+        url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'nuit/generic/login.html'}),
+    )

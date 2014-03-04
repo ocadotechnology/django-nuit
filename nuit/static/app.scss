@@ -332,7 +332,11 @@ $loader-subicon: "\0025CF" !default;
         }
         .nuit-loader {
             margin-bottom: 1em;
-            display: none;
+        }
+        h1 {
+            color: white;
+            font-size: 1.6em;
+            margin: 0;
         }
     }
     &.error {
