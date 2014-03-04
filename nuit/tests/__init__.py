@@ -60,9 +60,11 @@ class NuitTemplateFilters(TestCase):
     def test_message_class(self):
         self.assertEqual('alert', message_class(FakeMessage(constants.ERROR)))
         self.assertEqual('info', message_class(FakeMessage(constants.INFO)))
+        self.assertEqual('invalid-level', message_class(FakeMessage('invalid-level')))
 
     def test_message_icon(self):
         self.assertEqual('star', message_icon(FakeMessage(constants.INFO)))
+        self.assertEqual('invalid-level', message_class(FakeMessage('invalid-level')))
 
 class NuitTemplateTags(TestCase):
     '''Tests Nuit's template tags'''

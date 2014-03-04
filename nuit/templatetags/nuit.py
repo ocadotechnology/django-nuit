@@ -31,7 +31,10 @@ def message_class(msg):
     try:
         return MESSAGE_LEVELS[msg.level]['class']
     except KeyError:
-        return constants.DEFAULT_TAGS[msg.level]
+        try:
+            return constants.DEFAULT_TAGS[msg.level]
+        except KeyError:
+            return msg.level
 
 @register.filter
 def message_icon(msg):
@@ -41,7 +44,10 @@ def message_icon(msg):
     try:
         return MESSAGE_LEVELS[msg.level]['icon']
     except KeyError:
-        return constants.DEFAULT_TAGS[msg.level]
+        try:
+            return constants.DEFAULT_TAGS[msg.level]
+        except KeyError:
+            return msg.level
 
 @register.simple_tag
 def set_active_menu(active_menu):
