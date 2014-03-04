@@ -214,12 +214,6 @@ def calculate_widths(parts, num=12):
     last  = num - (parts - 1) * first
     return (parts - 1) * [first] + [last]
 
-def split_strip(iterable, delimiter=','):
-    '''
-    Splits an iterable and returns each element stripped.
-    '''
-    return [x.strip() for x in iterable.split(delimiter) if x.strip()]
-
 
 class FoundationFormField(object):
     '''
@@ -248,9 +242,6 @@ class FoundationFormField(object):
             self.fix_field_small_width = 12 - (self.prefix_small_width if self.prefix else 0) - (self.postfix_small_width if self.postfix else 0)
             self.fix_field_medium_width = 12 - (self.prefix_medium_width if self.prefix else 0) - (self.postfix_medium_width if self.postfix else 0)
             self.fix_field_large_width = 12 - (self.prefix_large_width if self.prefix else 0) - (self.postfix_large_width if self.postfix else 0)
-
-    def __repr__(self):
-        return '<Field: %s (%d, %d, %d)>' % (self.field, self.small_width, self.medium_width, self.large_width)
 
 def normalise_row(row_data):
     # pylint: disable=R0912

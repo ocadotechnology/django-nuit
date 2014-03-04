@@ -239,7 +239,7 @@ class NuitFormTags(TestCase):
         form_html = get_soup('''
             {% load nuit %}
             {% foundation_form form %}
-            title {'medium': 2}; firstname; lastname
+            title {'medium': 2}; firstname;; lastname
             {% end_foundation_form %}
         ''', {'form': self.form})
         self.assert_on_widths(form_html, (
@@ -261,6 +261,50 @@ class NuitFormTags(TestCase):
             ('lastname', 5, 4, 4),
         ))
 
+    def test_prefix(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            url {'prefix': 'http://'}
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('url', 9, 9, 9),
+        ))
+
+    def test_postfix(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            url {'postfix': '.com'}
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('url', 9, 9, 9),
+        ))
+
+    def test_prefix_custom_widths(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            url {'prefix': 'http://', 'prefix_small': 4, 'prefix_medium': 5, 'prefix_large': 2}
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('url', 8, 7, 10),
+        ))
+
+    def test_postfix_custom_widths(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            url {'postfix': '.com', 'postfix_small': 4, 'postfix_medium': 5, 'postfix_large': 2}
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('url', 8, 7, 10),
+        ))
+
     def test_invalid_field(self):
         with self.assertRaises(TemplateSyntaxError):
             get_soup('''
@@ -276,5 +320,13 @@ class NuitFormTags(TestCase):
                 {% load nuit %}
                 {% foundation_form form %}
                 title invalid-field-data!!!; firstname; lastname
+                {% end_foundation_form %}
+            ''', {'form': self.form})
+
+    def test_invalid_call(self):
+        with self.assertRaises(TemplateSyntaxError):
+            get_soup('''
+                {% load nuit %}
+                {% foundation_form %}
                 {% end_foundation_form %}
             ''', {'form': self.form})
