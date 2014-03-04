@@ -1,15 +1,14 @@
 '''Tests for nuit'''
 # pylint: disable=R0904
-import re
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.contrib.messages import constants
 from django.template import Template, Context, TemplateSyntaxError
+from bs4 import BeautifulSoup as soup
 
+from .forms import TestForm
 from ..context_processors import nuit as nuit_context_processor
 from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths
-
-from bs4 import BeautifulSoup as soup
 
 class NuitContextProcessors(TestCase):
     '''Tests Nuit's context processors'''
@@ -186,3 +185,96 @@ class NuitTemplateTags(TestCase):
 
         with self.assertRaises(TemplateSyntaxError):
             Template('{% load nuit %}{% app_menu "one" "two" %}{% end_app_menu %}').render(Context())
+
+def get_soup(template_contents, context_dict):
+    return soup(Template(template_contents).render(Context(context_dict)))
+
+class NuitFormTags(TestCase):
+    '''Tests Nuit's form rendering - it's complex!'''
+
+    def setUp(self):
+        self.form = TestForm()
+
+    def assert_on_widths(self, form_html, expected_fields_and_widths):
+        for field, small, medium, large in expected_fields_and_widths:
+            element = form_html.find('input', attrs={'name': field})
+            parent_row = element.findParent('div', attrs={'class': 'columns'})
+            self.assertTrue('small-%d' % small in parent_row.attrs['class'])
+            self.assertTrue('medium-%d' % medium in parent_row.attrs['class'])
+            self.assertTrue('large-%d' % large in parent_row.attrs['class'])
+
+    def test_empty_form_tag(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, ((field, 12, 12, 12) for field in self.form.fields))
+
+    def test_some_fields_defined(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            title
+
+            firstname
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, ((field, 12, 12, 12) for field in self.form.fields))
+
+    def test_fields_on_same_row(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            title; firstname; lastname
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('title', 12, 4, 4),
+            ('firstname', 12, 4, 4),
+            ('lastname', 12, 4, 4),
+        ))
+
+    def test_specifying_a_width(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            title {'medium': 2}; firstname; lastname
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('title', 12, 2, 2),
+            ('firstname', 12, 5, 5),
+            ('lastname', 12, 5, 5),
+        ))
+
+    def test_resetting_higher_width(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form %}
+            title {'small': 2, 'medium': 0}; firstname; lastname
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assert_on_widths(form_html, (
+            ('title', 2, 4, 4),
+            ('firstname', 5, 4, 4),
+            ('lastname', 5, 4, 4),
+        ))
+
+    def test_invalid_field(self):
+        with self.assertRaises(TemplateSyntaxError):
+            get_soup('''
+                {% load nuit %}
+                {% foundation_form form %}
+                this_field_does_not_exist
+                {% end_foundation_form %}
+            ''', {'form': self.form})
+
+    def test_invalid_field_data(self):
+        with self.assertRaises(TemplateSyntaxError):
+            get_soup('''
+                {% load nuit %}
+                {% foundation_form form %}
+                title invalid-field-data!!!; firstname; lastname
+                {% end_foundation_form %}
+            ''', {'form': self.form})
