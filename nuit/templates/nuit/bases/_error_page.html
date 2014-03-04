@@ -1,22 +1,42 @@
 {% load static %}
 {% load nuit %}
-{% extend nuit_base|default:'nuit/base.html' %}
+{% extend nuit_base|default:'nuit/base.html' topbar=True topbar_classes='show-for-small-only' %}
 
 {% block title %}{{nuit_error_code}}: {{nuit_error_title}}{% endblock %}
 
+{% block css %}
+
+<style type='text/css'>
+
+    .toggle-topbar {
+        display: none;
+    }
+
+</style>
+
+{% endblock %}
+
 {% block content %}
-<section class='modal error'>
-    <div class='row'>
-        <div class='small-12 medium-6 medium-push-3 large-4 large-push-4'>
-            <ul class='pricing-table'>
-                <li class='title'><img src='{% static 'images/ot-horiz-white.png' %}' /></li>
-                <li class='price'>{{nuit_error_code}}: {{nuit_error_title}}</li>
-                <li class='bullet-item'>
-                    {{nuit_error_message}}
-                </li>
-                {% if nuit_show_return %}<li class='bullet-item'>Perhaps you'd like to <a href='javascript:history.go(-1)'>go back and try again</a>?</a></li>{% endif %}
-            </ul>
-        </div>
-    </div>
+
+<section class='fixed-modal'>
+
+    <header class='show-for-medium-up'>
+        {% if NUIT_LARGE_LOGO %}
+            <img src='{% static NUIT_LARGE_LOGO %}' />
+        {% else %}
+            <h1>{{NUIT_GLOBAL_TITLE|default:'Nuit'}}</h1>
+        {% endif %}
+    </header>
+
+    <section>
+
+        <h2 class='full errorcode'>{{nuit_error_code}}: {{nuit_error_title}}</h2>
+
+        <p class='center'>{{nuit_error_message}}</p>
+        {% if nuit_show_return %}<button class='button expand'>Go back and try again</button>{% endif %}
+
+    </section>
+
 </section>
+
 {% endblock %}

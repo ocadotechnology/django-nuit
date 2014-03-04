@@ -27,3 +27,6 @@ def test_form(request):
     else:
         form = PublisherForm()
     return render(request, 'demo/forms.html', {'form': form})
+
+def error(request, code='400'):
+    return render(request, 'nuit/generic/%s.html' % code, {}, status=code)

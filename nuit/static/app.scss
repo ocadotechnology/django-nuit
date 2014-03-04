@@ -33,6 +33,8 @@ $sidebar-link-hover-bg: rgba(0, 64, 84, 0.03) !default;
 $loader-colors: rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) !default;
 $loader-subicon: "\0025CF" !default;
 
+$fixed-modal-width: 400px !default;
+
 .size-12 { font-size: 12px; }
 
 .size-14 { font-size: 14px; }
@@ -204,7 +206,7 @@ $loader-subicon: "\0025CF" !default;
 
 .main {
     
-    margin-top: 10px;
+    margin-top: 1rem;
 
     /*h1 {
         font-size: 1.8rem;
@@ -311,39 +313,61 @@ $loader-subicon: "\0025CF" !default;
   @include nuit-loader(96px);
 }
 
-.modal {
-
-    margin-top: 3em;
+.fixed-modal {
 
     @media #{$medium-up} {
-        .surround {
-            border: 1px solid #ccc;
-        }
+        width: $fixed-modal-width;
+        margin-top: 5rem;
+        border: 1px solid #ccc;
     }
-    .title {
+
+    margin: 0 auto;
+
+    header {
+
         background-color: $topbar-bg;
         padding: 1em;
         text-align: center;
-        margin-bottom: 1em;
-    }
-    .login {
-        .submit {
-            text-align: center;
-        }
-        .nuit-loader {
-            margin-bottom: 1em;
-        }
+
         h1 {
-            color: white;
+            color: $topbar-link-color;
             font-size: 1.6em;
             margin: 0;
         }
+
     }
-    &.error {
-        .bullet-item {
-            line-height: 1.6em;
+
+    section {
+
+        @media #{$medium-up} {
+            padding: 1rem;
+            padding-bottom: 0;
         }
+
+        .full {
+            margin-left: -1rem;
+            margin-right: -1rem;
+        }
+
+        .submit {
+            text-align: center;
+        }
+
+        .nuit-loader {
+            margin-bottom: 1em;
+        }
+
+        .errorcode {
+            @include pricing-table-price;
+            margin-bottom: 1rem;
+        }
+
     }
+
+}
+
+.center {
+    text-align: center;
 }
 
 .nuit-breadcrumbs {

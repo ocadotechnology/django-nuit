@@ -49,6 +49,12 @@ The following arguments can be passed to the :ref:`template-tag-extend` tag to c
 
     Whether to display the breadcrumbs or not. See the :ref:`component-breadcrumbs` documentation for more detail.
 
+.. attribute:: topbar_classes
+
+    :default: ``None``
+
+    A string containing extra classes to apply to the top bar for this particular page.
+
 Blocks
 ^^^^^^
 

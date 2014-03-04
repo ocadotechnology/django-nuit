@@ -25,10 +25,10 @@
     <script src='{% static 'js/vendor/modernizr.js' %}'></script>
 
 </head>
-<body>
+<body class='{% block body_class %}{% endblock %}'>
 
     {% if nuit_topbar %}
-    <nav class='top-bar' data-topbar>
+    <nav class='top-bar {{nuit_topbar_classes}}' data-topbar>
         <ul class='title-area'>
             <li class='name'>
                 {% if NUIT_LARGE_LOGO %}
@@ -55,7 +55,7 @@
                 <li class='show-for-small-only divider'></li>
 
             </ul>
-
+            
             <ul class='right'>
                 {% if NUIT_APPLICATIONS %}
                 <li class='has-dropdown'>
@@ -86,7 +86,7 @@
         </div>
         {% endif %}
         <div class='main'>
-            <div class='row'>
+            <div class='row{% if nuit_collapse_content_row %} collapse{% endif %}'>
                 <div class='small-12 columns'>
                     {% if nuit_rightmenu %}
                         <a href='#' data-dropdown='right-menu-drop' class='hide-for-large-up actions small secondary radius button dropdown right'><i class='fi-widget size-24'></i></a>
