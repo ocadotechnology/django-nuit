@@ -4,7 +4,7 @@ import re
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.contrib.messages import constants
-from django.template import Template, Context
+from django.template import Template, Context, TemplateSyntaxError
 
 from ..context_processors import nuit as nuit_context_processor
 from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths
@@ -102,14 +102,14 @@ class NuitTemplateTags(TestCase):
             {% menu_section "Section 2" %}
                 Section 2
             {% end_menu_section %}
-            {% menu_section title="Section 3" is_list=True %}
+            {% menu_section title=section_3 is_list=True %}
                 <li>Section 3</li>
             {% end_menu_section %}
             {% menu_section link_name="Section 4" id="section-4-id" %}
                 Section 4
             {% end_menu_section %}
         '''.strip())
-        rendered = soup(template.render(Context()))
+        rendered = soup(template.render(Context({'section_3': 'Section 3'})))
         sections = rendered.findAll('section')
 
         expected_section_data = [
@@ -161,6 +161,28 @@ class NuitTemplateTags(TestCase):
             for key, value in data['attrs'].iteritems():
                 self.assertEqual(value, section.attrs[key])
 
+    def test_app_menu(self):
+        template = Template('''
+            {% load nuit %}
+            {% app_menu %}{% end_app_menu %}
+            {% app_menu "Title" %}{% end_app_menu %}
+            {% app_menu title %}content{% end_app_menu %}
+        '''.strip())
+        rendered = soup(template.render(Context({'title': 'Title 2'})))
+        sections = rendered.findAll('section')
 
+        self.assertEqual(3, len(sections))
 
+        for section in sections:
+            self.assertTrue('main-nav' in section.attrs['class'])
+            self.assertEqual(1, len(section.findAll('nav')))
+            self.assertEqual(1, len(section.find('nav').findAll('ul')))
+            self.assertTrue('side-nav' in section.find('nav').find('ul').attrs['class'])
 
+        self.assertTrue(1, len(sections[1].findAll('h5')))
+        self.assertEqual('Title', sections[1].find('h5').text)
+        self.assertTrue(1, len(sections[2].findAll('h5')))
+        self.assertEqual('Title 2', sections[2].find('h5').text)
+
+        with self.assertRaises(TemplateSyntaxError):
+            Template('{% load nuit %}{% app_menu "one" "two" %}{% end_app_menu %}').render(Context())
