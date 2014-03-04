@@ -9,3 +9,6 @@ docs/_build
 .sass-cache
 example_project/example_project/static
 dbfile
+reports
+coverage.xml
+pep8.txt
