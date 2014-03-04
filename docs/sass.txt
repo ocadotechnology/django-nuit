@@ -84,7 +84,7 @@ For a list of most variables, please refer to the Foundation_ docs. The followin
 
     The icon of each part of the :ref:`component-loading-animation`.
 
-.. attribute: $fixed-modal-width
+.. attribute:: $fixed-modal-width
 
     :default: ``400px``
 
