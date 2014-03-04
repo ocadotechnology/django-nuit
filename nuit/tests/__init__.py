@@ -8,7 +8,7 @@ from django.contrib.messages import constants
 from ..context_processors import nuit as nuit_context_processor
 from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths
 
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 
 class NuitContextProcessors(TestCase):
     '''Tests Nuit's context processors'''
@@ -64,32 +64,27 @@ class NuitTemplateFilters(TestCase):
     def test_message_icon(self):
         self.assertEqual('star', message_icon(FakeMessage(constants.INFO)))
 
-def re_search(needle, haystack):
-    return re.search(r'\b%s\b' % needle, haystack)
-
 class NuitTemplateTags(TestCase):
     '''Tests Nuit's template tags'''
 
     def test_set_active_menu(self):
         output = soup(set_active_menu('bob')).find('span')
         self.assertEqual('bob', output.text)
-        self.assertEqual('nuit-active-menu', dict(output.attrs)['class'])
-        self.assertEqual('display: none', dict(output.attrs)['style'])
+        self.assertTrue('nuit-active-menu' in output.attrs['class'])
+        self.assertTrue('display: none' in output.attrs['style'])
 
     def test_menu_item(self):
         output = soup(menu_item(link='/', name='bob')).find('li')
-        output_attrs = dict(output.attrs)
         self.assertEqual('bob', output.text)
-        self.assertTrue(re_search('menu-bob', output_attrs['class']))
-        self.assertEqual('/', dict(output.find('a').attrs)['href'])
+        self.assertTrue('menu-bob' in output.attrs['class'])
+        self.assertEqual('/', output.find('a').attrs['href'])
 
         output = soup(menu_item(link='/', name='bob', id='bobby', current=True, unavailable=True)).find('li')
-        output_attrs = dict(output.attrs)
         self.assertEqual('bob', output.text)
-        self.assertTrue(re_search('menu-bobby', output_attrs['class']))
-        self.assertTrue(re_search('current', output_attrs['class']))
-        self.assertTrue(re_search('unavailable', output_attrs['class']))
-        self.assertEqual('/', dict(output.find('a').attrs)['href'])
+        self.assertTrue('menu-bobby' in output.attrs['class'])
+        self.assertTrue('current' in output.attrs['class'])
+        self.assertTrue('unavailable' in output.attrs['class'])
+        self.assertEqual('/', output.find('a').attrs['href'])
 
     def test_calculate_widths(self):
         self.assertEqual([4, 4, 4], calculate_widths(3))
@@ -97,4 +92,4 @@ class NuitTemplateTags(TestCase):
         self.assertEqual([2, 2, 2, 2, 4], calculate_widths(5))
         self.assertEqual([1], calculate_widths(1, 1))
 
-    
+
