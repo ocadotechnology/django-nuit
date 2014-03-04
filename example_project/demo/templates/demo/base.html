@@ -1,13 +1,25 @@
 {% load nuit %}
-{% extend 'nuit/base.html' app_title='User Provisioning' topbar=True leftmenu=True %}
+{% extend 'nuit/base.html' topbar=True leftmenu=True breadcrumbs=True %}
+
+{% block breadcrumbs %}
+    {% menu_item link='/' name='Demo Project' %}
+{% endblock %}
 
 {% block left_menu %}
 
-{% app_menu "User Provisioning" %}
-    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis" %}
-    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis1" %}
-    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis2" %}
-    {% menu_item link="http://infmis.ocado.com" name="InfMIS" id="infmis3" %}
+{% app_menu "Demo Project" %}
+
+    {% menu_item link='/' name='Introduction' %}
+
+    {% url 'kitchen_sink' as kitchen_sink_url %}
+    {% menu_item link=kitchen_sink_url name='Kitchen Sink' id='sink' %}
+
+    {% url 'list_view' as list_view %}
+    {% menu_item link=list_view name='Searchable List View' id='list_view' %}
+
+    {% url 'forms' as forms %}
+    {% menu_item link=forms name='Forms' id='forms' %}
+
 {% end_app_menu %}
 
 {% endblock %}

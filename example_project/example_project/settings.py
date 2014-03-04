@@ -99,78 +99,27 @@ configure_settings(globals())
 
 COMPRESS_OFFLINE = False
 
-NUIT_GLOBAL_TITLE = 'Test Project'
-NUIT_GLOBAL_LINK = 'http://www.google.com'
+NUIT_GLOBAL_TITLE = 'Nuit Demo Project'
+NUIT_GLOBAL_LINK = '/'
 NUIT_APPLICATIONS = (
     {
-        'name': 'Asset Management',
-        'link': 'https://infmis.ocado.com/',
+        'name': 'Google',
+        'link': 'http://www.google.com/',
     },
     {
-        'name': 'Network Access & Management',
+        'name': 'Ocado',
         'subs': (
             {
-                'name': 'RADIUS',
-                'link': 'https://infmis.ocado.com/',
+                'name': 'Ocado Webshop',
+                'link': 'https://www.ocado.com/',
             },
             {
-                'name': 'Wireless Tools',
-                'link': 'https://infmis.ocado.com/wireless/guest-passphrase/',
+                'name': 'Fetch',
+                'link': 'https://fetch.co.uk/',
             },
             {
-                'name': 'DHCP Management',
-                'link': 'https://infmis.ocado.com/',
-            },
-            {
-                'name': 'IPTool',
-                'link': 'https://iptool.tech.lastmile.com/iptool/api/v1/?format=json',
-            },
-        ),
-    },
-    {
-        'name': 'Dashboards & Insight',
-        'subs': (
-            {
-                'name': 'Forest Fire',
-                'link': 'https://forestfire.tech.lastmile.com',
-            },
-            {
-                'name': 'Flocked',
-                'link': '#',
-            },
-            {
-                'name': 'Shuttle Track',
-                'link': '#',
-            },
-        ),
-    },
-    {
-        'name': 'Self Service',
-        'subs': (
-            {
-                'name': 'User Provisioning',
-                'link': 'https://lss.ocado.com/',
-            },
-            {
-                'name': 'VM Provisioning',
-                'link': 'https://lss.ocado.com/vmpro/',
-            },
-            {
-                'name': 'Database Users',
-                'link': 'https://lss.ocado.com/dumi/',
-            },
-            {
-                'name': 'Apparition',
-                'link': 'https://lss.ocado.com/apparition/',
-            },
-        ),
-    },
-    {
-        'name': 'Warehouse Management',
-        'subs': (
-            {
-                'name': 'NFDC Pickstations',
-                'link': 'https://pickman.ocado.com/',
+                'name': 'Ocado Technology',
+                'link': 'http://www.ocadotechnology.com/',
             },
         ),
     },

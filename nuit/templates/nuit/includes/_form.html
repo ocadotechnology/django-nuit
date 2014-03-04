@@ -1,7 +1,7 @@
 {% if csrf_enabled %}{% csrf_token %}{% endif %}
 
 {% if form.non_field_errors %}
-<div class='row'>
+<div class='row{% if collapse_container %} collapse{% endif %}'>
     <div class='small-12 columns'>
         <div data-alert class='alert-box alert'>
             {% for non_field_error in form.non_field_errors %}

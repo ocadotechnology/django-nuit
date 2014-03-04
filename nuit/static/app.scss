@@ -9,6 +9,7 @@ $crumb-border-size: 0 !default;
 $crumb-radius: 0 !default;
 $alert-padding-top: 0.5rem !default;
 $alert-bottom-margin: 1em !default;
+$body-font-color: #444 !default;
 
 @import "scss/foundation";
 @import "nuit/_mixins";
@@ -205,9 +206,9 @@ $loader-subicon: "\0025CF" !default;
     
     margin-top: 10px;
 
-    h1 {
+    /*h1 {
         font-size: 1.8rem;
-    }
+    }*/
     
     .actions.button.dropdown {
         padding: 0.5rem 0.8rem;

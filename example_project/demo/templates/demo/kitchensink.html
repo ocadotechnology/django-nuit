@@ -1,0 +1,163 @@
+{% load nuit %}
+{% extend 'demo/base.html' rightmenu=True %}
+
+{% block title %}Kitchen Sink{% endblock %}
+
+{% block breadcrumbs %}
+    {{block.super}}
+    {% url 'kitchen_sink' as kitchen_sink_url %}
+    {% menu_item link=kitchen_sink_url name='Kitchen Sink' %}
+{% endblock %}
+
+{% block content %}
+
+{% set_active_menu 'sink' %}
+
+<h1>Kitchen Sink</h1>
+
+<p>This page includes all the different elements currently designed to work with Nuit, so we can ensure that they all work happily together.</p>
+
+<h2>Typography</h2>
+
+<p>This is just a sample of each style of typography available, to ensure that the Nuit stylings are suitable. See Foundation's <a href='http://foundation.zurb.com/docs/components/typography.html'>Typography</a> documentation for more detail and options.</p>
+
+<h3>Headers</h3>
+
+<p>All available header styles. Usually, only one <code>&lt;h1&gt;</code> should be used per page.</p>
+
+<h1>h1. A very large header.</h1>
+<h2>h2. A large header.</h2>
+<h3>h3. A medium header.</h3>
+<h4>h4. A small header.</h4>
+<h5>h5. A very small header.</h5>
+<h6>h6. A tiny header.</h6>
+
+<h3>Lists</h3>
+
+<ol>
+    <li>An ordered list</li>
+    <li>Should be used</li>
+    <li>When you have</li>
+    <li>A number of items</li>
+    <li>That need to be ordered!</li>
+    <li>You can
+        <ol>
+            <li>Nest them</li>
+            <li>Too.</li>
+        </ol>
+    </li>
+</ol>
+
+<ul>
+    <li>An unordered list</li>
+    <li>Should be used</li>
+    <li>When the order of</li>
+    <li>The items doesn't matter.</li>
+</ul>
+
+<dl>
+    <dt>Definition Lists</dt>
+    <dd>Can be used to define items in a glossary, or provide a list of key-value pairs.</dd>
+</dl>
+
+<h3>Blockquotes</h3>
+
+<blockquote>Those people who think they know everything are a great annoyance to those of us who do.<cite>Isaac Asimov</cite></blockquote>
+
+<h2>Tables</h2>
+
+<p>Standard table, not responsive:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th width="200">Table Header</th>
+      <th>Table Header</th>
+      <th width="150">Table Header</th>
+      <th width="150">Table Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Standard table, grouped responsive:</p>
+
+<table class='grouped responsive medium-down headers-30'>
+  <thead>
+    <tr>
+      <th width="200">Table Header 1</th>
+      <th>Table Header 2</th>
+      <th width="150">Table Header 3</th>
+      <th width="150">Table Header 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Loaders</h2>
+
+{% include 'nuit/includes/loader.html' with size=16 %}
+{% include 'nuit/includes/loader.html' with size=32 %}
+{% include 'nuit/includes/loader.html' with size=48 %}
+{% include 'nuit/includes/loader.html' with size=64 %}
+{% include 'nuit/includes/loader.html' with size=80 %}
+{% include 'nuit/includes/loader.html' with size=96 %}
+
+{% endblock %}
+
+{% block right_menu %}
+
+    {% menu_section 'Everything but the kitchen sink&hellip;' %}
+    <p>A phrase originating from World War II, meaning to take or use almost everything.</p>
+    {% end_menu_section %}
+
+    {% menu_section link_name='Definition Lists' %}
+    <dl>
+        <dt>Definition Lists&hellip;</dt>
+        <dd>&hellip;have specific styling when used in the right menu.</dd>
+    </dl>
+    {% end_menu_section %}
+
+    {% menu_section is_list=True %}
+        {% menu_item name='A Link' link='#' %}
+    {% end_menu_section %}
+
+{% endblock %}

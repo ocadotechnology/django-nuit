@@ -1,23 +1,24 @@
 {% load nuit %}
-{% extend 'demo/publisher_list.html' %}
+{% extend 'demo/base.html' rightmenu=True %}
 
-{% block title %}Publisher Form{% endblock %}
+{% block title %}Forms{% endblock %}
 
 {% block breadcrumbs %}
 {{block.super}}
-{% url 'publisher_form' as publisher_url %}
-{% menu_item name='New' link=publisher_url %}
+{% menu_item name='Forms' link=request.path %}
 {% endblock %}
 
 {% block content %}
 
-    <h1>Publisher Form</h1>
+    {% set_active_menu 'forms' %}
+
+    <h1>Forms</h1>
     
     <form method='post' action=''>
         {% foundation_form form %}
-            name {'medium': 4,}; address {'prefix': 'Bob', 'prefix_medium': 6, 'prefix_large': 0}
-            city; state_province; country {'postfix': 'Europe', 'postfix_small': 6, 'postfix_medium': 0}
-            website {'prefix': 'http://'}
+            name {'medium': 4,}; address {'prefix': 'Pre', 'prefix_medium': 6, 'prefix_large': 0}
+            city; state_province; country {'postfix': 'Post', 'postfix_small': 6, 'postfix_medium': 0}
+            website {'prefix': 'Pre'}
         {% end_foundation_form %}
         <button class='button'>Submit</button>
     </form>

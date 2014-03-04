@@ -5,21 +5,10 @@
 
 {% block breadcrumbs %}
 {{block.super}}
-{% menu_item name='Publishers' link='/publishers/' %}
+{% menu_item name='List View' link=request.path %}
 {% endblock %}
 
 {% block content %}
 {{block.super}}
-{% set_active_menu "infmis2" %}
-{% endblock %}
-
-{% block right_menu %}
-
-{% menu_section is_list=True %}
-{% url 'publishers_add' as publisher_form %}
-{% menu_item name='Add New Publisher' link=publisher_form %}
-{% end_menu_section %}
-
-{{block.super}}
-
+{% set_active_menu 'list_view' %}
 {% endblock %}
