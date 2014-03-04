@@ -4,6 +4,7 @@ import re
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.contrib.messages import constants
+from django.template import Template, Context
 
 from ..context_processors import nuit as nuit_context_processor
 from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths
@@ -91,5 +92,75 @@ class NuitTemplateTags(TestCase):
         self.assertEqual([3, 3, 3, 3], calculate_widths(4))
         self.assertEqual([2, 2, 2, 2, 4], calculate_widths(5))
         self.assertEqual([1], calculate_widths(1, 1))
+
+    def test_menu_section(self):
+        template = Template('''
+            {% load nuit %}
+            {% menu_section %}
+                Section 1
+            {% end_menu_section %}
+            {% menu_section "Section 2" %}
+                Section 2
+            {% end_menu_section %}
+            {% menu_section title="Section 3" is_list=True %}
+                <li>Section 3</li>
+            {% end_menu_section %}
+            {% menu_section link_name="Section 4" id="section-4-id" %}
+                Section 4
+            {% end_menu_section %}
+        '''.strip())
+        rendered = soup(template.render(Context()))
+        sections = rendered.findAll('section')
+
+        expected_section_data = [
+            {
+                'header': False,
+                'list': False,
+                'attrs': {
+                    'id': 'none',
+                    'data-link': 'None',
+                },
+            },
+            {
+                'header': 'Section 2',
+                'list': False,
+                'attrs': {
+                    'id': 'section-2',
+                    'data-link': 'Section 2',
+                },
+            },
+            {
+                'header': 'Section 3',
+                'list': True,
+                'attrs': {
+                },
+            },
+            {
+                'header': False,
+                'list': False,
+                'attrs': {
+                    'id': 'section-4-id',
+                    'data-link': 'Section 4',
+                },
+            }
+        ]
+
+        self.assertEqual(4, len(sections))
+        
+        for section, data in zip(sections, expected_section_data):
+            self.assertTrue('right-menu-reveal' in section.attrs['class'])
+            if not data['list']:
+                self.assertTrue('data-reveal' in section.attrs)
+            else:
+                self.assertEqual(1, len(section.findAll('nav')))
+                self.assertEqual(1, len(section.find('nav').findAll('ul')))
+                self.assertTrue('side-nav' in section.find('nav').find('ul').attrs['class'])
+            if data['header']:
+                self.assertEqual(1, len(section.findAll('h5')))
+                self.assertEqual(data['header'], section.find('h5').text)
+            for key, value in data['attrs'].iteritems():
+                self.assertEqual(value, section.attrs[key])
+
+
 
 
