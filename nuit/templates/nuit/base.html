@@ -140,20 +140,6 @@
         }
     });
 
-    function pad_main() {
-        var left_width = $('.sidebar.on-left').outerWidth();
-        var left_padding = 0;
-        if (left_width > 40) {
-            left_padding = left_width + 10;
-        }
-        $('.main').css({
-            'paddingLeft': left_padding
-        });
-    }
-
-    $(window).resize(pad_main);
-    pad_main();
-
     $('.nuit-active-menu').each(function() {
         $('.menu-' + $(this).html()).addClass('active');
     });

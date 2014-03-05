@@ -18,23 +18,17 @@ For a list of most variables, please refer to the Foundation_ docs. The followin
 
     The color of the left and right menus.
 
-.. attribute:: $sidebar-left-min-width
+.. attribute:: $sidebar-left-large-width
 
-    :default: ``150px``
+    :default: ``250px``
 
-    The minimum with of the left menu.
+    The with of the left menu on large screens.
 
-.. attribute:: $sidebar-left-max-width
+.. attribute:: $sidebar-left-medium-width
 
-    :default: ``280px``
+    :default: ``200px``
 
-    The maximum width of the left menu.
-
-.. attribute:: $sidebar-left-width
-
-    :default: ``30%``
-
-    The width of the left menu, if between :attr:`$sidebar-left-min-width` and :attr:`$sidebar-left-max-width`.
+    The width of the left menu on medium screens.
 
 .. attribute:: $sidebar-right-max-width
 
