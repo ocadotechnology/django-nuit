@@ -68,6 +68,18 @@ $fixed-modal-width: 400px !default;
         top: 0;
         left: $sidebar-gutter-spacing;
         position: absolute;
+
+        @media #{$large-up} {
+            & ~ .main {
+                margin-left: $sidebar-left-large-width + $sidebar-gutter-spacing;
+            }
+        }
+        @media #{$medium-only} {
+            & ~ .main {
+                margin-left: $sidebar-left-medium-width + $sidebar-gutter-spacing;
+            }
+        }
+
     }
     
     &.on-right {
@@ -208,13 +220,6 @@ $fixed-modal-width: 400px !default;
 .main {
     
     margin-top: 1rem;
-
-    @media #{$large-up} {
-        margin-left: $sidebar-left-large-width + $sidebar-gutter-spacing;
-    }
-    @media #{$medium-only} {
-        margin-left: $sidebar-left-medium-width + $sidebar-gutter-spacing;
-    }
     
     .actions.button.dropdown {
         padding: 0.5rem 0.8rem;

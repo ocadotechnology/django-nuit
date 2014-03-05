@@ -248,7 +248,7 @@ class NuitTemplateTags(TestCase):
         ]
 
         self.assertEqual(4, len(sections))
-        
+
         for section, data in zip(sections, expected_section_data):
             self.assertTrue('right-menu-reveal' in section.attrs['class'])
             if not data['list']:
@@ -307,6 +307,7 @@ class NuitFormTags(TestCase):
             self.assertTrue('large-%d' % large in parent_row.attrs['class'])
 
     def test_empty_form_tag(self):
+        # pylint: disable=E1101
         form_html = get_soup('''
             {% load nuit %}
             {% foundation_form form %}
@@ -315,6 +316,7 @@ class NuitFormTags(TestCase):
         self.assert_on_widths(form_html, ((field, 12, 12, 12) for field in self.form.fields))
 
     def test_some_fields_defined(self):
+        # pylint: disable=E1101
         form_html = get_soup('''
             {% load nuit %}
             {% foundation_form form %}
