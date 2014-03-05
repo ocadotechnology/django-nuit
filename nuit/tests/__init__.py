@@ -3,12 +3,13 @@
 from django.test import TestCase, RequestFactory
 from django.test.utils import override_settings
 from django.contrib.messages import constants
+from django.core.paginator import Paginator
 from django.template import Template, Context, TemplateSyntaxError
 from bs4 import BeautifulSoup as soup
 
 from .forms import TestForm
 from ..context_processors import nuit as nuit_context_processor
-from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths
+from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths, pagination_menu
 from ..views import SearchableListView
 
 from django.db import models
@@ -146,6 +147,28 @@ class NuitTemplateFilters(TestCase):
 
 class NuitTemplateTags(TestCase):
     '''Tests Nuit's template tags'''
+
+    def test_pagination_menu(self):
+
+        for letter in string.ascii_uppercase:
+            Publisher(
+                name = 'Publisher %s' % letter,
+                address = 'Address %s' % letter,
+                city = 'City %s' % letter,
+                state_province = 'State %s' % letter,
+                website = 'http://www.publisher%s.com' % letter,
+            ).save()
+
+        paginator = Paginator(Publisher.objects.all(), 2)
+
+        context = pagination_menu({}, paginator.page(1))
+        self.assertEqual([1, 2, 3, None, 12, 13], context['page_list'])
+
+        context = pagination_menu({}, paginator.page(7))
+        self.assertEqual([1, 2, None, 5, 6, 7, 8, 9, None, 12, 13], context['page_list'])
+
+        context = pagination_menu({}, paginator.page(12))
+        self.assertEqual([1, 2, None, 10, 11, 12, 13], context['page_list'])
 
     def test_set_active_menu(self):
         output = soup(set_active_menu('bob')).find('span')
