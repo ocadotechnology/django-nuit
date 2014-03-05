@@ -1,6 +1,6 @@
 '''Tests for nuit'''
 # pylint: disable=R0904
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.test.utils import override_settings
 from django.contrib.messages import constants
 from django.template import Template, Context, TemplateSyntaxError
@@ -9,6 +9,84 @@ from bs4 import BeautifulSoup as soup
 from .forms import TestForm
 from ..context_processors import nuit as nuit_context_processor
 from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths
+from ..views import SearchableListView
+
+from django.db import models
+
+import string
+
+def setup_view(view, request, *args, **kwargs):
+    """Mimic as_view() returned callable, but returns view instance.
+
+    args and kwargs are the same you would pass to ``reverse()``
+
+    """
+    view.request = request
+    view.args = args
+    view.kwargs = kwargs
+    return view
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=60)
+    state_province = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    website = models.URLField()
+
+class NuitViews(TestCase):
+    '''Tests Nuit's views'''
+
+    def setUp(self):
+        for letter in string.ascii_uppercase:
+            Publisher(
+                name = 'Publisher %s' % letter,
+                address = 'Address %s' % letter,
+                city = 'City %s' % letter,
+                state_province = 'State %s' % letter,
+                website = 'http://www.publisher%s.com' % letter,
+            ).save()
+
+    def setup_list_view(self, query_string=None, search_fields=None):
+        request = RequestFactory().get('/fake-path/?%s' % query_string)
+        view = SearchableListView()
+        view.model = Publisher
+        if search_fields:
+            view.search_fields = search_fields
+        return setup_view(view, request)
+
+    def test_searchable_list_view_context_no_fields(self):
+        view = self.setup_list_view()
+        context = view.get_context_data(object_list=[])
+        self.assertTrue('search' not in context)
+        self.assertTrue('search_query' not in context)
+
+    def test_searchable_list_view_context_no_search(self):
+        view = self.setup_list_view(search_fields=('name', 'address',))
+        context = view.get_context_data(object_list=[])
+        self.assertTrue(context['search'])
+
+    def test_searchable_list_view_context_search(self):
+        view = self.setup_list_view('q=isher%20A', ('name', 'address',))
+        context = view.get_context_data(object_list=[])
+        self.assertTrue(context['search'])
+        self.assertEqual('isher A', context['search_query'])
+
+    def test_searchable_list_view_queryset_no_fields(self):
+        view = self.setup_list_view()
+        self.assertEqual(Publisher.objects.count(), view.get_queryset().count())
+
+    def test_searchable_list_view_queryset_no_search(self):
+        view = self.setup_list_view(search_fields=('name', 'address',))
+        self.assertEqual(Publisher.objects.count(), view.get_queryset().count())
+
+    def test_searchable_list_view_queryset_search(self):
+        view = self.setup_list_view('q=isher%20A', ('name', 'address',))
+        self.assertEqual(1, view.get_queryset().count())
+
+    def test_searchable_list_view_queryset_different_lookup(self):
+        view = self.setup_list_view('q=isher%20A', (('name', 'startswith'),))
+        self.assertEqual(0, view.get_queryset().count())
 
 class NuitContextProcessors(TestCase):
     '''Tests Nuit's context processors'''
@@ -306,6 +384,14 @@ class NuitFormTags(TestCase):
         self.assert_on_widths(form_html, (
             ('url', 8, 7, 10),
         ))
+
+    def test_no_csrf(self):
+        form_html = get_soup('''
+            {% load nuit %}
+            {% foundation_form form csrf_enabled=False %}
+            {% end_foundation_form %}
+        ''', {'form': self.form})
+        self.assertTrue('csrf' not in form_html)
 
     def test_invalid_field(self):
         with self.assertRaises(TemplateSyntaxError):
