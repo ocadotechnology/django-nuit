@@ -14,8 +14,8 @@ import sys, os
 from gitversion import get_git_version
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../test_project/'))
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test_project.settings")
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../example_project/'))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")
 
 intersphinx_mapping = {
     'django': ('http://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/'),

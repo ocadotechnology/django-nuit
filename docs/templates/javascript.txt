@@ -1,0 +1,11 @@
+JavaScript
+==========
+
+Nuit provides a number of JavaScript hooks to dynamically alter the Nuit elements of your page.
+
+.. function:: nuit.add_message(alert_type, message)
+
+    Inject a message box onto the page.
+
+    :param str alert_type: The type of message: one of ``debug``, ``info``, ``success``, ``warning``, or ``error``.
+    :param str message: The message to display.

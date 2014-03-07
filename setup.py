@@ -15,7 +15,7 @@ setup(
         'django-foundation-statics',
         'django-compressor',
         'django-jquery',
-        'django-foundation-icons',
+        'django-foundation-icons>=3.1',
         'django',
         'django-autoconfig',
         'django-bourbon',

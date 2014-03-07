@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup as soup
 
 from .forms import TestForm
 from ..context_processors import nuit as nuit_context_processor
-from ..templatetags.nuit import message_class, message_icon, set_active_menu, menu_item, calculate_widths, pagination_menu
+from ..templatetags.nuit import message_class, set_active_menu, menu_item, calculate_widths, pagination_menu
 from ..views import SearchableListView
 
 from django.db import models
@@ -140,10 +140,6 @@ class NuitTemplateFilters(TestCase):
         self.assertEqual('alert', message_class(FakeMessage(constants.ERROR)))
         self.assertEqual('info', message_class(FakeMessage(constants.INFO)))
         self.assertEqual('invalid-level', message_class(FakeMessage('invalid-level')))
-
-    def test_message_icon(self):
-        self.assertEqual('star', message_icon(FakeMessage(constants.INFO)))
-        self.assertEqual('invalid-level', message_icon(FakeMessage('invalid-level')))
 
 class NuitTemplateTags(TestCase):
     '''Tests Nuit's template tags'''

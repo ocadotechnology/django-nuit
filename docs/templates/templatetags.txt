@@ -199,19 +199,3 @@ Given a message object from Django's :mod:`django.contrib.messages`, returns a s
     {% endfor %}
 
 .. _`alert boxes`: http://foundation.zurb.com/docs/components/alert_boxes.html
-
-.. _template-filter-message-icon:
-
-``message_icon``
-----------------
-
-Given a message object from Django's :mod:`django.contrib.messages`, returns a string containing the name of an icon from `Foundation Icons`_ corersponding to the message's level. Used to provide an icon in the message alert boxes::
-
-    {% for message in messages %}
-        <div data-alert class='alert-box {{message|message_class}}'>
-            <i class='fi-{{message|message_icon}}'></i>
-            {{message}}
-        </div>
-    {% endfor %}
-
-.. _`Foundation Icons`: http://zurb.com/playground/foundation-icon-fonts-3

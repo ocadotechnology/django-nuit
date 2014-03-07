@@ -16,11 +16,7 @@ FalseFilterExpression = FilterExpression("False", None)
 TrueFilterExpression = FilterExpression("True", None)
 
 MESSAGE_LEVELS = {
-    constants.DEBUG: {'icon': 'widget'},
-    constants.INFO: {'icon': 'star'},
-    constants.SUCCESS: {'icon': 'check'},
-    constants.WARNING: {'icon': 'alert'},
-    constants.ERROR: {'icon': 'prohibited', 'class': 'alert'},
+    constants.ERROR: 'alert',
 }
 
 @register.filter
@@ -29,20 +25,7 @@ def message_class(msg):
     Return the foundation alert class for a message level.
     '''
     try:
-        return MESSAGE_LEVELS[msg.level]['class']
-    except KeyError:
-        try:
-            return constants.DEFAULT_TAGS[msg.level]
-        except KeyError:
-            return msg.level
-
-@register.filter
-def message_icon(msg):
-    '''
-    Return the foundation icon class for a message level.
-    '''
-    try:
-        return MESSAGE_LEVELS[msg.level]['icon']
+        return MESSAGE_LEVELS[msg.level]
     except KeyError:
         try:
             return constants.DEFAULT_TAGS[msg.level]

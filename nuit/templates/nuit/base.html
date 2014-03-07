@@ -14,8 +14,6 @@
     <link rel='stylesheet' type='text/x-scss' href='{% static 'app.scss' %}' />
     {% endcompress %}
 
-    <link rel='stylesheet' type='text/css' href='{% static 'icons/foundation-icons.css' %}' />
-
     {% block head %}
     {% endblock %}
 
@@ -94,14 +92,13 @@
                         </ul>
                     {% endif %}
 
+                    <div class='nuit-messages'>
                     {% if messages %}
                         {% for message in messages %}
-                        <div data-alert class='alert-box {{message.tags}} {{message|message_class}}'>
-                            <i class='fi fi-{{message|message_icon}}'></i>{{message}}
-                            <a href='#' class='close'>&times;</a>
-                        </div>
+                        <div data-alert class='alert-box {{message.tags}} {{message|message_class}}'>{{message}}<a href='#' class='close'>&times;</a></div>
                         {% endfor %}
                     {% endif %}
+                    </div>
 
                     {% if nuit_breadcrumbs %}
                         <ul class='breadcrumbs nuit-breadcrumbs'>
@@ -139,6 +136,15 @@
             }
         }
     });
+
+    nuit = {
+        add_message: function(alert_type, message) {
+            alert_type = alert_type.toLowerCase()
+            message_html = '<div data-alert class="alert-box ' + alert_type + '">' + message + '<a href="#" class="close">&times;</a></div>';
+            var $message = $(message_html);
+            $('.nuit-messages').append($message).foundation('reflow');
+        }
+    }
 
     $('.nuit-active-menu').each(function() {
         $('.menu-' + $(this).html()).addClass('active');

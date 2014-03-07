@@ -11,3 +11,4 @@ Nuit is primarily a front-end framework, and as such comes with a number of temp
  forms
  generic
  templatetags
+ javascript
