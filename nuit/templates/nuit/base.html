@@ -109,11 +109,6 @@
         <div class='main'>
             <div class='row{% if nuit_collapse_content_row %} collapse{% endif %}'>
                 <div class='small-12 columns'>
-                    {% if nuit_rightmenu %}
-                        <a href='#' data-dropdown='right-menu-drop' class='hide-for-large-up actions small secondary radius button dropdown right'><i class='fi-widget size-24'></i></a>
-                        <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
-                        </ul>
-                    {% endif %}
 
                     <div class='nuit-messages'>
                     {% if messages %}
@@ -123,6 +118,12 @@
                     {% endif %}
                     </div>
 
+                    {% if nuit_rightmenu %}
+                        <a href='#' data-dropdown='right-menu-drop' class='hide-for-large-up actions small secondary radius button dropdown right'><i class='fi-widget size-24'></i></a>
+                        <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
+                        </ul>
+                    {% endif %}
+                    
                     {% if nuit_breadcrumbs %}
                         <ul class='breadcrumbs nuit-breadcrumbs'>
                             {% if nuit_app_title %}<li><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>{% endif %}
