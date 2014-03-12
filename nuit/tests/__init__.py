@@ -103,7 +103,10 @@ class NuitContextProcessors(TestCase):
     def test_nuit_context_processor(self):
         with self.settings(**self.sample_settings):
             resulting_dict = nuit_context_processor(None)
-        self.assertEqual(resulting_dict, self.sample_settings)
+        expected_resulting_settings = self.sample_settings
+        expected_resulting_settings['NUIT_LOGIN_URL'] = '/accounts/login/'
+        expected_resulting_settings['NUIT_LOGOUT_URL'] = '/accounts/logout/'
+        self.assertEqual(resulting_dict, expected_resulting_settings)
 
 class NuitHandlers(TestCase):
     '''Tests Nuit's handlers'''
