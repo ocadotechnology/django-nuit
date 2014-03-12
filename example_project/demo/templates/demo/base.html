@@ -1,5 +1,5 @@
 {% load nuit %}
-{% extend 'nuit/base.html' topbar=True leftmenu=True breadcrumbs=True %}
+{% extend 'nuit/base.html' topbar=True leftmenu=True breadcrumbs=True show_login=True user_profile_link='/profile/' user_profile_link_text='Profile' %}
 
 {% block breadcrumbs %}
     {% menu_item link='/' name='Demo Project' %}

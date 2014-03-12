@@ -9,6 +9,8 @@ def nuit(request):
         'NUIT_GLOBAL_LINK': getattr(settings, 'NUIT_GLOBAL_LINK', None),
         'NUIT_LARGE_LOGO': getattr(settings, 'NUIT_LARGE_LOGO', None),
         'NUIT_SMALL_LOGO': getattr(settings, 'NUIT_SMALL_LOGO', None),
+        'NUIT_LOGOUT_URL': getattr(settings, 'LOGOUT_URL', None),
+        'NUIT_LOGIN_URL': getattr(settings, 'LOGIN_URL', None),
     }
 
     return context

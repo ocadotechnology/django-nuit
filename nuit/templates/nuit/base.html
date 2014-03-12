@@ -55,6 +55,29 @@
             </ul>
             
             <ul class='right'>
+
+                {% if nuit_show_login and NUIT_LOGIN_URL and NUIT_LOGOUT_URL %}
+                    {% if request.user.is_anonymous %}
+                        <li><a href='{{NUIT_LOGIN_URL}}?next={{request.path}}'>Login</a></li>
+                    {% else %}
+                        <li class='has-dropdown' class='nuit-user-details'>
+                            <a href='#'>
+                                {% if request.user.first_name and request.user.last_name %}
+                                    {{request.user.first_name}} {{request.user.last_name}}
+                                {% else %}
+                                    {{request.user.first_name|default:request.user.username}}
+                                {% endif %}
+                            </a>
+                            <ul class='dropdown'>
+                                {% if nuit_user_profile_link %}
+                                    <li><a href='{{nuit_user_profile_link}}'>{{nuit_user_profile_link_text|default:'Edit Profile'}}</a></li>
+                                {% endif %}
+                                <li><a href='{{NUIT_LOGOUT_URL}}'>Logout</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                {% endif %}
+
                 {% if NUIT_APPLICATIONS %}
                 <li class='has-dropdown'>
                     <a href='#'>Applications</a>

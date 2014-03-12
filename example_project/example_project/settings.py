@@ -86,7 +86,6 @@ INSTALLED_APPS = (
     'nuit',
     'demo',
     'debug_toolbar',
-    'django_jenkins',
 )
 
 try:
@@ -96,6 +95,9 @@ except ImportError:
 
 from django_autoconfig.autoconfig import configure_settings
 configure_settings(globals())
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
 
 COMPRESS_OFFLINE = False
 

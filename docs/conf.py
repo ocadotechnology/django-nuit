@@ -11,7 +11,7 @@
 # serve to show the default.
 
 import sys, os
-from gitversion import get_git_version
+from nuit.version import __VERSION__
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../example_project/'))
@@ -55,7 +55,7 @@ copyright = u'2014, Ocado'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-git_version = get_git_version(__file__)
+git_version = __VERSION__
 # The short X.Y version.
 version = git_version.split('-')[0]
 # The full version, including alpha/beta/rc tags.
