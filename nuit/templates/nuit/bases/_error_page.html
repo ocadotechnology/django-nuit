@@ -2,7 +2,7 @@
 {% load nuit %}
 {% extend nuit_base|default:'nuit/base.html' topbar=True topbar_classes='show-for-small-only' %}
 
-{% block title %}{{nuit_error_code}}: {{nuit_error_title}}{% endblock %}
+{% block title %}{{nuit_error_code}}: {{nuit_error_title}}{% endblock title %}
 
 {% block css %}
 
@@ -14,7 +14,7 @@
 
 </style>
 
-{% endblock %}
+{% endblock css %}
 
 {% block content %}
 
@@ -39,4 +39,4 @@
 
 </section>
 
-{% endblock %}
+{% endblock content %}

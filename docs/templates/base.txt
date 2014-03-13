@@ -55,23 +55,11 @@ The following arguments can be passed to the :ref:`template-tag-extend` tag to c
 
     A string containing extra classes to apply to the top bar for this particular page.
 
-.. attribute:: show_login
+.. attribute:: show_user_info
 
     :default: ``False``
 
     Boolean that decides whether to show the login information on the top right or not.
-
-.. attribute:: user_profile_link
-
-    :default: ``None``
-
-    A link to a page to the logged-in user's profile for this app. If not defined, no link will be shown.
-
-.. attribute:: user_profile_link_text
-
-    :default: ``'Edit Profile'``
-
-    The text to use for the link to teh logged-in user's profile. Only used if :attr:`user_profile_link` is set to ``True``.
 
 Blocks
 ^^^^^^
@@ -123,6 +111,13 @@ top_bar_menu
 ~~~~~~~~~~~~
 
 Allows you to add links to the :ref:`component-top-bar`. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
+
+.. _`template-nuit-base-block-top-bar-right-menu`:
+
+top_bar_right_menu
+~~~~~~~~~~~~~~~~~~
+
+Allows you to add links to the :ref:`component-top-bar` on the right. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
 
 .. _`template-nuit-base-block-left-menu`:
 
