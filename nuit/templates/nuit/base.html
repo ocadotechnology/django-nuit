@@ -20,7 +20,7 @@
     {% block css %}
     {% endblock css %}
 
-    <script src='{% static 'js/vendor/modernizr.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/vendor/modernizr.js' %}'></script>
 
 </head>
 <body class='{% block body_class %}{% endblock %}'>
@@ -56,7 +56,7 @@
                 <li class='show-for-small-only divider'></li>
 
             </ul>
-            
+
             <ul class='right'>
 
                 {% block top_bar_right_menu %}
@@ -129,7 +129,7 @@
                         <ul id='right-menu-drop' data-dropdown-content class='f-dropdown'>
                         </ul>
                     {% endif %}
-                    
+
                     {% if nuit_breadcrumbs %}
                         <ul class='breadcrumbs nuit-breadcrumbs'>
                             {% if nuit_app_title %}<li><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>{% endif %}
@@ -147,15 +147,14 @@
     </div>
     </section>
 
-    <script src='{% static 'js/vendor/jquery.js' %}'></script>
-    <script src='{% static 'js/vendor/jquery.cookie.js' %}'></script>
-    <script src='{% static 'js/foundation.min.js' %}'></script>
-    <script src='{% static 'app.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/vendor/jquery.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/vendor/jquery.cookie.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/foundation.min.js' %}'></script>
+    <script type='text/javascript' src='{% static 'app.js' %}'></script>
 
     {% block scripts %}
     {% endblock scripts %}
-    
+
 </body>
 
 </html>
-    

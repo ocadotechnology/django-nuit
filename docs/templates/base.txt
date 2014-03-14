@@ -110,14 +110,21 @@ Allows you to enter Javascript ``<script>`` tags that will be included just befo
 top_bar_menu
 ~~~~~~~~~~~~
 
-Allows you to add links to the :ref:`component-top-bar`. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
+Allows you to add links to the :ref:`component-top-bar`. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-item` template tag.
 
 .. _`template-nuit-base-block-top-bar-right-menu`:
 
 top_bar_right_menu
 ~~~~~~~~~~~~~~~~~~
 
-Allows you to add links to the :ref:`component-top-bar` on the right. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-section` template tag.
+Allows you to add links to the :ref:`component-top-bar` on the right. This is only visible when :attr:`topbar` is ``True``. Intended to be used with the :ref:`template-tag-menu-item` template tag.
+
+.. _`template-nuit-base-block-user-info-menu`:
+
+user_info_menu
+~~~~~~~~~~~~~~
+
+Allows you to add links to the :ref:`component-top-bar` in the user info dropdown. This is only visible when :attr:`topbar` and :attr:`show_user_info` are ``True``. Intended to be used with the :ref:`template-tag-menu-item` template tag.
 
 .. _`template-nuit-base-block-left-menu`:
 
