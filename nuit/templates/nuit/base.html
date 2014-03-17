@@ -11,7 +11,7 @@
     <title>{% block title %}Home{% endblock title %}{% if nuit_app_title %} - {{page_title|default:nuit_app_title}}{% else %} - {{page_title|default:'Nuit'}}{% endif %}</title>
 
     {% compress css %}
-    <link rel='stylesheet' type='text/x-scss' href='{% static 'app.scss' %}' />
+    <link rel='stylesheet' type='text/x-scss' href='{% static 'nuit/app.scss' %}' />
     {% endcompress %}
 
     {% block head %}
@@ -150,7 +150,7 @@
     <script type='text/javascript' src='{% static 'js/vendor/jquery.js' %}'></script>
     <script type='text/javascript' src='{% static 'js/vendor/jquery.cookie.js' %}'></script>
     <script type='text/javascript' src='{% static 'js/foundation.min.js' %}'></script>
-    <script type='text/javascript' src='{% static 'app.js' %}'></script>
+    <script type='text/javascript' src='{% static 'nuit/app.js' %}'></script>
 
     {% block scripts %}
     {% endblock scripts %}
