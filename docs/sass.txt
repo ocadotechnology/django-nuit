@@ -83,3 +83,12 @@ For a list of most variables, please refer to the Foundation_ docs. The followin
     :default: ``400px``
 
     The width of fixed-width modals, such as the login form and error pages.
+
+Using Nuit's Styles
+-------------------
+
+To use the variables that Nuit and Foundation themselves use in your own CSS, but without including any of their rendered CSS, add the following to the top of your SCSS file::
+
+    @import "nuit/_styles"
+
+You'll then have access to the variables defined above, as well as any used by Foundation.
