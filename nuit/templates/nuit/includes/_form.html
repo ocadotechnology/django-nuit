@@ -26,6 +26,9 @@
                 {% if foundation_field.prefix or foundation_field.postfix %}<div class='row collapse'>{% endif %}
                 {% if foundation_field.show_label %}<label{% if field.errors %} class='error'{% endif %} for='{{field.auto_id}}'>
                     {{field.label}}
+                    {% if field.help_text %}
+                    <i data-tooltip class='fi fi-info has-tip' title='{{field.help_text}}'></i>
+                    {% endif %}
                 </label>{% endif %}
                 {% if foundation_field.prefix %}
                     <div class='small-{{foundation_field.prefix_small_width}} medium-{{foundation_field.prefix_medium_width}} large-{{foundation_field.prefix_large_width}} columns'><span class='prefix'>{{foundation_field.prefix}}</span></div>
