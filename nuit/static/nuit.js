@@ -15,7 +15,7 @@ nuit.setup = function() {
         crossDomain: false,
         beforeSend: function(xhr, settings) {
             if (!nuit.csrfSafeMethod(settings.type)) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.setRequestHeader("X-CSRFToken", nuit.csrftoken);
                 xhr.setRequestHeader('Accept', 'application/json');
             }
         }
