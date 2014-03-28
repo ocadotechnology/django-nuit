@@ -3,10 +3,6 @@ Templates Tags and Filters
 
 Nuit provides a handlful of template tags and filters designed to abstract some of the complexities of writing templates for the framework.
 
-To use them, you need to load the ``nuit`` tag library::
-
-    {% load nuit %}
-
 Tags
 ~~~~
 

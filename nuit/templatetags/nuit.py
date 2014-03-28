@@ -1,7 +1,7 @@
 from __future__ import division
 from django import template
 from django.template.base import token_kwargs, FilterExpression
-from django.template.loader_tags import do_extends
+from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
 from django.template.loader import get_template
 from django.contrib.messages import constants
@@ -41,20 +41,23 @@ def set_active_menu(active_menu):
     return "<span style='display: none' class='nuit-active-menu'>%s</span>" % active_menu
 
 
-class ExtendNode(template.Node):
+class ExtendNode(ExtendsNode):
     '''
     Template node that extends another template with additional variables.
     '''
 
     def __init__(self, node, kwargs):
-        self.node = node
+        super(ExtendNode, self).__init__(node.nodelist, node.parent_name, node.template_dirs)
         self.kwargs = dict(("nuit_%s" % key, value) for key, value in kwargs.iteritems())
+
+    def __repr__(self):
+        return '<ExtendNode: extends %s with args: %r>' % (super(ExtendNode, self).__repr__(), self.kwargs)
 
     def render(self, context):
         kwargs = dict((key, value.resolve(context)) for key, value in self.kwargs.iteritems())
         context.update(kwargs)
         try:
-            return self.node.render(context)
+            return super(ExtendNode, self).render(context)
         finally:
             context.pop()
 

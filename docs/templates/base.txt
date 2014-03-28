@@ -41,7 +41,7 @@ The following arguments can be passed to the :ref:`template-tag-extend` tag to c
 
     :default: ``None``
 
-    The base URL of the application.
+    The base view of the application - this should be a url-reversable string.
 
 .. attribute:: breadcrumbs
 

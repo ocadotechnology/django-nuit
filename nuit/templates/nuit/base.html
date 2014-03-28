@@ -47,7 +47,7 @@
 
                 {% if nuit_app_title %}
                     <li class='hide-for-small-only divider'></li>
-                    <li class='hide-for-small-only'><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>
+                    <li class='hide-for-small-only'><a href='{% if nuit_app_url %}{% url nuit_app_url %}{% else %}/{% endif %}'>{{nuit_app_title}}</a></li>
                 {% endif %}
 
                 {% block top_bar_menu %}
@@ -132,7 +132,7 @@
 
                     {% if nuit_breadcrumbs %}
                         <ul class='breadcrumbs nuit-breadcrumbs'>
-                            {% if nuit_app_title %}<li><a href='{{nuit_app_url|default:'/'}}'>{{nuit_app_title}}</a></li>{% endif %}
+                            {% if nuit_app_title %}<li><a href='{% if nuit_app_url %}{% url nuit_app_url %}{% else %}/{% endif %}'>{{nuit_app_title}}</a></li>{% endif %}
                             {% block breadcrumbs %}
                             {% endblock breadcrumbs %}
                         </ul>

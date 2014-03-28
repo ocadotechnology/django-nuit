@@ -22,3 +22,8 @@ SETTINGS = {
         'bourbon',
     ],
 }
+
+# We need to add this globally as we're making a new ExtendsNode
+# and this needs to be the first node in the template.
+from django.template.loader import add_to_builtins
+add_to_builtins('nuit.templatetags.nuit')
