@@ -31,17 +31,18 @@
 
     td {
         border: none;
-        border-bottom: 1px solid #eee; 
+        border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 45%; 
+        padding-left: 45%;
+        min-height: 2.4rem;
     }
-    
-    td:before { 
+
+    td:before {
         position: absolute;
         top: 0.5625rem;
         left: 0.625rem;
-        width: 40%; 
-        padding-right: 10px; 
+        width: 40%;
+        padding-right: 10px;
         white-space: nowrap;
         content: attr(data-title);
         font-weight: $table-head-font-weight;
