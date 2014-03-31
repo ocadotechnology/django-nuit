@@ -74,11 +74,7 @@ nuit.setup = function() {
         }
     });
 
-    // Set headers for responsive tables
-    $('table.responsive').find('td').each(function() {
-        $td = $(this);
-        $td.attr('data-title', $td.closest('table').find('th').eq($td.index()).html());
-    });
+    nuit.trigger_responsive_tables();
 
     // Setup foundation
     $(document).foundation();
@@ -86,6 +82,14 @@ nuit.setup = function() {
 };
 
 // User functions
+
+nuit.trigger_responsive_tables = function() {
+    // Set headers for responsive tables
+    $('table.responsive').find('td').each(function() {
+        $td = $(this);
+        $td.attr('data-title', $td.closest('table').find('th').eq($td.index()).html());
+    });
+};
 
 nuit.add_message = function(alert_type, message) {
     message_html = '<div data-alert class="alert-box ' + alert_type.toLowerCase() + '">' + message + '<a href="#" class="close">&times;</a></div>';
