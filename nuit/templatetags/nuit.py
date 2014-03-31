@@ -1,9 +1,9 @@
 from __future__ import division
 from django import template
+from django.template.loader import get_template
 from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
-from django.template.loader import get_template
 from django.contrib.messages import constants
 from ast import literal_eval
 
