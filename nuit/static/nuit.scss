@@ -386,14 +386,24 @@
     }
 }
 
-table.responsive {
+.responsive {
     &.grouped {
         @media #{$small-only} {
-            @include responsive-table;
+            @include grouped-responsive-table;
         }
         &.medium-down {
             @media #{$medium-down} {
-                @include responsive-table;
+                @include grouped-responsive-table;
+            }
+        }
+    }
+    &.scroll {
+        @media #{$small-only} {
+            @include scroll-responsive-table(#{upper-bound($small-range)});
+        }
+        &.medium-down {
+            @media #{$medium-down} {
+                @include scroll-responsive-table(#{upper-bound($medium-range)});
             }
         }
     }

@@ -84,10 +84,18 @@ nuit.setup = function() {
 // User functions
 
 nuit.trigger_responsive_tables = function() {
-    // Set headers for responsive tables
-    $('table.responsive').find('td').each(function() {
+    // Set headers for grouped responsive tables
+    $('table.responsive.grouped').find('td').each(function() {
         $td = $(this);
         $td.attr('data-title', $td.closest('table').find('th').eq($td.index()).html());
+    });
+    $('table.responsive.scroll').each(function () {
+        $table = $(this);
+        classes = 'responsive scroll';
+        if ($table.hasClass('medium-down')) {
+            classes += ' medium-down';
+        }
+        $table.wrap('<div class="' + classes + '"></div>');
     });
 };
 

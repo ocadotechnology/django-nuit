@@ -63,6 +63,15 @@
 
 <blockquote>Those people who think they know everything are a great annoyance to those of us who do.<cite>Isaac Asimov</cite></blockquote>
 
+<h2>Loaders</h2>
+
+{% include 'nuit/includes/loader.html' with size=16 %}
+{% include 'nuit/includes/loader.html' with size=32 %}
+{% include 'nuit/includes/loader.html' with size=48 %}
+{% include 'nuit/includes/loader.html' with size=64 %}
+{% include 'nuit/includes/loader.html' with size=80 %}
+{% include 'nuit/includes/loader.html' with size=96 %}
+
 <h2>Tables</h2>
 
 <p>Standard table, not responsive:</p>
@@ -131,14 +140,38 @@
   </tbody>
 </table>
 
-<h2>Loaders</h2>
+<p>Standard table, scroll responsive:</p>
 
-{% include 'nuit/includes/loader.html' with size=16 %}
-{% include 'nuit/includes/loader.html' with size=32 %}
-{% include 'nuit/includes/loader.html' with size=48 %}
-{% include 'nuit/includes/loader.html' with size=64 %}
-{% include 'nuit/includes/loader.html' with size=80 %}
-{% include 'nuit/includes/loader.html' with size=96 %}
+<table class='scroll responsive medium-down'>
+  <thead>
+    <tr>
+      <th width="200">Table Header</th>
+      <th>Table Header</th>
+      <th width="150">Table Header</th>
+      <th width="150">Table Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+  </tbody>
+</table>
 
 {% endblock %}
 

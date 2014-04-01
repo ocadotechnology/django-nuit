@@ -8,7 +8,7 @@
   }
 }
 
-@mixin responsive-table {
+@mixin grouped-responsive-table {
 
     & {
         border: none;
@@ -131,4 +131,12 @@
         }
     }
 
+}
+
+@mixin scroll-responsive-table($width: 800px) {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    table {
+        min-width: $width;
+    }
 }
