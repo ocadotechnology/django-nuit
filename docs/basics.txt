@@ -1,7 +1,7 @@
 Quickstart
 ==========
 
-To get started with Nuit, follow the steps below. Note: this is a quick overview, and for a more in-depth explaination of each stage you should read the revelant documentation.
+To get started with Nuit, follow the steps below. Note: this is a quick overview, and for a more in-depth explanation of each stage you should read the relevant documentation.
 
 * Install Nuit following the :doc:`installation` guidelines.
 * In your app, define a base template that extends from :ref:`template-nuit-base`, that includes the relevant framework elements::

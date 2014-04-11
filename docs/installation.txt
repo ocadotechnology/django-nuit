@@ -4,7 +4,7 @@ Installation
 Requirements
 ------------
 
-Nuit is built using SASS_, and requires that you install the SASS binary in order to compile and compress the CSS. This won't be installed using ``pip``, and will need to be installed manually.
+Nuit is built using SASS_, and requires that you install the SASS binary in order to compile and compress the CSS. This won't be installed using ``pip``, and will need to be installed manually (usually with ``gem install sass``).
 
 Installation
 ------------
@@ -13,36 +13,24 @@ Installation
 
     pip install django-nuit
 
-* Add the following to your ``INSTALLED_APPS`` in ``settings.py``::
+* Add ``nuit`` to your ``INSTALLED_APPS`` in ``settings.py``::
 
-    INSTALLED_APPS += (
+    INSTALLED_APPS = (
+        ...
         'nuit',
-        'compressor',
-        'foundation_scss',
-        'foundation_icons',
-        'jquery',
+        ...
     )
 
-* Add the context processor to your settings::
+* Add the the following to the end of ``settings.py``::
 
-    TEMPLATE_CONTEXT_PROCESSORS += (
-        'nuit.context_processors.nuit',
-    )
+    from django_autoconfig.autoconfig import configure_settings
+    configure_settings(globals())
 
-* Add the following settings for django-compressor_ (see their documentation for more detail)::
+* For production, add the following settings for django-compressor_ (see their documentation for more detail)::
 
-    
-    # Add 'compressor.finders.CompressorFinder' to STATICFILES_FINDERS
-
-    COMPRESS_ENABLED = True
     COMPRESS_OFFLINE = True
 
-    COMPRESS_PRECOMPILERS = (
-        ('text/x-sass', 'sass {infile} {outfile}'),
-        ('text/x-scss', 'sass {infile} {outfile}'),
-    )
-
-* Run ``collectstatic`` and ``compress``::
+* Run ``collectstatic`` and ``compress`` (``compress`` is only needed if ``COMPRESS_OFFLINE`` is ``True``)::
 
     manage.py collectstatic
     manage.py compress
@@ -84,6 +72,12 @@ In case you're installing Nuit differently (e.g. from the git repo), make sure t
 
       pip install django-bourbon
 
+- django-autoconfig_
+
+  Allows you to include two lines of code in your ``settings.py`` that adds all the required Django settings for Nuit::
+
+      pip install django-autoconfig
+
 .. _SASS: http://sass-lang.com
 .. _`django-compressor`: http://django-compressor.readthedocs.org/en/latest/
 .. _`django`: https://www.djangoproject.com/
@@ -92,3 +86,4 @@ In case you're installing Nuit differently (e.g. from the git repo), make sure t
 .. _`django-foundation-icons`: https://pypi.python.org/pypi/django-foundation-icons/
 .. _`Foundation Icons`: http://zurb.com/playground/foundation-icon-fonts-3
 .. _`django-bourbon`: https://pypi.python.org/pypi/django-bourbon/
+.. _`django-autoconfig`: https://pypi.python.org/pypi/django-autoconfig/
