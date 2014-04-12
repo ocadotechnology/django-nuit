@@ -412,3 +412,36 @@
         }
     }
 }
+
+
+h1 span {
+    font-size: 0.5em;
+}
+
+.key-value {
+
+    .columns {
+        margin-bottom: 1em;
+    }
+
+    span {
+
+        display: block;
+        padding: 0.5em;
+        font-size: 0.8em;
+        text-align: center;
+
+        &.key {
+            @include border-top-radius(3px);
+            background: $topbar-bg;
+            color: $topbar-link-color;
+        }
+
+        &.value {
+            @include border-bottom-radius(3px);
+            border: 1px solid $table-border-color;
+            border-top: none;
+        }
+
+    }
+}
