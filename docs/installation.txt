@@ -87,3 +87,4 @@ In case you're installing Nuit differently (e.g. from the git repo), make sure t
 .. _`Foundation Icons`: http://zurb.com/playground/foundation-icon-fonts-3
 .. _`django-bourbon`: https://pypi.python.org/pypi/django-bourbon/
 .. _`django-autoconfig`: https://pypi.python.org/pypi/django-autoconfig/
+
