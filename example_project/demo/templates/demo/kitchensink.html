@@ -175,6 +175,20 @@
 
 {% endblock %}
 
+{% block left_menu %}
+
+  {{block.super}}
+
+  {% menu_section title='Table' %}
+    <table>
+      <tr>
+        <td>Full width tables</td>
+      </tr>
+    </table>
+  {% end_menu_section %}
+
+{% endblock %}
+
 {% block right_menu %}
 
     {% menu_section 'Everything but the kitchen sink&hellip;' %}
@@ -191,6 +205,23 @@
     {% menu_section is_list=True %}
         {% menu_item name='A Link' link='#' %}
         {% menu_item name='Add a message' link='javascript:nuit.add_message("info", "A new message!");' %}
+    {% end_menu_section %}
+
+    {% menu_section title='Table' %}
+    <table>
+      <tr>
+        <td>Full width tables</td>
+      </tr>
+    </table>
+    {% end_menu_section %}
+
+    {% menu_section title='List' %}
+    <ol>
+      <li>One</li>
+      <li>Two</li>
+      <li>Three is the magic number (like the song)</li>
+      <li>Four is one too many</li>
+    </ol>
     {% end_menu_section %}
 
 {% endblock %}

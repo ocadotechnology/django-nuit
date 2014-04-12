@@ -76,16 +76,20 @@
         margin-top: 0;
     }
 
-    p, table, dd {
+    p, table, dd, ul, ol {
         font-size: 0.8rem;
     }
 
-    p, table {
+    p, table, ul, ol {
         margin-top: 0.8rem;
     }
 
     table tr td, table tr th {
         font-size: 0.8rem;
+    }
+
+    table {
+        width: 100%;
     }
 
     .panel {
