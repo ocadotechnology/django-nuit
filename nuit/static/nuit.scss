@@ -119,7 +119,7 @@
 
     }
 
-    li {
+    ul.side-nav li {
 
         margin: 0;
         padding: 0;
@@ -420,11 +420,7 @@ h1 span {
 
 .key-value {
 
-    .columns {
-        margin-bottom: 1em;
-    }
-
-    span {
+    li > span {
 
         display: block;
         padding: 0.5em;
