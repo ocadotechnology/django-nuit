@@ -5,6 +5,7 @@ from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
 from django.contrib.messages import constants
+from django.core.urlresolvers import reverse, NoReverseMatch
 from ast import literal_eval
 
 # pylint: disable=C0103
@@ -161,6 +162,7 @@ def app_menu(parser, token):
     parser.delete_first_token()
     return AppMenuNode(nodelist, title=title)
 
+
 @register.simple_tag
 def menu_item(link, name, id=None, current=False, unavailable=False):
     '''
@@ -174,7 +176,12 @@ def menu_item(link, name, id=None, current=False, unavailable=False):
         classes.append('current')
     if unavailable:
         classes.append('unavailable')
-    return "<li class='menu-{id} {classes}'><a href='{link}'>{name}</a></li>".format(name=name, link=link, id=id, classes=' '.join(classes))
+    # Try reversing the link to see if it is a view:
+    try:
+        url = reverse(link)
+    except NoReverseMatch:
+        url = link
+    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=url, id=id)
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)
