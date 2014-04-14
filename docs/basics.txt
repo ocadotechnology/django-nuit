@@ -6,7 +6,7 @@ To get started with Nuit, follow the steps below. Note: this is a quick overview
 * Install Nuit following the :doc:`installation` guidelines.
 * In your app, define a base template that extends from :ref:`template-nuit-base`, that includes the relevant framework elements::
 
-    {% extends 'nuit/base.html' app_title='My application' topbar=True leftmenu=True %}
+    {% extend 'nuit/base.html' app_title='My application' topbar=True leftmenu=True %}
 
 * Use this template to define everything you want on all pages in your application, such as the application-level menu::
 
@@ -22,4 +22,4 @@ To get started with Nuit, follow the steps below. Note: this is a quick overview
 
 * Inherit all other templates from this one::
 
-    {% extends 'my-base.html' %}
+    {% extend 'my-base.html' %}
