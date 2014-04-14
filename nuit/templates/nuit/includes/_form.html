@@ -22,7 +22,7 @@
 
     {% for foundation_field in foundation_fields %}
         {% with foundation_field.field as field %}
-            <div class='small-{{foundation_field.small_width}} medium-{{foundation_field.medium_width}} large-{{foundation_field.large_width}} columns {% if field.errors %}error{% endif %}'>
+            <div class='small-{{foundation_field.small_width}} medium-{{foundation_field.medium_width}} large-{{foundation_field.large_width}} columns {% if field.errors %}error{% endif %} {% if field.field.required %}required{% endif %}'>
                 {% if foundation_field.prefix or foundation_field.postfix %}<div class='row collapse'>{% endif %}
                 {% if foundation_field.show_label %}<label{% if field.errors %} class='error'{% endif %} for='{{field.auto_id}}'>
                     {{field.label}}
