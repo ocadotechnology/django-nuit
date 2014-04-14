@@ -181,7 +181,7 @@ def menu_item(link, name, id=None, current=False, unavailable=False):
         url = reverse(link)
     except NoReverseMatch:
         url = link
-    return "<li class='menu-{id}'><a href='{link}'>{name}</a></li>".format(name=name, link=url, id=id, classes=' '.join(classes))
+    return "<li class='menu-{id} {classes}'><a href='{link}'>{name}</a></li>".format(name=name, link=url, id=id, classes=' '.join(classes))
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)
