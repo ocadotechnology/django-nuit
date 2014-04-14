@@ -109,11 +109,11 @@ Example usage::
 
     {% block left_menu %}
         {% app_menu 'My Application' %}
-            {% menu_link name='Page One' link='/page-one/' %}
-            {% menu_link name='Page Two' link='/page-two/' %}
-            {% menu_link name='Page Three' link='/page-three/' %}
-            {% menu_link name='Page Four' link='/page-four/' %}
-            {% menu_link name='Page Five' link='/page-five/' %}
+            {% menu_item name='Page One' link='/page-one/' %}
+            {% menu_item name='Page Two' link='/page-two/' %}
+            {% menu_item name='Page Three' link='/page-three/' %}
+            {% menu_item name='Page Four' link='/page-four/' %}
+            {% menu_item name='Page Five' link='/page-five/' %}
         {% end_app_menu %}
     {% endblock %}
 
