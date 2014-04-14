@@ -214,7 +214,7 @@ class FoundationFormField(object):
     # pylint: disable=R0902
     # pylint: disable=C0301
 
-    def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None, show_label=True):
+    def __init__(self, field, small=12, medium=None, large=None, prefix=None, prefix_small=3, prefix_medium=None, prefix_large=None, postfix=None, postfix_small=3, postfix_medium=None, postfix_large=None, show_label=True, label=None):
         # pylint: disable=R0913
         self.field = field
         self.small_width = small
@@ -229,6 +229,7 @@ class FoundationFormField(object):
         self.postfix_medium_width = postfix_medium or self.postfix_small_width
         self.postfix_large_width = postfix_large or self.postfix_medium_width
         self.show_label = show_label
+        self.label = label
 
         if self.prefix or self.postfix:
             self.fix_field_small_width = 12 - (self.prefix_small_width if self.prefix else 0) - (self.postfix_small_width if self.postfix else 0)

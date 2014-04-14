@@ -25,7 +25,7 @@
             <div class='small-{{foundation_field.small_width}} medium-{{foundation_field.medium_width}} large-{{foundation_field.large_width}} columns {% if field.errors %}error{% endif %} {% if field.field.required %}required{% endif %}'>
                 {% if foundation_field.prefix or foundation_field.postfix %}<div class='row collapse'>{% endif %}
                 {% if foundation_field.show_label %}<label{% if field.errors %} class='error'{% endif %} for='{{field.auto_id}}'>
-                    {{field.label}}
+                    {{foundation_field.label|default:field.label}}
                     {% if field.help_text %}
                     <i data-tooltip class='fi fi-info has-tip' title='{{field.help_text}}'></i>
                     {% endif %}
