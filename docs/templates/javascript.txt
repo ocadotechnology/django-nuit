@@ -9,3 +9,47 @@ Nuit provides a number of JavaScript hooks to dynamically alter the Nuit element
 
     :param str alert_type: The type of message: one of ``debug``, ``info``, ``success``, ``warning``, or ``error``.
     :param str message: The message to display.
+
+.. function:: nuit.confirmation_box(options)
+
+    Display a confirmation box.
+
+    :param dict options: Optional parameters to customise the confirmation box.
+
+    .. attribute:: title
+
+        :default: 'Confirmation required'
+
+        The title for the confirmation box.
+
+    .. attribute:: description
+
+        :default: '<p>Are you sure you wish to perform this action?</p>'
+
+        A more detailed description of what the confirmation box is for.
+
+    .. attribute:: size
+
+        :default: 'tiny'
+
+        A Foundation attribute for the size of the box: one of ``tiny``, ``small``, ``medium``, ``large``, ``xlarge``. Applied as a class, so you can define your own.
+
+    .. attribute:: yes
+
+        :default: 'Yes'
+
+        The text for the confirm button.
+
+    .. attribute:: no
+
+        :default: 'No'
+
+        The text for the abort button.
+
+    .. attribute:: on_confirm
+
+        A function that gets executed when the user clicks the confirm button.
+
+    .. attribute:: on_abort
+
+        A function that gets executed when the user clicks the abort button.

@@ -105,5 +105,48 @@ nuit.add_message = function(alert_type, message) {
     $('.nuit-messages').append($message).foundation('reflow');
 };
 
+nuit.confirmation_box = function(user_options) {
+    var defaults = {
+        title:          'Confirmation required',
+        description:    'Are you sure you wish to perform this action?',
+        size:           'tiny',
+        yes:            'Yes',
+        no:             'No',
+        on_confirm:     function () { console.log('Confirmed!'); },
+        on_abort:       function () { console.log('Aborted!'); },
+    };
+    var options = $.extend({}, defaults, user_options);
+
+    var modal = $('<div data-reveal></div>')
+        .addClass('reveal-modal ' + options.size)
+        .append('<h2>' + options.title + '</h2>')
+        .append(options.description);
+
+    var confirm_button = $('<a href="#" class="button">' + options.yes + '</a> ');
+    var abort_button = $('<a href="#" class="right button alert">' + options.no + '</a>');
+
+    modal.append(confirm_button);
+    modal.append(abort_button);
+
+    confirm_button.click(function() {
+        modal.foundation('reveal', 'close');
+        options.on_confirm();
+    });
+
+    abort_button.click(function() {
+        modal.foundation('reveal', 'close');
+        options.on_abort();
+    });
+
+    modal.on('closed', function() {
+        $(this).remove();
+    });
+
+    $('body').append(modal);
+    modal.foundation('reflow').foundation('reveal', 'open');
+
+    console.log(options);
+};
+
 // Initialisation
 nuit.setup();
