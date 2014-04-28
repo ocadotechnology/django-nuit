@@ -119,48 +119,75 @@
 
     }
 
-    ul.side-nav li {
+    ul.side-nav {
 
-        margin: 0;
-        padding: 0;
+        li {
 
-        &.divider {
-            margin: 16px 0;
-        }
+            &.button-bar {
 
-        &.heading {
-            padding: 2px 0;
-            text-transform: uppercase;
-            font-size: 0.78rem;
-        }
+                font-size: 0.8rem;
+                margin-bottom: 1em;
 
-        a {
-            padding: 0.33333rem 0;
-        }
+                &:last-child {
+                    margin-bottom: 0;
+                }
 
-        p {
-            margin-bottom: 0;
-        }
+                ul.button-group {
 
-        &.active {
-            & > a:first-child {
-                margin: 0 -20px;
-                padding-left: 20px;
-                padding-right: 20px;
-                background: $sidebar-link-active-bg;
-                font-weight: bold;
-                color: $sidebar-link-active-color;
+                    margin-top: 0.2em;
+
+                    .button {
+                        padding: 0.1em 0.3em;
+                        color: white;
+                        margin: 0;
+                    }
+
+                }
+
             }
-        }
 
-        &:hover {
-            & > a:first-child {
-                margin: 0 -20px;
-                padding-left: 20px;
-                padding-right: 20px;
-                color: $sidebar-link-hover-color;
-                background: $sidebar-link-hover-bg;
+            margin: 0;
+            padding: 0;
+
+            &.divider {
+                margin: 16px 0;
             }
+
+            &.heading {
+                padding: 2px 0;
+                text-transform: uppercase;
+                font-size: 0.78rem;
+            }
+
+            .menu-item {
+                padding: 0.33333rem 0;
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+
+            &.active {
+                & > .menu-item {
+                    margin: 0 -20px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    background: $sidebar-link-active-bg;
+                    font-weight: bold;
+                    color: $sidebar-link-active-color;
+                }
+            }
+
+            &:hover {
+                & > .menu-item {
+                    margin: 0 -20px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    color: $sidebar-link-hover-color;
+                    background: $sidebar-link-hover-bg;
+                }
+            }
+
         }
     }
 
