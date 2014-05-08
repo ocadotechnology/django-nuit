@@ -74,7 +74,7 @@ nuit.setup = function() {
         }
     });
 
-    nuit.trigger_button_bar();
+    nuit.trigger_button_bars();
     nuit.trigger_responsive_tables();
 
     // Setup foundation
@@ -84,7 +84,7 @@ nuit.setup = function() {
 
 // User functions
 
-nuit.trigger_button_bar = function() {
+nuit.trigger_button_bars = function() {
     $('.button-bar .button-group').each(function() {
         var $button_group = $(this);
         var $buttons = $(this).find('.button');
