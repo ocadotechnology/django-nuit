@@ -53,3 +53,10 @@ Nuit provides a number of JavaScript hooks to dynamically alter the Nuit element
     .. attribute:: on_abort
 
         A function that gets executed when the user clicks the abort button.
+
+.. function:: nuit.button_bar_value(button_bar, [value])
+
+    Get or set the value of a button bar.
+
+    :param obj button_bar: a jQuery object of the button bar.
+    :param str value: The value to set the object to. If ommitted, the current value is returned instead.

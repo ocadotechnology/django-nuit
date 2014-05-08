@@ -79,10 +79,10 @@
 <table>
   <thead>
     <tr>
-      <th width="200">Table Header</th>
+      <th width='200'>Table Header</th>
       <th>Table Header</th>
-      <th width="150">Table Header</th>
-      <th width="150">Table Header</th>
+      <th width='150'>Table Header</th>
+      <th width='150'>Table Header</th>
     </tr>
   </thead>
   <tbody>
@@ -112,10 +112,10 @@
 <table class='grouped responsive medium-down headers-30'>
   <thead>
     <tr>
-      <th width="200">Table Header 1</th>
+      <th width='200'>Table Header 1</th>
       <th>Table Header 2</th>
-      <th width="150">Table Header 3</th>
-      <th width="150">Table Header 4</th>
+      <th width='150'>Table Header 3</th>
+      <th width='150'>Table Header 4</th>
     </tr>
   </thead>
   <tbody>
@@ -145,10 +145,10 @@
 <table class='scroll responsive medium-down'>
   <thead>
     <tr>
-      <th width="200">Table Header</th>
+      <th width='200'>Table Header</th>
       <th>Table Header</th>
-      <th width="150">Table Header</th>
-      <th width="150">Table Header</th>
+      <th width='150'>Table Header</th>
+      <th width='150'>Table Header</th>
     </tr>
   </thead>
   <tbody>
@@ -226,7 +226,66 @@
 
     {% menu_section is_list=True %}
         {% menu_item name='A Link' link='#' %}
-        {% menu_item name='Add a message' link='javascript:nuit.add_message("info", "A new message!");' %}
+        {% menu_item name='Add a message' link="javascript:nuit.add_message('info', 'A new message!');" %}
+    {% end_menu_section %}
+
+    {% menu_section is_list=True title='Key (Nodes)' %}
+
+      <li class='button-bar'>
+        <ul class='button-group radius right' id='fully-failed-button-group'>
+          <li><a href='#' class='tiny button' data-value='show'><i class='fi fi-check tip-left' title='Show' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny alert button' data-value='hide'><i class='fi fi-x tip-left' title='Hide' data-tooltip></i></a></li>
+        </ul>
+        Fully Failed
+      </li>
+
+      <li class='button-bar'>
+        <ul class='button-group radius right'>
+          <li><a href='#' class='tiny alert button'><i class='fi fi-check tip-left' title='Show' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button'><i class='fi fi-x tip-left' title='Hide' data-tooltip></i></a></li>
+        </ul>
+        Partially Failed
+      </li>
+
+      <li class='button-bar'>
+        <ul class='button-group radius right'>
+          <li><a href='#' class='tiny alert button'><i class='fi fi-check tip-left' title='Show' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button'><i class='fi fi-x tip-left' title='Hide' data-tooltip></i></a></li>
+        </ul>
+        Not Failed
+      </li>
+
+    {% end_menu_section %}
+
+    {% menu_section is_list=True title='Key (Edges: Failure Types)' %}
+
+      <li class='button-bar'>
+        <ul class='button-group radius right' id='asset-link-types'>
+          <li><a href='#' class='tiny button' data-value='show'><i class='fi fi-check tip-left' title='Show' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny alert button' data-value='hide'><i class='fi fi-x tip-left' title='Hide' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button' data-value='collapse'><i class='fi fi-arrows-compress tip-left' title='Collapse' data-tooltip></i></a></li>
+        </ul>
+        Asset
+      </li>
+
+      <li class='button-bar'>
+        <ul class='button-group radius right'>
+          <li><a href='#' class='tiny alert button'><i class='fi fi-check tip-left' title='Show' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button'><i class='fi fi-x tip-left' title='Hide' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button'><i class='fi fi-arrows-compress tip-left' title='Collapse' data-tooltip></i></a></li>
+        </ul>
+        Management Network
+      </li>
+
+      <li class='button-bar'>
+        <ul class='button-group radius right'>
+          <li><a href='#' class='tiny alert button'><i class='fi fi-check tip-left' title='Show' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button'><i class='fi fi-x tip-left' title='Hide' data-tooltip></i></a></li>
+          <li><a href='#' class='tiny button'><i class='fi fi-arrows-compress tip-left' title='Collapse' data-tooltip></i></a></li>
+        </ul>
+        Power
+      </li>
+
     {% end_menu_section %}
 
     {% menu_section title='Table' %}

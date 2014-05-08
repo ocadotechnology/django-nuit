@@ -74,6 +74,15 @@ nuit.setup = function() {
         }
     });
 
+    $('.button-bar .button-group').each(function() {
+        var $button_group = $(this);
+        var $buttons = $(this).find('.button');
+        $buttons.click(function() {
+            $buttons.removeClass('alert');
+            $(this).addClass('alert');
+        });
+    });
+
     nuit.trigger_responsive_tables();
 
     // Setup foundation
@@ -82,6 +91,21 @@ nuit.setup = function() {
 };
 
 // User functions
+
+nuit.button_bar_value = function($button_bar, value) {
+    if (value === undefined) {
+        return $button_bar.find('.button.alert').data('value');
+    } else {
+        $button_bar.find('.button').each(function() {
+            $button = $(this);
+            if ($button.data('value') != value) {
+                $button.removeClass('alert');
+            } else {
+                $button.addClass('alert');
+            }
+        });
+    }
+};
 
 nuit.trigger_responsive_tables = function() {
     // Set headers for grouped responsive tables

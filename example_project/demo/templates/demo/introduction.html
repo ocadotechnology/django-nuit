@@ -2,6 +2,20 @@
 
 {% block title %}Introduction{% endblock %}
 
+{% block scripts %}
+
+    <script type='text/javascript'>
+
+    $(document).ready(function() {
+        $('a').click(function() {
+            nuit.confirmation_box();
+        });
+    });
+
+    </script>
+
+{% endblock scripts %}
+
 {% block content %}
 
     {% set_active_menu 'introduction' %}
@@ -9,5 +23,7 @@
     <h1>Introduction</h1>
 
     <p>This demo project is designed to demonstrate the UI capabilities of Nuit.</p>
+
+    <p><a href='#'>Click me!</a></p>
 
 {% endblock %}
