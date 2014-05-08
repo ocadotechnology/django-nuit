@@ -77,9 +77,11 @@ nuit.setup = function() {
     $('.button-bar .button-group').each(function() {
         var $button_group = $(this);
         var $buttons = $(this).find('.button');
-        $buttons.click(function() {
+        $buttons.click(function(e) {
+            e.preventDefault();
             $buttons.removeClass('alert');
             $(this).addClass('alert');
+            $button_group.trigger('change', $(this).data('value'));
         });
     });
 
