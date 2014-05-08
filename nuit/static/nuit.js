@@ -74,6 +74,17 @@ nuit.setup = function() {
         }
     });
 
+    nuit.trigger_button_bar();
+    nuit.trigger_responsive_tables();
+
+    // Setup foundation
+    $(document).foundation();
+
+};
+
+// User functions
+
+nuit.trigger_button_bar = function() {
     $('.button-bar .button-group').each(function() {
         var $button_group = $(this);
         var $buttons = $(this).find('.button');
@@ -84,15 +95,7 @@ nuit.setup = function() {
             $button_group.trigger('change', $(this).data('value'));
         });
     });
-
-    nuit.trigger_responsive_tables();
-
-    // Setup foundation
-    $(document).foundation();
-
 };
-
-// User functions
 
 nuit.button_bar_value = function($button_bar, value) {
     if (value === undefined) {
