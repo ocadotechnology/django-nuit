@@ -84,16 +84,27 @@ nuit.setup = function() {
 
 // User functions
 
+nuit.button_bar_handler = function(e) {
+    e.preventDefault();
+    e.data.buttons.removeClass('alert');
+    $(this).addClass('alert');
+    e.data.button_group.trigger('change', $(this).data('value'));
+}
+
 nuit.trigger_button_bars = function() {
     $('.button-bar .button-group').each(function() {
         var $button_group = $(this);
         var $buttons = $(this).find('.button');
-        $buttons.click(function(e) {
-            e.preventDefault();
-            $buttons.removeClass('alert');
-            $(this).addClass('alert');
-            $button_group.trigger('change', $(this).data('value'));
-        });
+        $buttons.off('click', nuit.button_bar_handler);
+        $buttons.on(
+            'click',
+            null,
+            {
+                'buttons': $buttons,
+                'button_group': $button_group,
+            },
+            nuit.button_bar_handler
+        );
     });
 };
 
