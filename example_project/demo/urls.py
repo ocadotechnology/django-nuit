@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^403/$', 'demo.views.error', {'code': 403}, name='403'),
     url(r'^404/$', 'demo.views.error', {'code': 404}, name='404'),
     url(r'^500/$', 'demo.views.error', {'code': 500}, name='500'),
+    url(r'^no-access/$', 'demo.views.no_access', name='no_access'),
 )

@@ -1,12 +1,14 @@
 from __future__ import division
 from django import template
+from django.contrib.messages import constants
+from django.core.urlresolvers import resolve, reverse, NoReverseMatch, Resolver404
 from django.template.loader import get_template
 from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
-from django.contrib.messages import constants
-from django.core.urlresolvers import reverse, NoReverseMatch
 from ast import literal_eval
+
+from ..utils import user_can_see_view
 
 # pylint: disable=C0103
 
@@ -163,8 +165,8 @@ def app_menu(parser, token):
     return AppMenuNode(nodelist, title=title)
 
 
-@register.simple_tag
-def menu_item(link, name, id=None, current=False, unavailable=False):
+@register.simple_tag(takes_context=True)
+def menu_item(context, link, name, id=None, current=False, unavailable=False, always_display=False):
     '''
     Renders an HTML anchor element in a list element.
     '''
@@ -181,7 +183,19 @@ def menu_item(link, name, id=None, current=False, unavailable=False):
         url = reverse(link)
     except NoReverseMatch:
         url = link
-    return "<li class='menu-item menu-{id} {classes}'><a class='menu-item' href='{link}'>{name}</a></li>".format(name=name, link=url, id=id, classes=' '.join(classes))
+        display = True
+
+    try:
+        user = context['request'].user if 'request' in context else None
+        view = resolve(url)
+        display = always_display or user_can_see_view(view, user)
+    except Resolver404:
+        display = False
+
+    if display:
+        return "<li class='menu-item menu-{id} {classes}'><a class='menu-item' href='{link}'>{name}</a></li>".format(name=name, link=url, id=id, classes=' '.join(classes))
+    else:
+        return ''
 
 
 @register.inclusion_tag('nuit/includes/_pagination_menu.html', takes_context=True)

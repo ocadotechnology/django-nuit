@@ -21,6 +21,14 @@
 
 {% end_app_menu %}
 
+{% menu_section 'Automatic Link Hiding' is_list=True %}
+
+    {% menu_item link='no_access' name="I'm Invisible" %}
+
+    {% menu_item link='no_access' always_display=True name="I'm not invisible." %}
+
+{% end_menu_section %}
+
 {% endblock %}
 
 {% block top_bar_menu %}

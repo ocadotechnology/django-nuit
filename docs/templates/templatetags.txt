@@ -75,18 +75,23 @@ Example usage::
 ``menu_item``
 -------------
 
-Renders the HTML for a menu item. Intended for use between :ref:`template-tag-menu-section` tags with ``is_list`` set to ``True``. Takes the following arguments:
+Renders the HTML for a menu item. Intended for use between :ref:`template-tag-menu-section` tags with ``is_list`` set to ``True``.
+If the link resolves to a view that the user doesn't have permission to access, the link will not be displayed.
+Takes the following arguments:
 
 .. attribute:: link
 
-    The URL for the menu item. If you wish to use a reversed view, then you should use Django's URL tag::
+    The URL for the menu item. You can use a view identifier, which will be reversed if possible.::
 
-        {% url 'name.of.my.view' as my_url %}
-        {% menu_item link=my_url name="My URL" %}
+        {% menu_item link='name.of.my.view' name="My URL" %}
 
 .. attribute:: name
 
     The display name of the link.
+
+.. attribute:: always_display
+
+    If you want the link to always be displayed, even if the user can't access it, set this to True.
 
 .. attribute:: id
 
