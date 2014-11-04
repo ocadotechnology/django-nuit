@@ -22,9 +22,19 @@ nuit.setup = function() {
     });
 
     // Hightlight current page in menu
-    $('.nuit-active-menu').each(function() {
-        $('.menu-' + $(this).html()).addClass('active');
-    });
+    if ($('.nuit-active-menu').length == 0) {
+        $($('.breadcrumbs > .menu-item a').get().reverse()).each(function() {
+            var matched_links = $(".sidebar.on-left a[href='" + $(this).attr('href') + "']");
+            if (matched_links.length != 0) {
+                matched_links.parent().addClass('active');
+                return false;
+            }
+        });
+    } else {
+        $('.nuit-active-menu').each(function() {
+            $('.menu-' + $(this).html()).addClass('active');
+        });
+    }
 
     // Highlight current breadcrumb
     $('.nuit-breadcrumbs li:last-child').addClass('current');
