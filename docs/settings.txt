@@ -23,6 +23,25 @@ There are a handful of settings available to customise Nuit from ``settings.py``
 
     Defines the path (to be passed to the ``static`` template tag) to the logo to be used at small sizes. :attr:`NUIT_SMALL_LOGO` must also be defined - if set, this logo will replace the large logo at small screen sizes. Defaults to ``None``.
 
+.. _settings-nuit-search-view:
+.. attribute:: NUIT_SEARCH_VIEW
+
+    Defines the view which the search box, if used, will submit to. If not set, the form will submit to ``/search/``.
+
+.. _settings-nuit-search-placholder:
+.. attribute:: NUIT_SEARCH_PLACEHOLDER
+
+    :default: ``Search...``
+
+    Defines the placeholder text for the search box.
+
+.. _settings-nuit-search-parameter:
+.. attribute:: NUIT_SEARCH_PARAMETER
+
+    :default: ``q``
+
+    Defines the name of the parameter used for the search term when submitted.
+
 .. _settings-nuit-applications:
 .. attribute:: NUIT_APPLICATIONS
 

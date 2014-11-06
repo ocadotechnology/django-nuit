@@ -11,6 +11,9 @@ def nuit(request):
         'NUIT_SMALL_LOGO': getattr(settings, 'NUIT_SMALL_LOGO', None),
         'NUIT_LOGOUT_URL': getattr(settings, 'LOGOUT_URL', None),
         'NUIT_LOGIN_URL': getattr(settings, 'LOGIN_URL', None),
+        'NUIT_SEARCH_VIEW': getattr(settings, 'NUIT_SEARCH_VIEW', None),
+        'NUIT_SEARCH_PLACEHOLDER': getattr(settings, 'NUIT_SEARCH_PLACEHOLDER', None),
+        'NUIT_SEARCH_PARAMETER': getattr(settings, 'NUIT_SEARCH_PARAMETER', None),
     }
 
     return context

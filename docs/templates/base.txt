@@ -61,6 +61,30 @@ The following arguments can be passed to the :ref:`template-tag-extend` tag to c
 
     Boolean that decides whether to show the login information on the top right or not.
 
+.. attribute:: show_search
+
+    :default: ``False``
+
+    Boolean that decides whether to show the search box on the top right or not.
+
+.. attribute:: search_view
+
+    :default: :attr:`NUIT_SEARCH_VIEW`
+
+    The view which the search form submits to.
+
+.. attribute:: search_placeholder
+
+    :default: :attr:`NUIT_SEARCH_PLACEHOLDER`
+
+    The placeholder text for the search box.
+
+.. attribute:: search_parameter
+
+    :default: :attr:`NUIT_SEARCH_PARAMETER`
+
+    The name of the search parameter.
+
 Blocks
 ^^^^^^
 

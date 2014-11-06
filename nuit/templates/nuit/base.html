@@ -84,6 +84,14 @@
                     {% endif %}
                 {% endif %}
 
+                {% if nuit_show_search %}
+                    <li class='has-form'>
+                    <form method='get' action='{% if nuit_search_view %}{% url nuit_search_view %}{% else %}{% if NUIT_SEARCH_VIEW %}{% url NUIT_SEARCH_VIEW %}{% else %}/search/{% endif %}{% endif %}'>
+                            <input type='text' placeholder='{{nuit_search_placeholder|default:NUIT_SEARCH_PLACEHOLDER|default:'Search...'}}' id='nuit_search' name='{{nuit_search_parameter|default:NUIT_SEARCH_PARAMETER|default:'q'}}' />
+                        </form>
+                    </li>
+                {% endif %}
+
                 {% if NUIT_APPLICATIONS %}
                 <li class='has-dropdown'>
                     <a href='#'>Applications</a>

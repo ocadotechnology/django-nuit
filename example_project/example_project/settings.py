@@ -101,6 +101,9 @@ LOGOUT_URL = '/logout/'
 
 COMPRESS_OFFLINE = False
 
+NUIT_SEARCH_VIEW = 'introduction'
+NUIT_SEARCH_PLACEHOLDER = 'Search me...'
+NUIT_SEARCH_PARAMETER = 'query'
 NUIT_GLOBAL_TITLE = 'Nuit Demo Project'
 NUIT_GLOBAL_LINK = '/'
 NUIT_APPLICATIONS = (
