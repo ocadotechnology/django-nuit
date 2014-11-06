@@ -98,6 +98,9 @@ class NuitContextProcessors(TestCase):
         'NUIT_GLOBAL_LINK': 'http://www.google.com',
         'NUIT_LARGE_LOGO': 'logo.png',
         'NUIT_SMALL_LOGO': 'small_logo.png',
+        'NUIT_SEARCH_VIEW': 'test',
+        'NUIT_SEARCH_PARAMETER': 'q',
+        'NUIT_SEARCH_PLACEHOLDER': 'Search me!',
     }
 
     def test_nuit_context_processor(self):
@@ -176,12 +179,13 @@ class NuitTemplateTags(TestCase):
         self.assertTrue('display: none' in output.attrs['style'])
 
     def test_menu_item(self):
-        output = soup(menu_item(link='/', name='bob')).find('li')
+
+        output = soup(menu_item({}, link='/', name='bob', always_display=True)).find('li')
         self.assertEqual('bob', output.text)
         self.assertTrue('menu-bob' in output.attrs['class'])
         self.assertEqual('/', output.find('a').attrs['href'])
 
-        output = soup(menu_item(link='/', name='bob', id='bobby', current=True, unavailable=True)).find('li')
+        output = soup(menu_item({}, link='/', name='bob', id='bobby', current=True, unavailable=True, always_display=True)).find('li')
         self.assertEqual('bob', output.text)
         self.assertTrue('menu-bobby' in output.attrs['class'])
         self.assertTrue('current' in output.attrs['class'])
