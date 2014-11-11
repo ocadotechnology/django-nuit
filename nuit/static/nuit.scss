@@ -474,3 +474,81 @@ h1 span {
         font-weight: bold;
     }
 }
+
+@media #{$small-only} {
+
+    // scss/foundation/components/_buttons.scss
+    button, .button {
+        // Duplicate of .expand
+        &.small-only-expand { @include button-size($padding:null,$full-width:true); }
+    }
+
+}
+
+@media #{$medium-down} {
+
+    // scss/foundation/components/_buttons.scss
+    button, .button {
+        // Duplicate of .expand
+        &.medium-down-expand { @include button-size($padding:null,$full-width:true); }
+    }
+
+}
+
+@media #{$medium-only} {
+
+    // scss/foundation/components/_buttons.scss
+    button, .button {
+        // Duplicate of .expand
+        &.medium-only-expand { @include button-size($padding:null,$full-width:true); }
+    }
+
+}
+
+@media #{$medium-up} {
+
+    // Duplicate of .right, cannot use @extend because of media queries
+    // foundation/components/_global.scss
+    .medium-right { float: right !important; }
+
+    // scss/foundation/components/_forms.scss
+    label {
+        // Duplicate of label.right
+        &.medium-right { @include form-label(right,false); }
+        // Duplicate of label.inline
+        &.medium-inline { @include form-label(inline,false); }
+    }
+
+    // scss/foundation/components/_buttons.scss
+    button, .button {
+        // Duplicate of .expand
+        &.medium-up-expand { @include button-size($padding:null,$full-width:true); }
+    }
+
+}
+
+@media #{$large-only} {
+
+    // scss/foundation/components/_buttons.scss
+    button, .button {
+        // Duplicate of .expand
+        &.large-only-expand { @include button-size($padding:null,$full-width:true); }
+    }
+
+}
+
+@media #{$large-up} {
+
+    // Duplicate of .right
+    // foundation/components/_global.scss
+    .large-right { float: right !important; }
+
+    // scss/foundation/components/_forms.scss
+    label {
+        // Duplicate of label.right
+        &.large-right { @include form-label(right,false); }
+        // Duplicate of label.inline
+        &.large-inline { @include form-label(inline,false); }
+    }
+
+}

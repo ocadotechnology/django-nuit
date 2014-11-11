@@ -19,7 +19,20 @@
             city; state_province; country {'postfix': 'Post', 'postfix_small': 6, 'postfix_medium': 0}
             website {'prefix': 'Pre'}
         {% end_foundation_form %}
-        <button class='button'>Submit</button>
+        <button class='button small-only-expand'>Submit</button>
+    </form>
+
+    <h2>Manual Form</h2>
+
+    <form>
+        <div class='row'>
+            <div class='medium-3 columns'>
+                <label class='medium-right medium-inline' for='foo'>Foo</label>
+            </div>
+            <div class='medium-9 columns'>
+                <input type='text' name='foo' id='foo' />
+            </div>
+        </div>
     </form>
 
 {% endblock %}
