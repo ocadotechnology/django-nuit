@@ -29,6 +29,12 @@
     position: relative;
 }
 
+.top-bar-section {
+    .collapse {
+        display: none;
+    }
+}
+
 .sidebar {
 
     background-color: $sidebar-bg;
@@ -117,6 +123,25 @@
             margin: 0 0 1rem;
         }
 
+    }
+
+    .collapsed {
+        hr {
+            margin-top: 1.25rem;
+        }
+    }
+
+    i.collapse {
+        opacity: 0.8;
+        cursor: pointer;
+        @include transform(rotate(-90deg));
+        @include transition(all, 0.5s);
+        &:hover {
+            opacity: 1;
+        }
+        &.collapsed {
+            @include transform(rotate(90deg));
+        }
     }
 
     ul.side-nav {

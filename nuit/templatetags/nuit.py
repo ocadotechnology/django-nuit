@@ -81,26 +81,29 @@ class MenuSectionNode(template.Node):
     '''
     # pylint: disable=W0622
 
-    def __init__(self, nodelist, title=NoneFilterExpression, is_list=FalseFilterExpression, link_name=NoneFilterExpression, id=NoneFilterExpression):
+    def __init__(self, nodelist, title=NoneFilterExpression, is_list=FalseFilterExpression, link_name=NoneFilterExpression, id=NoneFilterExpression, can_collapse=FalseFilterExpression):
         self.nodelist = nodelist
         self.title = title
         self.is_list = is_list
         self.link_name = link_name
         self.link_id = id
+        self.can_collapse = can_collapse
 
     def render(self, context):
         content = self.nodelist.render(context)
         bare_title = self.title.resolve(context)
-        title = '<h5>%s</h5>' % bare_title if bare_title else ''
+        title = '<h5>%s%s</h5>' % (bare_title if bare_title else '', '<i class=\'collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
         link_name = self.link_name.resolve(context) or bare_title
         resolved_link_id = self.link_id.resolve(context)
         return '''
             <section class='right-menu-reveal' {reveal} data-link='{link_name}' id='{id}'>
                 <div>
                 {title}
+                <div class='side-content'>
                 {list_begin}
                 {content}
                 {list_end}
+                </div>
                 </div>
                 <hr />
             </section>
@@ -140,29 +143,33 @@ class AppMenuNode(template.Node):
     Template node that renders the main application menu for Nuit.
     '''
 
-    def __init__(self, nodelist, title=None):
+    def __init__(self, nodelist, title=NoneFilterExpression, can_collapse=FalseFilterExpression):
         self.nodelist = nodelist
         self.title = title
+        self.can_collapse = can_collapse
 
     def render(self, context):
         content = self.nodelist.render(context)
-        title = '<h5>%s</h5>' % self.title.resolve(context) if self.title else ''
-        return "<section class='main-nav'>{title}<nav><ul class='side-nav'>{content}</ul></nav><hr /></section>".format(title=title, content=content)
+        title = '<h5>%s%s</h5>' % (self.title.resolve(context) if self.title else '', '<i class=\'collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
+        return "<section class='main-nav'>{title}<nav><ul class='side-content side-nav'>{content}</ul></nav><hr /></section>".format(title=title, content=content)
 
 @register.tag
 def app_menu(parser, token):
     '''
     Renders the main application menu for Nuit.
     '''
-    bits = token.split_contents()
-    if len(bits) > 2:
-        raise template.TemplateSyntaxError('Wrong number of arguments for app_menu - expected 2 maximum')
-    title = None
-    if len(bits) == 2:
-        title = parser.compile_filter(bits[1])
+    args = token.split_contents()
+    kwargs = {}
+    for kwarg in args[1:]:
+        if '=' not in kwarg:
+            kwargs['title'] = kwarg
+            continue
+        before, after = kwarg.split('=')
+        kwargs[before] = after
     nodelist = parser.parse(('end_app_menu',))
     parser.delete_first_token()
-    return AppMenuNode(nodelist, title=title)
+    kwargs = dict((key, parser.compile_filter(value)) for key, value in kwargs.iteritems())
+    return AppMenuNode(nodelist, **kwargs)
 
 
 @register.simple_tag(takes_context=True)

@@ -6,7 +6,7 @@
 
 {% block left_menu %}
 
-{% app_menu "Demo Project" %}
+{% app_menu "Demo Project" can_collapse=True %}
 
     {% menu_item link='/' name='Introduction' %}
 
@@ -21,12 +21,13 @@
 
 {% end_app_menu %}
 
-{% menu_section 'Automatic Link Hiding' is_list=True %}
+{% menu_section 'Collapsing' can_collapse=True %}
+    <p>I can collapse!</p>
+{% end_menu_section %}
 
+{% menu_section 'Automatic Link Hiding' is_list=True can_collapse=True %}
     {% menu_item link='no_access' name="I'm Invisible" %}
-
     {% menu_item link='no_access' always_display=True name="I'm not invisible." %}
-
 {% end_menu_section %}
 
 {% endblock %}

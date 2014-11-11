@@ -84,6 +84,22 @@ nuit.setup = function() {
         }
     });
 
+    // Collapseable menu items
+    $('.collapse').click(function() {
+        $this = $(this);
+        $section = $this.closest('section');
+        $content = $section.find('.side-content');
+        if ($this.hasClass('collapsed')) {
+            $this.removeClass('collapsed');
+            $section.removeClass('collapsed');
+            $content.slideDown();
+        } else {
+            $this.addClass('collapsed');
+            $section.addClass('collapsed');
+            $content.slideUp();
+        }
+    });
+
     nuit.trigger_button_bars();
     nuit.trigger_responsive_tables();
 
