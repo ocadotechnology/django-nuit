@@ -52,6 +52,7 @@ class NuitViews(TestCase):
         request = RequestFactory().get('/fake-path/?%s' % query_string)
         view = SearchableListView()
         view.model = Publisher
+        view.object_list = []
         if search_fields:
             view.search_fields = search_fields
         return setup_view(view, request)
