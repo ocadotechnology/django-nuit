@@ -290,9 +290,6 @@ class NuitTemplateTags(TestCase):
         self.assertTrue(1, len(sections[2].findAll('h5')))
         self.assertEqual('Title 2', sections[2].find('h5').text)
 
-        with self.assertRaises(TemplateSyntaxError):
-            Template('{% load nuit %}{% app_menu "one" "two" %}{% end_app_menu %}').render(Context())
-
 def get_soup(template_contents, context_dict):
     return soup(Template(template_contents).render(Context(context_dict)))
 
