@@ -92,7 +92,7 @@ class MenuSectionNode(template.Node):
     def render(self, context):
         content = self.nodelist.render(context)
         bare_title = self.title.resolve(context)
-        title = '<h5>%s%s</h5>' % (bare_title if bare_title else '', '<i class=\'collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
+        title = '<h5>%s%s</h5>' % (bare_title if bare_title else '', '<i class=\'nuit-collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
         link_name = self.link_name.resolve(context) or bare_title
         resolved_link_id = self.link_id.resolve(context)
         return '''
@@ -150,7 +150,7 @@ class AppMenuNode(template.Node):
 
     def render(self, context):
         content = self.nodelist.render(context)
-        title = '<h5>%s%s</h5>' % (self.title.resolve(context) if self.title else '', '<i class=\'collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
+        title = '<h5>%s%s</h5>' % (self.title.resolve(context) if self.title else '', '<i class=\'nuit-collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
         return "<section class='main-nav'>{title}<nav><ul class='side-content side-nav'>{content}</ul></nav><hr /></section>".format(title=title, content=content)
 
 @register.tag

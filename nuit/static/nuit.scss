@@ -125,13 +125,13 @@
 
     }
 
-    .collapsed {
+    .nuit-collapsed {
         hr {
             margin-top: 1.25rem;
         }
     }
 
-    i.collapse {
+    i.nuit-collapse {
         opacity: 0.8;
         cursor: pointer;
         @include transform(rotate(-90deg));
@@ -139,7 +139,7 @@
         &:hover {
             opacity: 1;
         }
-        &.collapsed {
+        &.nuit-collapsed {
             @include transform(rotate(90deg));
         }
     }

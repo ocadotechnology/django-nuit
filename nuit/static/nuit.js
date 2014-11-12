@@ -85,17 +85,17 @@ nuit.setup = function() {
     });
 
     // Collapseable menu items
-    $('.collapse').click(function() {
+    $('.nuit-collapse').click(function() {
         $this = $(this);
         $section = $this.closest('section');
         $content = $section.find('.side-content');
-        if ($this.hasClass('collapsed')) {
-            $this.removeClass('collapsed');
-            $section.removeClass('collapsed');
+        if ($this.hasClass('nuit-collapsed')) {
+            $this.removeClass('nuit-collapsed');
+            $section.removeClass('nuit-collapsed');
             $content.slideDown();
         } else {
-            $this.addClass('collapsed');
-            $section.addClass('collapsed');
+            $this.addClass('nuit-collapsed');
+            $section.addClass('nuit-collapsed');
             $content.slideUp();
         }
     });
