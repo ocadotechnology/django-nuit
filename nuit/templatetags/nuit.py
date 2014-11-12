@@ -57,7 +57,7 @@ class ExtendNode(ExtendsNode):
         return '<ExtendNode: extends %s with args: %r>' % (super(ExtendNode, self).__repr__(), self.kwargs)
 
     def render(self, context):
-        kwargs = dict((key, value.resolve(context)) for key, value in self.kwargs.iteritems())
+        kwargs = dict((key, value.resolve(context)) for key, value in self.kwargs.iteritems() if key not in context)
         context.update(kwargs)
         try:
             return super(ExtendNode, self).render(context)
