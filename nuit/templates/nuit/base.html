@@ -22,6 +22,10 @@
     {% endblock css %}
 
     <script type='text/javascript' src='{% static 'js/vendor/modernizr.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/vendor/jquery.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/vendor/jquery.cookie.js' %}'></script>
+    <script type='text/javascript' src='{% static 'js/foundation.min.js' %}'></script>
+    <script type='text/javascript' src='{% static 'nuit.js' %}'></script>
 
 </head>
 <body class='{% block body_class %}{% endblock %}'>
@@ -155,11 +159,6 @@
         </div>
     </div>
     </section>
-
-    <script type='text/javascript' src='{% static 'js/vendor/jquery.js' %}'></script>
-    <script type='text/javascript' src='{% static 'js/vendor/jquery.cookie.js' %}'></script>
-    <script type='text/javascript' src='{% static 'js/foundation.min.js' %}'></script>
-    <script type='text/javascript' src='{% static 'nuit.js' %}'></script>
 
     {% block scripts %}
     {% endblock scripts %}
