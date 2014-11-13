@@ -211,8 +211,9 @@ nuit.confirmation_box = function(user_options) {
     $('body').append(modal);
     modal.foundation('reflow').foundation('reveal', 'open');
 
-    console.log(options);
 };
 
 // Initialisation
-nuit.setup();
+$(document).ready(function() {
+    nuit.setup();
+}); 
