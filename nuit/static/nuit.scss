@@ -465,6 +465,18 @@
     }
 }
 
+// Tabs
+
+.tabs dd > a {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: $global-radius;
+}
+
+.tabs dd.active > a {
+    background: $primary-color;
+    color: #fff;
+}
 
 h1 span {
     font-size: 0.5em;
