@@ -12,7 +12,7 @@ setup(
     maintainer_email     = 'netnix@ocado.com',
     packages             = find_packages(),
     install_requires     = [
-        'django-foundation-statics >= 5.4.7-1',
+        'django-foundation-statics >= 5.4.7-2',
         'django_compressor >= 1.3.1ocado1',
         'django-jquery',
         'django-foundation-icons>=3.1',
