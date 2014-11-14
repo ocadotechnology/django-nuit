@@ -92,7 +92,9 @@ class MenuSectionNode(template.Node):
     def render(self, context):
         content = self.nodelist.render(context)
         bare_title = self.title.resolve(context)
-        title = '<h5>%s%s</h5>' % (bare_title if bare_title else '', '<i class=\'nuit-collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
+        title = ''
+        if bare_title:
+            title = '<h5>%s%s</h5>' % (bare_title, '<i class=\'nuit-collapse fi-play right\'></i>' if self.can_collapse.resolve(context) else '')
         link_name = self.link_name.resolve(context) or bare_title
         resolved_link_id = self.link_id.resolve(context)
         return '''

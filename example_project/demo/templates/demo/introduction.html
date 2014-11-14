@@ -1,4 +1,18 @@
-{% extend 'demo/base.html' %}
+{% extend 'demo/base.html' rightmenu=True %}
+
+{% block right_menu %}
+
+    {% menu_section is_list=True title='Links!' %}
+        {% menu_item always_display=True link='#' name='Bob' %}
+        {% menu_item always_display=True link='#' name='Ben' %}
+        {% menu_item always_display=True link='#' name='Bop' %}
+    {% end_menu_section %}
+
+    {% menu_section title='Other Stuff' %}
+        <p>This is some other stuff.</p>
+    {% end_menu_section %}
+
+{% endblock %}
 
 {% block title %}Introduction{% endblock %}
 
@@ -24,6 +38,45 @@
 
     <p>This demo project is designed to demonstrate the UI capabilities of Nuit.</p>
 
+<dl class="tabs" data-tab data-options="deep_linking:true;scroll_to_content: false">
+  <dd class="active"><a href="#panel1">Tab 1</a></dd>
+  <dd><a href="#panel2">Tab 2</a></dd>
+  <dd><a href="#panel3">Tab 3</a></dd>
+  <dd><a href="#panel4">Tab 4</a></dd>
+</dl>
+<div class="tabs-content">
+  <div class="content active" id="panel1">
+    <p>This is the first panel of the basic tab example. This is the first panel of the basic tab example.</p>
+  </div>
+  <div class="content" id="panel2">
+    <p>This is the second panel of the basic tab example. This is the second panel of   the basic tab example.</p>
+  </div>
+  <div class="content" id="panel3">
+    <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+  </div>
+  <div class="content" id="panel4">
+    <p>This is the fourth panel of the basic tab example. This is the fourth panel of   the basic tab example.</p>
+  </div>
+</div>
+
     <p><a href='#' id='confirmation'>Click me!</a></p>
+    <p><a href='#' data-reveal-id='other-stuff-2'>Click me!</a></p>
+
+
+    <section class="right-menu-reveal reveal-modal" data-reveal="" id="other-stuff-2">
+                <div>
+                <h5>Other Stuff</h5>
+                <div class="side-content">
+                
+                
+        <p>This is some other stuff.</p>
+    
+                
+                </div>
+                </div>
+                <hr>
+            </section>
+
+
 
 {% endblock %}
