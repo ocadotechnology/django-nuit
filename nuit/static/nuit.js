@@ -40,10 +40,15 @@ nuit.setup = function() {
     $('.nuit-breadcrumbs li:last-child').addClass('current');
 
     // Fix right-menu modals when they're closed
-    $(document).on('closed', '[data-reveal]', function () {
+    $(document).on('closed.fndtn.reveal', '[data-reveal]', function () {
         var modal = $(this);
         modal.attr('style', '');
     });
+
+    // Fix right-menu modals on iOS
+    $(document).on('click tap touchstart', '.close-reveal-modal', function() {
+        return $('[data-reveal]').foundation('reveal', 'close');
+    }); 
 
     // Add correct links for cog-menu
     $('.sidebar.on-right > section').each(function() {
@@ -204,7 +209,7 @@ nuit.confirmation_box = function(user_options) {
         options.on_abort();
     });
 
-    modal.on('closed', function() {
+    modal.on('closed.fdntn.reveal', function() {
         $(this).remove();
     });
 

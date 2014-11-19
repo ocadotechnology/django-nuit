@@ -99,6 +99,7 @@ class MenuSectionNode(template.Node):
         resolved_link_id = self.link_id.resolve(context)
         return '''
             <section class='right-menu-reveal' {reveal} data-link='{link_name}' id='{id}'>
+                <a class='close-reveal-modal'>&#215;</a>
                 <div>
                 {title}
                 <div class='side-content'>
