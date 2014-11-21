@@ -5,6 +5,6 @@ class PublisherForm(ModelForm):
     name = CharField(help_text='The name of the publisher')
     class Meta:
         model = Publisher
-        fields = ('name', 'address', 'city', 'state_province', 'country', 'website',)
+        fields = ('name', 'address', 'city', 'state_province', 'country', 'website', 'sleazy')
     def clean(self):
         raise ValidationError('Something went wrong')

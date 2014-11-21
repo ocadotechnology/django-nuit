@@ -233,6 +233,23 @@
 
 }
 
+/* Form overrides */
+
+.switch {
+    input + label {
+        margin-top: 0.2rem;
+        margin-bottom: 0.8rem;
+    }
+    &.tiny input + label {
+        margin-top: 0.32rem;
+        margin-bottom: 1.15rem;
+    }
+    &.small input + label {
+        margin-top: 0.25rem;
+        margin-bottom: 1rem;
+    }
+}
+
 /* Right Menu Reveals */
 
 @media #{$medium-down} {
