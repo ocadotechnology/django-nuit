@@ -37,6 +37,12 @@ The following arguments can be passed to the :ref:`template-tag-extend` tag to c
 
     The name of the application. This is displayed in various places, such as the ``<title>`` element, and as a button on the top bar to take you back to the :attr:`app_url` defined.
 
+.. attribute:: app_logo
+
+    :default: ``None``
+
+    A more complex application title or logo that can contain HTML elements. This is displayed in a button on the top bar to take you back to the :attr:`app_url` defined, and overrides any :attr:`app_title` defined in this location. :attr:`app_title` is still used in the ``<title>`` element.
+
 .. attribute:: app_url
 
     :default: ``None``
