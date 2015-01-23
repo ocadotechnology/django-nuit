@@ -40,7 +40,7 @@ Get started with Nuit by following these steps:
     manage.py collectstatic
     manage.py compress
 
-You're not ready to start using Nuit in your templates and apps. Read the `documentation <https://django-nuit.readthedocs.org/en/latest/>`_ for the next steps.
+You're now ready to start using Nuit in your templates and apps. Read the `documentation <https://django-nuit.readthedocs.org/en/latest/>`_ for the next steps.
 
 ============
 Contributing
