@@ -11,11 +11,12 @@
 # serve to show the default.
 
 import sys, os
-from nuit.version import __VERSION__
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../example_project/'))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")
+
+from nuit.version import __VERSION__
 
 intersphinx_mapping = {
     'django': ('http://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/'),
