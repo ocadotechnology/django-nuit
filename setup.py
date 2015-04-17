@@ -16,7 +16,7 @@ setup(
         'django_compressor >= 1.3.1ocado1',
         'django-jquery',
         'django-foundation-icons>=3.1',
-        'django',
+        'django < 1.8',
         'django-autoconfig',
         'django-bourbon',
     ],
