@@ -296,7 +296,7 @@ def normalise_row(row_data):
         unspecified = len([x for x, y in row_data if size not in y or not y[size]])
         if unspecified == len(row_data) and size == 'small':
             unspecified_widths = [12] * unspecified
-        else:
+        elif unspecified:
             unspecified_widths = calculate_widths(unspecified, 12 - total)
         for _field, data in row_data:
             if size in data and data[size]:
