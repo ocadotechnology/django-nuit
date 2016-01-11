@@ -13,7 +13,7 @@ setup(
     packages             = find_packages(),
     install_requires     = [
         'django-foundation-statics >= 5.4.7-2',
-        'django_compressor >= 1.3.1ocado1',
+        'django_compressor >= 1.3.1ocado1, < 2.0',
         'django-jquery',
         'django-foundation-icons>=3.1',
         'django < 1.8',
