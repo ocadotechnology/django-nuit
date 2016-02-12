@@ -1,6 +1,7 @@
 '''Utils.'''
 
 from django.core.exceptions import PermissionDenied
+from django.test import RequestFactory
 
 def get_callable_cells(function):
     '''
@@ -28,18 +29,44 @@ def get_callable_cells(function):
                 callables.append(closure.cell_contents)
     return [function] + callables
 
+
+def get_class_based_views(callable_cells):
+    '''Find class based views for a set of cells.'''
+    for cell in callable_cells:
+        if cell.func_closure:
+            closure_dict = dict(zip(cell.func_code.co_freevars, cell.func_closure))
+            if 'cls' in closure_dict:
+                klass = closure_dict['cls'].cell_contents
+                if hasattr(klass, 'dispatch'):
+                    yield klass
+
+
+def get_cbv_dispatch_tests(callable_cells):
+    '''Generate tests for class based view dispatch methods.'''
+    for klass in get_class_based_views(callable_cells):
+        def test_func(user):
+            test_view_class = type('TestView', (klass,), {
+                'http_method_names': [],
+            })
+            request = RequestFactory().get('/')
+            request.user = user
+            test_view_class.as_view()(request)
+            return True
+        yield test_func
+
 def get_user_tests(function):
     '''
     Get a list of callable cells attached to this function that have the first
     parameter named "u" or "user".
     '''
+    callable_cells = get_callable_cells(function)
     return [
-        x for x in get_callable_cells(function)
+        x for x in callable_cells
         if getattr(x, 'func_code', None) and (
             x.func_code.co_varnames[0] in ["user", "u"] or
             (len(x.func_code.co_varnames) > 1 and x.func_code.co_varnames[0] in ['self', 'cls'] and x.func_code.co_varnames[1] in ['u', 'user'])
         )
-    ]
+    ] + list(get_cbv_dispatch_tests(callable_cells))
 
 def test_view(test, urlconf, user):
     '''

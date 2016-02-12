@@ -1,16 +1,21 @@
 '''Tests for nuit'''
 # pylint: disable=R0904
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, TransactionTestCase
 from django.test.utils import override_settings
+from django.contrib.auth.models import Permission, User
 from django.contrib.messages import constants
 from django.core.paginator import Paginator
+from django.core.urlresolvers import ResolverMatch
 from django.template import Template, Context, TemplateSyntaxError
 from bs4 import BeautifulSoup as soup
 
 from .forms import TestForm
 from ..context_processors import nuit as nuit_context_processor
 from ..templatetags.nuit import message_class, set_active_menu, menu_item, calculate_widths, pagination_menu
+from ..utils import user_can_see_view
 from ..views import SearchableListView
+
+from . import views
 
 from django.db import models
 
@@ -444,3 +449,28 @@ class NuitFormTags(TestCase):
                 {% foundation_form %}
                 {% end_foundation_form %}
             ''', {'form': self.form})
+
+
+class NuitMenuItemVisibility(TransactionTestCase):
+    '''
+        Test the selective visibility of menu_items
+    '''
+
+    def setUp(self):
+        self.staff_user = User.objects.create(username='staff-user', is_staff=True)
+        self.staff_user.user_permissions.add(Permission.objects.get(codename='add_user'))
+        self.superuser_user = User.objects.create(username='superuser-user', is_superuser=True)
+        self.normal_user = User.objects.create(username='normal-user')
+
+    def run_view_test(self, view, user):
+        return user_can_see_view(ResolverMatch(view, [], {}), user)
+
+    def test_decorator_visibility(self):
+        self.assertTrue(self.run_view_test(views.view_needing_staff, self.staff_user))
+        self.assertFalse(self.run_view_test(views.view_needing_staff, self.normal_user))
+
+        self.assertTrue(self.run_view_test(views.view_needing_add_user, self.staff_user))
+        self.assertFalse(self.run_view_test(views.view_needing_add_user, self.normal_user))
+
+        self.assertTrue(self.run_view_test(views.ViewNeedingAddUser.as_view(), self.staff_user))
+        self.assertFalse(self.run_view_test(views.ViewNeedingAddUser.as_view(), self.normal_user))
