@@ -33,7 +33,7 @@ def get_callable_cells(function):
 def get_class_based_views(callable_cells):
     '''Find class based views for a set of cells.'''
     for cell in callable_cells:
-        if cell.func_closure:
+        if hasattr(cell, 'func_closure') and cell.func_closure:
             closure_dict = dict(zip(cell.func_code.co_freevars, cell.func_closure))
             if 'cls' in closure_dict:
                 klass = closure_dict['cls'].cell_contents
