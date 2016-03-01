@@ -1,7 +1,6 @@
 '''Utils.'''
 
 from django.core.exceptions import PermissionDenied
-from django.test import RequestFactory
 
 def get_callable_cells(function):
     '''
@@ -43,6 +42,8 @@ def get_class_based_views(callable_cells):
 
 def get_cbv_dispatch_tests(callable_cells):
     '''Generate tests for class based view dispatch methods.'''
+    from django.test import RequestFactory
+
     for klass in get_class_based_views(callable_cells):
         def test_func(user):
             test_view_class = type('TestView', (klass,), {
