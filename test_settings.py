@@ -9,6 +9,6 @@ INSTALLED_APPS = [
     'nuit',
 ]
 STATIC_URL = '/static/'
-STATIC_ROOT = '.'
+STATIC_ROOT = '.static'
 from django_autoconfig.autoconfig import configure_settings
 configure_settings(globals())

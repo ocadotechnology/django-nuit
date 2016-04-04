@@ -29,16 +29,15 @@ Get started with Nuit by following these steps:
     from django_autoconfig.autoconfig import configure_settings
     configure_settings(globals())
 
-* In a production environment, add the following setting for django-compressor_ (see their documentation for more details)::
+* In a production environment, add the following setting for django-pipeline_ (see their documentation for more details)::
 
-    COMPRESS_OFFLINE = True
+    PIPELINE_ENABLED = True
 
-* Install the SASS binary in order to compile and compress the CSS. This can't be instaled using ``pip``, and will need to be installed manually (usually with ``gem install sass``)
+* Install the SASS binary in order to compile and compress the CSS. This can't be installed using ``pip``, and will need to be installed manually (usually with ``gem install sass``)
 
-* Run ``collectstatic`` and ``compress`` (``compress`` is only needed if ``COMPRESS_OFFLINE`` is ``True``)::
+* Run ``collectstatic``::
 
     manage.py collectstatic
-    manage.py compress
 
 You're now ready to start using Nuit in your templates and apps. Read the `documentation <https://django-nuit.readthedocs.org/en/latest/>`_ for the next steps.
 
@@ -50,5 +49,5 @@ To contribute, fork the repo, do your work, and issue a pull request. We ask tha
 
 .. _`Zurb Foundation`: http://foundation.zurb.com
 .. _`Read the Docs`: http://django-nuit.readthedocs.org/en/latest
-.. _`django-compressor`: http://django-compressor.readthedocs.org/en/latest/
 .. _`django-autoconfig`: http://github.com/mikebryant/django-autoconfig/
+.. _`django-pipeline`: https://django-pipeline.readthedocs.org/en/latest/

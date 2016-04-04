@@ -6,6 +6,7 @@ from django.template.loader import get_template
 from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
+from django.utils.html import format_html
 from ast import literal_eval
 
 from ..utils import user_can_see_view
@@ -41,13 +42,14 @@ def set_active_menu(active_menu):
     Inserts a span with a class of .nuit-active-menu that is picked up by Javascript
     to highlight the correct menu item.
     '''
-    return "<span style='display: none' class='nuit-active-menu'>%s</span>" % active_menu
+    return format_html("<span style='display: none' class='nuit-active-menu'>{}</span>", active_menu)
 
 
 class ExtendNode(ExtendsNode):
     '''
     Template node that extends another template with additional variables.
     '''
+    must_be_first = False
 
     def __init__(self, node, kwargs):
         super(ExtendNode, self).__init__(node.nodelist, node.parent_name, node.template_dirs)
@@ -205,7 +207,7 @@ def menu_item(context, link, name, id=None, current=False, unavailable=False, al
             display = False
 
     if always_display or display:
-        return "<li class='menu-item menu-{id} {classes}'><a class='menu-item' href='{link}'>{name}</a></li>".format(name=name, link=url, id=id, classes=' '.join(classes))
+        return format_html("<li class='menu-item menu-{id} {classes}'><a class='menu-item' href='{link}'>{name}</a></li>", name=name, link=url, id=id, classes=' '.join(classes))
     else:
         return ''
 
@@ -399,4 +401,3 @@ def foundation_form(parser, token):
     nodelist = parser.parse(('end_foundation_form',))
     parser.delete_first_token()
     return FoundationFormNode(form, nodelist, **kwargs)
-
