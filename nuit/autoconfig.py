@@ -1,29 +1,56 @@
 '''Nuit autoconfig'''
 
 SETTINGS = {
-    'COMPRESS_ENABLED': True,
-    'COMPRESS_PRECOMPILERS': [
-        ('text/x-sass', 'sass {infile} {outfile}'),
-        ('text/x-scss', 'sass {infile} {outfile}'),
-    ],
-    'STATICFILES_FINDERS': [
-        'compressor.finders.CompressorFinder',
-    ],
     'TEMPLATE_CONTEXT_PROCESSORS': [
         'django.core.context_processors.request',
         'nuit.context_processors.nuit',
     ],
     'INSTALLED_APPS': [
         'django.contrib.staticfiles',
-        'compressor',
         'foundation_scss',
         'foundation_icons',
         'jquery',
         'bourbon',
+        'pipeline',
+    ],
+    'PIPELINE': {
+        'COMPILERS': (
+            'pipeline.compilers.sass.SASSCompiler',
+        ),
+        'CSS_COMPRESSOR': None,
+        'SASS_ARGUMENTS': '--quiet',
+        'STYLESHEETS': {
+            'nuit': {
+                'source_filenames': (
+                  'nuit.scss',
+                ),
+                'output_filename': 'nuit.css',
+            },
+        },
+    },
+    'STATICFILES_FINDERS': [
+        'pipeline.finders.PipelineFinder',
+    ],
+    'STATICFILES_STORAGE': 'pipeline.storage.PipelineStorage',
+    'TEMPLATES': [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',
+                    'nuit.context_processors.nuit',
+                ],
+            },
+        },
     ],
 }
 
 # We need to add this globally as we're making a new ExtendsNode
 # and this needs to be the first node in the template.
-from django.template.base import add_to_builtins
-add_to_builtins('nuit.templatetags.nuit')
+try:
+    from django.template.base import add_to_builtins
+except ImportError:
+    pass
+else:
+    add_to_builtins('nuit.templatetags.nuit')

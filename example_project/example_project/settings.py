@@ -86,18 +86,12 @@ INSTALLED_APPS = (
     'demo',
 )
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
-
-from django_autoconfig.autoconfig import configure_settings
-configure_settings(globals())
-
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
-COMPRESS_OFFLINE = False
+PIPELINE = {
+    'PIPELINE_ENABLED': False,
+}
 
 NUIT_SEARCH_VIEW = 'introduction'
 NUIT_SEARCH_PLACEHOLDER = 'Search me...'
@@ -127,3 +121,11 @@ NUIT_APPLICATIONS = (
         ),
     },
 )
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+from django_autoconfig.autoconfig import configure_settings
+configure_settings(globals())

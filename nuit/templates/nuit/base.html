@@ -1,7 +1,6 @@
-{% load static %}
-{% load compress %}
 {% load nuit %}
-{% load url from future %}
+{% load pipeline %}
+{% load static %}
 <!DOCTYPE html>
 
 <html class='no-js' lang='en'>
@@ -11,9 +10,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{% block title %}Home{% endblock title %}{% if nuit_app_title %} - {{page_title|default:nuit_app_title|force_escape}}{% else %} - {{page_title|default:'Nuit'}}{% endif %}</title>
 
-    {% compress css %}
-    <link rel='stylesheet' type='text/x-scss' href='{% static 'nuit.scss' %}' />
-    {% endcompress %}
+    {% stylesheet 'nuit' %}
 
     {% block head %}
     {% endblock head %}
