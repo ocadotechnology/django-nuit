@@ -1,2 +1,2 @@
 # Test discovery for 1.6
-from test_main import *
+from nuit.tests.test_main import *
