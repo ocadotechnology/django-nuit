@@ -1,23 +1,23 @@
 language: python
 env:
-- DJANGOLT=1.9
-- DJANGOLT=1.10
+- DJANGO_VERSION=">=1.8, < 1.9"
+- DJANGO_VERSION=">=1.9, < 1.10"
 python:
   - 2.7
   - 3.5
 matrix:
   allow_failures:
   - python: 3.5
-    env: DJANGOLT=1.9
+    env: DJANGO_VERSION=">=1.8, < 1.9"
   - python: 3.5
-    env: DJANGOLT=1.10
+    env: DJANGO_VERSION=">=1.9, < 1.10"
   fast_finish: true
   include:
   - python: 2.7
-    env: DJANGOLT=1.8
+    env: DJANGO_VERSION=">=1.7, < 1.8"
 install:
   - pip install gitversion
-  - pip install "Django < $DJANGOLT"
+  - pip install "Django $DJANGO_VERSION"
   - pip install .
   - pip install coveralls
 script:
@@ -31,5 +31,5 @@ deploy:
     secure: "zOt2jV52ap4fYIZpl9KDkMUyJAMZD9qtsZUosSIzjdGpd45fZyPRq1BcdcNSKmp/yZv+KexndFMBjuiI5rByA9lw4lKaIQoBeFDlVdkti1P78EYQWERj3RsesjefL7CYsEfMo6j+5Y6xtfBo39VSrEfKUwdDxhH/jfSCjNeKUvR/IW1voXVGnWaEV8h1UludPZj6aKs+4dQzTNNea3SgXdwAV4uWbpKnWVEuHHAACLYod++E0dUqn62fUpmnYnv4WFTkXIs9m/KTdHAK2djAJRATwZASsy2lTGsbc77KI9F9VZp1NWz5jM9v1fxMWB/Kqt4g6p1GG159Pt5lPSad0bHmsjd22WrYJ+VN+At5FmL4tJWBW15pJ8Px8t/b0CUe0/7gCk2/9e6QjwCF9DfvTcAd1a+x2yBJvZtMGgQph8Z+LvxFisHnLlI/QTGq2Y0DyVN2YFZjvUsgo8keDj8Bz5dd6EJN4G2Nah2L3V99KoYy3J+wxtIloshAsbNXPX0osTgILQzJjPwJtYuJz2Z42ibiIs/gb4G8cuboJpw6nP4shXhiTUYcCiPRRhZlEjgjPdLzlTLB5xNkJiAUj8GZIEpbBkeq7jLV2heootjwuPUCqRIjPfn+MbAs16jRzAIoXb8ZNv+rKLqBh9jt9pbzTQ4hN72/PAiE+M+pypYBXow="
   distributions: "bdist_wheel sdist"
   on:
-    condition: "$DJANGOLT = 1.10"
+    condition: $DJANGO_VERSION = ">=1.9, < 1.10"
     repo: ocadotechnology/django-nuit
