@@ -1,4 +1,6 @@
 '''Nuit autoconfig'''
+import django
+
 
 SETTINGS = {
     'TEMPLATE_CONTEXT_PROCESSORS': [
@@ -45,6 +47,11 @@ SETTINGS = {
         },
     ],
 }
+
+if django.VERSION >= (1,9):
+    SETTINGS['TEMPLATES'][0]['OPTIONS']['builtins'] = [
+        'nuit.templatetags.nuit',
+    ]
 
 # We need to add this globally as we're making a new ExtendsNode
 # and this needs to be the first node in the template.
