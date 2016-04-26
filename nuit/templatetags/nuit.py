@@ -49,7 +49,6 @@ class ExtendNode(ExtendsNode):
     '''
     Template node that extends another template with additional variables.
     '''
-    must_be_first = False
 
     def __init__(self, node, kwargs):
         super(ExtendNode, self).__init__(node.nodelist, node.parent_name, node.template_dirs)
