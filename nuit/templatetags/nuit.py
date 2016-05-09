@@ -8,6 +8,7 @@ from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
 from django.utils.html import format_html
 from ast import literal_eval
+from urlparse import urlparse
 
 from ..utils import user_can_see_view
 
@@ -200,7 +201,7 @@ def menu_item(context, link, name, id=None, current=False, unavailable=False, al
     if not always_display:
         try:
             user = context['request'].user if 'request' in context else None
-            view = resolve(url)
+            view = resolve(urlparse(url).path)
             display = user_can_see_view(view, user)
         except Resolver404:
             display = False
