@@ -191,20 +191,24 @@ def menu_item(context, link, name, id=None, current=False, unavailable=False, al
     if unavailable:
         classes.append('unavailable')
 
-    # Try reversing the link to see if it is a view:
     try:
         url = reverse(link)
     except NoReverseMatch:
         url = link
         display = True
 
-    if not always_display:
+    parsed_url = urlparse(url)
+
+    if not parsed_url.netloc and not always_display:
+        user = context['request'].user if 'request' in context else None
         try:
-            user = context['request'].user if 'request' in context else None
-            view = resolve(urlparse(url).path)
-            display = user_can_see_view(view, user)
+            view = resolve(parsed_url.path)
         except Resolver404:
             display = False
+        else:
+            display = user_can_see_view(view, user)
+    else:
+        display = True
 
     if always_display or display:
         return format_html("<li class='menu-item menu-{id} {classes}'><a class='menu-item' href='{link}'>{name}</a></li>", name=name, link=url, id=id, classes=' '.join(classes))
