@@ -55,6 +55,7 @@ def get_cbv_dispatch_tests(callable_cells):
             return True
         yield test_func
 
+
 def get_user_tests(function):
     '''
     Get a list of callable cells attached to this function that have the first
@@ -69,6 +70,7 @@ def get_user_tests(function):
         )
     ] + list(get_cbv_dispatch_tests(callable_cells))
 
+
 def test_view(test, urlconf, user):
     '''
     Run a view test. Add in *args, **kwargs if appropriate.
@@ -76,6 +78,7 @@ def test_view(test, urlconf, user):
     args = [] if 'args' not in test.func_code.co_varnames else urlconf.args
     kwargs = {} if 'kwargs' not in test.func_code.co_varnames else urlconf.kwargs
     return test(user, *args, **kwargs)
+
 
 def user_can_see_view(view, user):
     '''
