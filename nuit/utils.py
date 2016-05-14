@@ -13,6 +13,10 @@ def _code(fn):
     return six.get_function_code(fn)
 
 
+def _func(fn):
+    return six.get_method_function(fn)
+
+
 def has_closure(fn):
     return hasattr(fn, 'func_closure') or hasattr(fn, '__closure__')
 
@@ -37,10 +41,10 @@ def get_callable_cells(function):
             # Class-based view does not have a .func_closure attribute.
             # Instead, we want to look for decorators on the dispatch method.
             # We can also look for decorators on a "get" method, if one exists.
-            if hasattr(closure.cell_contents, 'dispatch'):
-                callables.extend(get_callable_cells(closure.cell_contents.dispatch.__func__))
-                if hasattr(closure.cell_contents, 'get'):
-                    callables.extend(get_callable_cells(closure.cell_contents.get.__func__))
+            if hasattr(closure.cell_contents, 'dispatch') and inspect.ismethod(closure.cell_contents.dispatch):
+                callables.extend(get_callable_cells(_func(closure.cell_contents.dispatch)))
+                if hasattr(closure.cell_contents, 'get') and inspect.ismethod(closure.cell_contents.get):
+                    callables.extend(get_callable_cells(_func(closure.cell_contents.get)))
             elif has_closure(closure.cell_contents) and _closure(closure.cell_contents):
                 callables.extend(get_callable_cells(closure.cell_contents))
             else:
