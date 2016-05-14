@@ -2,6 +2,7 @@
 
 from django.core.exceptions import PermissionDenied
 import six
+import inspect
 
 
 def _closure(fn):
@@ -17,7 +18,7 @@ def has_closure(fn):
 
 
 def has_code(fn):
-    return hasattr(fn, 'func_code') or hasattr(fn, '__code__')
+    return inspect.isfunction(fn)
 
 
 def get_callable_cells(function):
