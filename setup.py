@@ -19,6 +19,7 @@ setup(
         'django-autoconfig',
         'django-bourbon',
         'django-pipeline >= 1.6.0',
+        'six'
     ],
     include_package_data = True,
     test_suite           = 'setuptest.setuptest.SetupTestSuite',

@@ -8,8 +8,8 @@ from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
 from django.utils.html import format_html
 from ast import literal_eval
-from urlparse import urlparse
-
+from six.moves.urllib.parse import urlparse
+from six import iteritems as _iteritems
 from ..utils import user_can_see_view
 
 # pylint: disable=C0103
@@ -53,13 +53,13 @@ class ExtendNode(ExtendsNode):
 
     def __init__(self, node, kwargs):
         super(ExtendNode, self).__init__(node.nodelist, node.parent_name, node.template_dirs)
-        self.kwargs = dict(("nuit_%s" % key, value) for key, value in kwargs.iteritems())
+        self.kwargs = dict(("nuit_%s" % key, value) for key, value in _iteritems(kwargs))
 
     def __repr__(self):
         return '<ExtendNode: extends %s with args: %r>' % (super(ExtendNode, self).__repr__(), self.kwargs)
 
     def render(self, context):
-        kwargs = dict((key, value.resolve(context)) for key, value in self.kwargs.iteritems() if key not in context)
+        kwargs = dict((key, value.resolve(context)) for key, value in _iteritems(self.kwargs) if key not in context)
         context.update(kwargs)
         try:
             return super(ExtendNode, self).render(context)
@@ -139,7 +139,7 @@ def menu_section(parser, token):
         kwargs[before] = after
     nodelist = parser.parse(('end_menu_section',))
     parser.delete_first_token()
-    kwargs = dict((key, parser.compile_filter(value)) for key, value in kwargs.iteritems())
+    kwargs = dict((key, parser.compile_filter(value)) for key, value in _iteritems(kwargs))
     return MenuSectionNode(nodelist, **kwargs)
 
 
@@ -173,7 +173,7 @@ def app_menu(parser, token):
         kwargs[before] = after
     nodelist = parser.parse(('end_app_menu',))
     parser.delete_first_token()
-    kwargs = dict((key, parser.compile_filter(value)) for key, value in kwargs.iteritems())
+    kwargs = dict((key, parser.compile_filter(value)) for key, value in _iteritems(kwargs))
     return AppMenuNode(nodelist, **kwargs)
 
 

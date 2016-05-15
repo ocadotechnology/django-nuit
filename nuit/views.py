@@ -1,5 +1,6 @@
 from django.views.generic import ListView
 from django.db.models import Q
+from six import string_types
 
 class SearchableListView(ListView):
     '''
@@ -32,7 +33,7 @@ class SearchableListView(ListView):
         query = Q()
         for field in self.search_fields:
             lookup = 'icontains'
-            if not isinstance(field, basestring):
+            if not isinstance(field, string_types):
                 field, lookup = field
             query = query | Q(**{'%s__%s' % (field, lookup): search_term})
         return queryset.filter(query)

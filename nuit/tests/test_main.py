@@ -20,6 +20,8 @@ from . import views
 from django.db import models
 
 import string
+from six import iteritems
+
 
 def setup_view(view, request, *args, **kwargs):
     """Mimic as_view() returned callable, but returns view instance.
@@ -269,7 +271,7 @@ class NuitTemplateTags(TestCase):
             if data['header']:
                 self.assertEqual(1, len(section.findAll('h5')))
                 self.assertEqual(data['header'], section.find('h5').text)
-            for key, value in data['attrs'].iteritems():
+            for key, value in iteritems(data['attrs']):
                 self.assertEqual(value, section.attrs[key])
 
     def test_app_menu(self):
