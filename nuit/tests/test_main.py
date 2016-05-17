@@ -1,5 +1,6 @@
 '''Tests for nuit'''
 # pylint: disable=R0904
+import django
 from django.test import TestCase, RequestFactory, TransactionTestCase
 from django.test.utils import override_settings
 from django.contrib.auth.models import Permission, User
@@ -8,6 +9,7 @@ from django.core.paginator import Paginator
 from django.core.urlresolvers import ResolverMatch
 from django.template import Template, Context, TemplateSyntaxError
 from bs4 import BeautifulSoup as soup
+import unittest
 
 from .forms import TestForm
 from ..context_processors import nuit as nuit_context_processor
@@ -476,3 +478,9 @@ class NuitMenuItemVisibility(TransactionTestCase):
 
         self.assertTrue(self.run_view_test(views.ViewNeedingAddUser.as_view(), self.staff_user))
         self.assertFalse(self.run_view_test(views.ViewNeedingAddUser.as_view(), self.normal_user))
+
+    @unittest.skipIf(django.VERSION < (1, 9, 0), 'PermissionRequiredMixin was introduced in 1.9.0')
+    def test_mixin_visibility(self):
+        '''Test visibility for PermissionRequiredMixin'''
+        self.assertTrue(self.run_view_test(views.MixinViewNeedingAddUser.as_view(), self.staff_user))
+        self.assertFalse(self.run_view_test(views.MixinViewNeedingAddUser.as_view(), self.normal_user))
