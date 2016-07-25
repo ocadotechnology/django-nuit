@@ -5,13 +5,9 @@
 
 {% block css %}
 
-<style type='text/css'>
+    {{ block.super }}
 
-    .toggle-topbar {
-        display: none;
-    }
-
-</style>
+    <link rel='stylesheet' type='text/css' href='{% static 'nuit/css/no-toggle-topbar.css' %}' />
 
 {% endblock css %}
 
