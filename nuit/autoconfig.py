@@ -3,6 +3,17 @@ import django
 
 
 SETTINGS = {
+    # For use with django-csp
+    'CSP_STYLE_SRC': (
+        "'self'",
+        # modernizr.js
+        "'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw='",
+        "'sha256-LpfmXS+4ZtL2uPRZgkoR29Ghbxcfime/CsD/4w5VujE='",
+        "'sha256-MZKTI0Eg1N13tshpFaVW65co/LeICXq4hyVx6GWVlK0='",
+        "'sha256-YJO/M9OgDKEBRKGqp4Zd07dzlagbB+qmKgThG52u/Mk='",
+        # jquery.js
+        "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+    ),
     'TEMPLATE_CONTEXT_PROCESSORS': [
         'django.core.context_processors.request',
         'nuit.context_processors.nuit',
