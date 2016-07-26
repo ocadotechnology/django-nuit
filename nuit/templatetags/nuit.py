@@ -405,3 +405,11 @@ def foundation_form(parser, token):
     nodelist = parser.parse(('end_foundation_form',))
     parser.delete_first_token()
     return FoundationFormNode(form, nodelist, **kwargs)
+
+
+@register.simple_tag
+def query_transform(request, **kwargs):
+    query = request.GET.copy()
+    for k, v in kwargs.iteritems():
+        query[k] = v
+    return query.urlencode()
