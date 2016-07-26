@@ -186,7 +186,7 @@ class NuitTemplateTags(TestCase):
         output = soup(set_active_menu('bob')).find('span')
         self.assertEqual('bob', output.text)
         self.assertTrue('nuit-active-menu' in output.attrs['class'])
-        self.assertTrue('display: none' in output.attrs['style'])
+        self.assertTrue('hide' in output.attrs['class'])
 
     def test_menu_item(self):
 

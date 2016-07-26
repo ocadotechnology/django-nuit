@@ -5,13 +5,9 @@
 
 {% block css %}
 
-<style type='text/css'>
+    {{ block.super }}
 
-    .login-loader, .toggle-topbar {
-        display: none;
-    }
-
-</style>
+    <link rel='stylesheet' type='text/css' href='{% static 'nuit/css/no-toggle-topbar.css' %}' />
 
 {% endblock css %}
 
@@ -44,8 +40,8 @@
             <input type='password' id='password' name='password' placeholder='Password'>
 
             <div class='submit'>
-                <div class='login-loader'>{% include 'nuit/includes/loader.html' with size=48 %}</div>
-                <button class='button expand'>Login</button>
+                <div class='hide' id='login-loader'>{% include 'nuit/includes/loader.html' with size=48 %}</div>
+                <button class='button expand' id='login-button'>Login</button>
             </div>
 
             <input type='hidden' name='next' value='{{next}}' />
@@ -60,15 +56,8 @@
 
 {% block scripts %}
 
-<script type='text/javascript'>
+    {{ block.super }}
 
-    $(document).ready(function() {
-        $('button').click(function() {
-            $(this).hide();
-            $('.login-loader').show();
-        });
-    });
-
-</script>
+    <script type='text/javascript' src='{% static 'nuit/js/login.js' %}'></script>
 
 {% endblock scripts %}

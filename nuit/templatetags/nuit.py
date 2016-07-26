@@ -43,7 +43,7 @@ def set_active_menu(active_menu):
     Inserts a span with a class of .nuit-active-menu that is picked up by Javascript
     to highlight the correct menu item.
     '''
-    return format_html("<span style='display: none' class='nuit-active-menu'>{}</span>", active_menu)
+    return format_html("<span class='hide nuit-active-menu'>{}</span>", active_menu)
 
 
 class ExtendNode(ExtendsNode):
