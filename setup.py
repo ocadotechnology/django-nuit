@@ -15,7 +15,7 @@ setup(
         'django-foundation-statics >= 5.4.7-2',
         'django-jquery',
         'django-foundation-icons>=3.1',
-        'django < 1.10',
+        'django < 1.11',
         'django-autoconfig',
         'django-bourbon',
         'django-pipeline >= 1.6.0',

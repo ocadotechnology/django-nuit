@@ -118,29 +118,27 @@ class NuitContextProcessors(TestCase):
             resulting_dict = nuit_context_processor(None)
         expected_resulting_settings = self.sample_settings
         expected_resulting_settings['NUIT_LOGIN_URL'] = '/accounts/login/'
-        expected_resulting_settings['NUIT_LOGOUT_URL'] = '/accounts/logout/'
+        expected_resulting_settings['NUIT_LOGOUT_URL'] = getattr(django.conf.settings, 'LOGOUT_URL', None)
         self.assertEqual(resulting_dict, expected_resulting_settings)
 
 class NuitHandlers(TestCase):
     '''Tests Nuit's handlers'''
-    urls = 'nuit.tests.urls'
-
-    @override_settings(COMPRESS_OFFLINE=False)
+    @override_settings(COMPRESS_OFFLINE=False, ROOT_URLCONF='nuit.tests.urls')
     def test_error_400(self):
         response = self.client.get('/error400/')
         self.assertEqual(response.status_code, 400)
 
-    @override_settings(COMPRESS_OFFLINE=False)
+    @override_settings(COMPRESS_OFFLINE=False, ROOT_URLCONF='nuit.tests.urls')
     def test_error_403(self):
         response = self.client.get('/error403/')
         self.assertEqual(response.status_code, 403)
 
-    @override_settings(COMPRESS_OFFLINE=False)
+    @override_settings(COMPRESS_OFFLINE=False, ROOT_URLCONF='nuit.tests.urls')
     def test_error_404(self):
         response = self.client.get('/error404/')
         self.assertEqual(response.status_code, 404)
 
-    @override_settings(COMPRESS_OFFLINE=False)
+    @override_settings(COMPRESS_OFFLINE=False, ROOT_URLCONF='nuit.tests.urls')
     def test_error_500(self):
         response = self.client.get('/error500/')
         self.assertEqual(response.status_code, 500)
