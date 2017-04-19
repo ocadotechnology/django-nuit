@@ -1,9 +1,10 @@
 '''Test URLs'''
-from django.conf.urls import patterns
+from django.conf.urls import url
+from .. import handlers
 
-urlpatterns = patterns('',
-    (r'^error400/$', 'nuit.handlers.handler400'),
-    (r'^error403/$', 'nuit.handlers.handler403'),
-    (r'^error404/$', 'nuit.handlers.handler404'),
-    (r'^error500/$', 'nuit.handlers.handler500'),
-)
+urlpatterns = [
+    url(r'^error400/$', handlers.handler400),
+    url(r'^error403/$', handlers.handler403),
+    url(r'^error404/$', handlers.handler404),
+    url(r'^error500/$', handlers.handler500),
+]
