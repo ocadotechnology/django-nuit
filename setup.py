@@ -12,6 +12,7 @@ setup(
     maintainer_email     = 'netnix@ocado.com',
     packages             = find_packages(),
     install_requires     = [
+        'asteval',
         'django-foundation-statics >= 5.4.7-2',
         'django-jquery',
         'django-foundation-icons>=3.1',
@@ -19,7 +20,7 @@ setup(
         'django-autoconfig',
         'django-bourbon',
         'django-pipeline >= 1.6.0',
-        'six'
+        'six',
     ],
     include_package_data = True,
     test_suite           = 'setuptest.setuptest.SetupTestSuite',

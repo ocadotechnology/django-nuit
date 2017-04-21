@@ -12,6 +12,8 @@ from six.moves.urllib.parse import urlparse
 from six import iteritems as _iteritems
 from ..utils import user_can_see_view
 
+import asteval
+
 # pylint: disable=C0103
 
 register = template.Library()
@@ -349,8 +351,9 @@ class FoundationFormNode(template.Node):
                 except ValueError:
                     row_data.append((field_data, {}))
                 else:
+                    aeval = asteval.Interpreter(symtable=context.flatten())
                     try:
-                        row_data.append((field_name, literal_eval(data)))
+                        row_data.append((field_name, aeval(data, show_errors=False)))
                     except SyntaxError:
                         raise template.TemplateSyntaxError('Invalid parameters for field %s' % field_name)
 
