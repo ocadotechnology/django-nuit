@@ -15,7 +15,7 @@
 
     <form method='post' action=''>
         {% foundation_form form %}
-            name {'medium': 4,}; address {'prefix': 'Pre', 'prefix_medium': 6, 'prefix_large': 0}
+            name {'medium': 4,}; address {'prefix': data, 'prefix_medium': 6, 'prefix_large': 0}
             city; state_province; country {'postfix': 'Post', 'postfix_small': 6, 'postfix_medium': 0}
             website {'prefix': 'Pre'}; sleazy {'medium': 2, 'switch': True, 'switch_class': 'round small'}
         {% end_foundation_form %}
