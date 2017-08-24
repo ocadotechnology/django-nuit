@@ -351,7 +351,10 @@ class FoundationFormNode(template.Node):
                 except ValueError:
                     row_data.append((field_data, {}))
                 else:
-                    aeval = asteval.Interpreter(symtable=context.flatten())
+                    new_context = {}
+                    for d in context.dicts:
+                        new_context.update(d)
+                    aeval = asteval.Interpreter(symtable=new_context)
                     try:
                         row_data.append((field_name, aeval(data, show_errors=False)))
                     except SyntaxError:
