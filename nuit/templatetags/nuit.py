@@ -1,5 +1,6 @@
 from __future__ import division
-from django import template
+from distutils.version import StrictVersion
+from django import template, get_version
 from django.contrib.messages import constants
 from django.core.urlresolvers import resolve, reverse, NoReverseMatch, Resolver404
 from django.template.loader import get_template
@@ -7,12 +8,12 @@ from django.template.base import token_kwargs, FilterExpression
 from django.template.loader_tags import do_extends, ExtendsNode
 from django.template.defaultfilters import slugify
 from django.utils.html import format_html
-from ast import literal_eval
 from six.moves.urllib.parse import urlparse
 from six import iteritems as _iteritems
 from ..utils import user_can_see_view
 
 import asteval
+
 
 # pylint: disable=C0103
 
@@ -25,6 +26,9 @@ TrueFilterExpression = FilterExpression("True", None)
 MESSAGE_LEVELS = {
     constants.ERROR: 'alert',
 }
+
+IS_DJANGO_1_11_OR_ABOVE = StrictVersion(get_version()) >= StrictVersion('1.11.0')
+
 
 @register.filter
 def message_class(msg):
@@ -320,6 +324,7 @@ def normalise_row(row_data):
                 if size not in field_data or not field_data[size]:
                     field_data[size] = 3
 
+
 class FoundationFormNode(template.Node):
     '''
     A template node for a form field capabale of rendering Foundation-specific markup.
@@ -394,9 +399,14 @@ class FoundationFormNode(template.Node):
         # Each element in a row list is a FoundationFormField object.
 
         try:
-            return form_template.render(context)
+            if IS_DJANGO_1_11_OR_ABOVE:
+                context_dict = context.flatten()
+                return form_template.render(context_dict, context_dict.get('request'))
+            else:
+                return form_template.render(context)
         finally:
             context.pop()
+
 
 @register.tag
 def foundation_form(parser, token):
